@@ -5,3 +5,8 @@
   --font-sans: "Geist", sans-serif;
   --color-panel: #1b2224;
 }
+
+body {
+  background-image: url("./assets/background.jpg");
+  background-size: cover;
+}
