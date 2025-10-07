@@ -14,7 +14,7 @@ function Desktop() {
   };
 
   return (
-    <div className="h-screen w-full" onContextMenu={handleContextMenu}>
+    <div className="h-screen w-full" id="desktop" onContextMenu={handleContextMenu}>
       <Panel />
       <ContextMenu />
     </div>

@@ -6,7 +6,7 @@
   --color-panel: #1b2224;
 }
 
-body {
+#desktop {
   background-image: url("./assets/background.jpg");
   background-size: cover;
 }
