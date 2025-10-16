@@ -9,7 +9,7 @@ function BootScreen() {
     const timeoutId = setTimeout(() => {
       toggleBootScreen();
       toggleDesktop();
-    }, 3000);
+    }, 1000);
 
     return () => {
       clearTimeout(timeoutId);
