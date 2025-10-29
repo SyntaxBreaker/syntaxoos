@@ -14,6 +14,7 @@ function Window({ id, x, y, name, children }: WindowProps) {
   const dragOffsetRef = useRef({ offsetX: 0, offsetY: 0 });
   const windowRef = useRef<HTMLDivElement>(null);
   const changePosition = useWindowsStore((state) => state.changePosition);
+  const closeWindow = useWindowsStore((state) => state.closeWindow);
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     dragOffsetRef.current = {
@@ -28,7 +29,7 @@ function Window({ id, x, y, name, children }: WindowProps) {
     if (!isDragging) return;
 
     const desktop = document.getElementById("desktop");
-    if(!desktop || !windowRef.current) return;
+    if (!desktop || !windowRef.current) return;
 
     const desktopRect = desktop.getBoundingClientRect();
     const windowRect = windowRef.current.getBoundingClientRect();
@@ -77,7 +78,10 @@ function Window({ id, x, y, name, children }: WindowProps) {
         <div className="flex flex-row gap-1">
           <div className="h-2 w-2 bg-green-600 rounded-xs"></div>
           <div className="h-2 w-2 bg-yellow-600 rounded-xs"></div>
-          <div className="h-2 w-2 bg-red-600 rounded-xs"></div>
+          <div
+            className="h-2 w-2 bg-red-600 rounded-xs cursor-pointer"
+            onClick={() => closeWindow(id)}
+          ></div>
         </div>
       </div>
       <div className="h-full w-full">{children}</div>
