@@ -1,18 +1,79 @@
+import { useEffect, useRef, useState } from "react";
+import { useWindowsStore } from "../../store/windowsStore";
+
 interface WindowProps {
+  id: number;
   x: number;
   y: number;
   name: string;
   children: React.ReactNode;
 }
 
-function Window({ x, y, name, children }: WindowProps) {
+function Window({ id, x, y, name, children }: WindowProps) {
+  const [isDragging, setIsDragging] = useState(false);
+  const dragOffsetRef = useRef({ offsetX: 0, offsetY: 0 });
+  const windowRef = useRef<HTMLDivElement>(null);
+  const changePosition = useWindowsStore((state) => state.changePosition);
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    dragOffsetRef.current = {
+      offsetX: e.clientX - x,
+      offsetY: e.clientY - y,
+    };
+
+    setIsDragging(true);
+  };
+
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!isDragging) return;
+
+    const desktop = document.getElementById("desktop");
+    if(!desktop || !windowRef.current) return;
+
+    const desktopRect = desktop.getBoundingClientRect();
+    const windowRect = windowRef.current.getBoundingClientRect();
+
+    const rawX = e.clientX - dragOffsetRef.current.offsetX;
+    const rawY = e.clientY - dragOffsetRef.current.offsetY;
+
+    const minX = desktopRect.left;
+    const minY = desktopRect.top;
+    const maxX = desktopRect.right - windowRect.width;
+    const maxY = desktopRect.bottom - windowRect.height;
+
+    const newX = Math.max(minX, Math.min(rawX, maxX));
+    const newY = Math.max(minY, Math.min(rawY, maxY));
+
+    changePosition(id, newX, newY);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  useEffect(() => {
+    if (isDragging) {
+      document.addEventListener("mousemove", handleMouseMove);
+      document.addEventListener("mouseup", handleMouseUp);
+    }
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [isDragging]);
+
   return (
     <div
       className="flex flex-col gap-4 h-[640px] w-[640px] p-2 bg-panel absolute rounded-sm"
-      style={{left: `${x}px`, top: `${y}px`}}
+      style={{ left: `${x}px`, top: `${y}px` }}
+      ref={windowRef}
     >
-      <div className="flex flex-row justify-between items-center">
-        <p className="text-white text-sm font-bold">{name}</p>
+      <div
+        className="flex flex-row justify-between items-center cursor-move"
+        onMouseDown={handleMouseDown}
+      >
+        <p className="text-white text-sm font-bold select-none">{name}</p>
         <div className="flex flex-row gap-1">
           <div className="h-2 w-2 bg-green-600 rounded-xs"></div>
           <div className="h-2 w-2 bg-yellow-600 rounded-xs"></div>

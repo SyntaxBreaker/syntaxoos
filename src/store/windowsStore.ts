@@ -11,6 +11,7 @@ interface windowsStore {
   openWindow: (windowId: number) => void;
   closeWindow: (windowId: number) => void;
   isWindowOpen: (windowId: number) => boolean;
+  changePosition: (windowId: number, newX: number, newY: number) => void;
 }
 
 export const useWindowsStore = create<windowsStore>()((set, get) => ({
@@ -33,4 +34,13 @@ export const useWindowsStore = create<windowsStore>()((set, get) => ({
   },
   isWindowOpen: (windowId) =>
     get().activeWindows.some((activeWindow) => activeWindow.id === windowId),
+  changePosition: (windowId, newX, newY) => {
+    set((state) => ({
+      activeWindows: state.activeWindows.map((activeWindow) =>
+        activeWindow.id === windowId
+          ? { ...activeWindow, x: newX, y: newY }
+          : activeWindow
+      ),
+    }));
+  },
 }));

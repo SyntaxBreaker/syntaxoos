@@ -41,6 +41,7 @@ function Desktop() {
         return (
           <Window
             key={activeWindow.id}
+            id={activeWindow.id}
             x={activeWindow.x}
             y={activeWindow.y}
             name={windowData.name}
