@@ -1,5 +1,5 @@
 import folderIcon from "./assets/folder.svg";
-import terminalIcon from "./assets/folder.svg";
+import terminalIcon from "./assets/terminal.svg";
 
 interface App {
   id: number;
