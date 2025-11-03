@@ -66,7 +66,7 @@ function Window({ id, x, y, name, children }: WindowProps) {
 
   return (
     <div
-      className="flex flex-col gap-2 h-[600px] w-[1024px] min-w-3xl min-h-[600px] bg-panel absolute rounded-sm resize overflow-auto"
+      className="flex flex-col h-[600px] w-[1024px] min-w-3xl min-h-[600px] bg-panel absolute rounded-sm resize overflow-auto"
       style={{ left: `${x}px`, top: `${y}px` }}
       ref={windowRef}
     >

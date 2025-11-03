@@ -15,7 +15,9 @@ function Terminal() {
       } else if (input.startsWith("echo")) {
         newLines.push(input.slice(5));
       } else {
-        newLines.push(`Command "${input}" not recognized. Type "help" for a list of commands.`);
+        newLines.push(
+          `Command "${input}" not recognized. Type "help" for a list of commands.`
+        );
       }
 
       setLines(newLines);
@@ -24,7 +26,7 @@ function Terminal() {
   };
 
   return (
-    <div className="text-white text-sm flex flex-col gap-1">
+    <div className="text-white text-sm flex flex-col gap-1 py-2">
       {lines.map((line, idx) => (
         <div key={idx}>{line}</div>
       ))}
