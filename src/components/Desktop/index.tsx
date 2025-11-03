@@ -6,8 +6,14 @@ import DesktopIconList from "../DesktopIconList";
 import Window from "../Window";
 import { useWindowsStore } from "../../store/windowsStore";
 import Terminal from "../Terminal";
+import FileManager from "../FileManager";
 
 const WINDOWS = [
+  {
+    id: 0,
+    name: "File Manager",
+    component: <FileManager />,
+  },
   {
     id: 1,
     name: "Terminal",
