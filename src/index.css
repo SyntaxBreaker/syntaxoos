@@ -4,6 +4,7 @@
 @theme {
   --font-sans: "Geist", sans-serif;
   --color-panel: #1b2224;
+  --color-border-primary: #2e3436;
 }
 
 #desktop {

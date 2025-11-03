@@ -66,12 +66,12 @@ function Window({ id, x, y, name, children }: WindowProps) {
 
   return (
     <div
-      className="flex flex-col gap-4 h-[600px] w-[1024px] min-w-3xl min-h-[600px] p-2 bg-panel absolute rounded-sm resize overflow-auto"
+      className="flex flex-col gap-2 h-[600px] w-[1024px] min-w-3xl min-h-[600px] bg-panel absolute rounded-sm resize overflow-auto"
       style={{ left: `${x}px`, top: `${y}px` }}
       ref={windowRef}
     >
       <div
-        className="flex flex-row justify-between items-center cursor-move"
+        className="flex flex-row justify-between items-center cursor-move p-2 border-b border-border-primary"
         onMouseDown={handleMouseDown}
       >
         <p className="text-white text-sm font-bold select-none">{name}</p>
@@ -84,7 +84,7 @@ function Window({ id, x, y, name, children }: WindowProps) {
           ></div>
         </div>
       </div>
-      <div className="h-full w-full">{children}</div>
+      <div className="h-full w-full px-2">{children}</div>
     </div>
   );
 }
