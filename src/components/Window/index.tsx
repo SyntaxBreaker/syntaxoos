@@ -15,6 +15,8 @@ function Window({ id, x, y, name, children }: WindowProps) {
   const windowRef = useRef<HTMLDivElement>(null);
   const changePosition = useWindowsStore((state) => state.changePosition);
   const closeWindow = useWindowsStore((state) => state.closeWindow);
+  const minimizeWindow = useWindowsStore((state) => state.minimizeWindow);
+  const isWindowMinimized = useWindowsStore((state) => state.isWindowMinimized);
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     dragOffsetRef.current = {
@@ -66,8 +68,12 @@ function Window({ id, x, y, name, children }: WindowProps) {
 
   return (
     <div
-      className="flex flex-col h-[600px] w-[1024px] min-w-3xl min-h-[600px] bg-panel absolute rounded-sm resize overflow-auto"
-      style={{ left: `${x}px`, top: `${y}px` }}
+      className="flex-col h-[600px] w-[1024px] min-w-3xl min-h-[600px] bg-panel absolute rounded-sm resize overflow-auto"
+      style={{
+        left: `${x}px`,
+        top: `${y}px`,
+        display: isWindowMinimized(id) ? "none" : "flex",
+      }}
       ref={windowRef}
     >
       <div
@@ -76,7 +82,10 @@ function Window({ id, x, y, name, children }: WindowProps) {
       >
         <p className="text-white text-sm font-bold select-none">{name}</p>
         <div className="flex flex-row gap-1">
-          <div className="h-2 w-2 bg-green-600 rounded-xs"></div>
+          <div
+            className="h-2 w-2 bg-green-600 rounded-xs cursor-pointer"
+            onClick={() => minimizeWindow(id)}
+          ></div>
           <div className="h-2 w-2 bg-yellow-600 rounded-xs"></div>
           <div
             className="h-2 w-2 bg-red-600 rounded-xs cursor-pointer"

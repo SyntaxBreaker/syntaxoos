@@ -7,6 +7,7 @@ function Panel() {
   const activeWindows = useWindowsStore((state) => state.activeWindows)
     .map((activeWindow) => APPS.find((app) => app.id === activeWindow.id))
     .filter((app) => app !== undefined);
+  const toggleMinimize = useWindowsStore((state) => state.toggleMinimize);
 
   return (
     <div className="fixed bottom-0 p-2 bg-panel w-full flex flex-row justify-between">
@@ -16,7 +17,11 @@ function Panel() {
         </button>
         <div className="flex flex-row gap-4">
           {activeWindows.map((activeWindow) => (
-            <div key={activeWindow.id} className="flex flex-row gap-1">
+            <div
+              key={activeWindow.id}
+              className="flex flex-row gap-1 cursor-pointer"
+              onClick={() => toggleMinimize(activeWindow.id)}
+            >
               <img
                 src={activeWindow.iconSrc}
                 alt={activeWindow.name}

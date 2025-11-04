@@ -4,6 +4,7 @@ interface ActiveWindowItem {
   id: number;
   x: number;
   y: number;
+  isMinimized: boolean;
 }
 
 interface windowsStore {
@@ -12,6 +13,9 @@ interface windowsStore {
   closeWindow: (windowId: number) => void;
   isWindowOpen: (windowId: number) => boolean;
   changePosition: (windowId: number, newX: number, newY: number) => void;
+  minimizeWindow: (windowId: number) => void;
+  isWindowMinimized: (windowId: number) => boolean;
+  toggleMinimize: (windowId: number) => void;
 }
 
 export const useWindowsStore = create<windowsStore>()((set, get) => ({
@@ -22,7 +26,10 @@ export const useWindowsStore = create<windowsStore>()((set, get) => ({
         (activeWindow) => activeWindow.id === windowId
       )
         ? state.activeWindows
-        : [...state.activeWindows, { id: windowId, x: 100, y: 100 }],
+        : [
+            ...state.activeWindows,
+            { id: windowId, x: 100, y: 100, isMinimized: false },
+          ],
     }));
   },
   closeWindow: (windowId) => {
@@ -39,6 +46,27 @@ export const useWindowsStore = create<windowsStore>()((set, get) => ({
       activeWindows: state.activeWindows.map((activeWindow) =>
         activeWindow.id === windowId
           ? { ...activeWindow, x: newX, y: newY }
+          : activeWindow
+      ),
+    }));
+  },
+  minimizeWindow: (windowId) => {
+    set((state) => ({
+      activeWindows: state.activeWindows.map((activeWindow) =>
+        activeWindow.id === windowId
+          ? { ...activeWindow, isMinimized: true }
+          : activeWindow
+      ),
+    }));
+  },
+  isWindowMinimized: (windowId) =>
+    get().activeWindows.find((activeWindow) => activeWindow.id === windowId)
+      ?.isMinimized ?? false,
+  toggleMinimize: (windowId) => {
+    set((state) => ({
+      activeWindows: state.activeWindows.map((activeWindow) =>
+        activeWindow.id === windowId
+          ? { ...activeWindow, isMinimized: !activeWindow.isMinimized }
           : activeWindow
       ),
     }));
