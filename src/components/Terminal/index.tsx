@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const COMMANDS = ["help", "echo", "about"];
+const COMMANDS = ["about", "clear", "echo", "help"];
 
 const SYSTEM_INFO = [
   "OS: SyntaxoOS 1.0.0 (Powered by TypeScript)",
@@ -19,20 +19,24 @@ function Terminal() {
 
   const handleInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      const newLines = [...lines, `guest@syntaxos:~$ ${input}`];
-      if (input === "help") {
-        newLines.push(`Available commands: ${COMMANDS.join(", ")}`);
-      } else if (input === "about") {
-        newLines.push(...SYSTEM_INFO);
-      } else if (input.startsWith("echo")) {
-        newLines.push(input.slice(5));
+      if (input === "clear") {
+        setLines([]);
       } else {
-        newLines.push(
-          `Command "${input}" not recognized. Type "help" for a list of commands.`
-        );
+        const newLines = [...lines, `guest@syntaxos:~$ ${input}`];
+        if (input === "help") {
+          newLines.push(`Available commands: ${COMMANDS.join(", ")}`);
+        } else if (input === "about") {
+          newLines.push(...SYSTEM_INFO);
+        } else if (input.startsWith("echo")) {
+          newLines.push(input.slice(5));
+        } else {
+          newLines.push(
+            `Command "${input}" not recognized. Type "help" for a list of commands.`
+          );
+        }
+        setLines(newLines);
       }
 
-      setLines(newLines);
       setInput("");
     }
   };
