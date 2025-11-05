@@ -28,7 +28,7 @@ function Terminal() {
   return (
     <div className="text-white text-sm flex flex-col gap-1 py-2">
       {lines.map((line, idx) => (
-        <div key={idx}>{line}</div>
+        <p key={idx}>{line}</p>
       ))}
       <div className="flex flex-row gap-1">
         <p>guest@syntaxos:~$</p>
