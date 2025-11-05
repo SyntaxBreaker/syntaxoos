@@ -18,16 +18,17 @@ function Terminal() {
   ]);
 
   const handleInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const command = input.toLocaleLowerCase().trim();
     if (e.key === "Enter") {
-      if (input === "clear") {
+      if (command === "clear") {
         setLines([]);
       } else {
         const newLines = [...lines, `guest@syntaxos:~$ ${input}`];
-        if (input === "help") {
+        if (command === "help") {
           newLines.push(`Available commands: ${COMMANDS.join(", ")}`);
-        } else if (input === "about") {
+        } else if (command === "about") {
           newLines.push(...SYSTEM_INFO);
-        } else if (input.startsWith("echo")) {
+        } else if (command.startsWith("echo")) {
           newLines.push(input.slice(5));
         } else {
           newLines.push(
