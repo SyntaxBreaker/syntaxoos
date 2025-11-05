@@ -1,5 +1,13 @@
 import { useState } from "react";
 
+const SYSTEM_INFO = [
+  "OS: SyntaxoOS 1.0.0 (Powered by TypeScript)",
+  "Kernel: 1.0.0-typescript (Stable - probably)",
+  "Shell: SyntaxShell 1.0.0",
+  "CPU: Intel Core2 Duo E8400 (Still the best CPU)",
+  "Memory: 128TB",
+];
+
 function Terminal() {
   const [input, setInput] = useState("");
   const [lines, setLines] = useState([
@@ -11,7 +19,9 @@ function Terminal() {
     if (e.key === "Enter") {
       const newLines = [...lines, `guest@syntaxos:~$ ${input}`];
       if (input === "help") {
-        newLines.push(`Available commands: help, echo`);
+        newLines.push(`Available commands: help, echo, about`);
+      } else if (input === "about") {
+        newLines.push(...SYSTEM_INFO);
       } else if (input.startsWith("echo")) {
         newLines.push(input.slice(5));
       } else {
