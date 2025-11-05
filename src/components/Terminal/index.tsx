@@ -8,6 +8,7 @@ const SYSTEM_INFO = [
   "Shell: SyntaxShell 1.0.0",
   "CPU: Intel Core2 Duo E8400 (Still the best CPU)",
   "Memory: 128TB",
+  "Author: SyntaxBreaker",
 ];
 
 function Terminal() {
