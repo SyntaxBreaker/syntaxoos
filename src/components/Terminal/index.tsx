@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const COMMANDS = ["help", "echo", "about"];
+
 const SYSTEM_INFO = [
   "OS: SyntaxoOS 1.0.0 (Powered by TypeScript)",
   "Kernel: 1.0.0-typescript (Stable - probably)",
@@ -19,7 +21,7 @@ function Terminal() {
     if (e.key === "Enter") {
       const newLines = [...lines, `guest@syntaxos:~$ ${input}`];
       if (input === "help") {
-        newLines.push(`Available commands: help, echo, about`);
+        newLines.push(`Available commands: ${COMMANDS.join(", ")}`);
       } else if (input === "about") {
         newLines.push(...SYSTEM_INFO);
       } else if (input.startsWith("echo")) {
