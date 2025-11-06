@@ -27,7 +27,7 @@ function FileManager() {
 
   return (
     <div className="flex flex-row gap-2 h-full">
-      <div className="flex flex-col border-r border-border-primary py-2 pr-8">
+      <div className="flex flex-col border-r border-border-primary py-2 pr-16">
         <h2 className="text-white text-sm font-extrabold">Places</h2>
         {directories.map((directory) => (
           <button
