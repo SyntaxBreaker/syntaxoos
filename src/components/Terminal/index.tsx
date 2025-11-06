@@ -11,6 +11,12 @@ const SYSTEM_INFO = [
   "Author: SyntaxBreaker",
 ];
 
+const commandHandlers = {
+  help: () => [`Available commands: ${COMMANDS.join(", ")}`],
+  about: () => SYSTEM_INFO,
+  echo: (input: string) => input.slice(5),
+};
+
 function Terminal() {
   const [input, setInput] = useState("");
   const [lines, setLines] = useState([
@@ -19,18 +25,18 @@ function Terminal() {
   ]);
 
   const handleInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const command = input.toLocaleLowerCase().trim();
+    const command = input.toLowerCase().trim();
     if (e.key === "Enter") {
       if (command === "clear") {
         setLines([]);
       } else {
         const newLines = [...lines, `guest@syntaxos:~$ ${input}`];
         if (command === "help") {
-          newLines.push(`Available commands: ${COMMANDS.join(", ")}`);
+          newLines.push(...commandHandlers.help());
         } else if (command === "about") {
-          newLines.push(...SYSTEM_INFO);
+          newLines.push(...commandHandlers.about());
         } else if (command.startsWith("echo")) {
-          newLines.push(input.slice(5));
+          newLines.push(commandHandlers.echo(command));
         } else {
           newLines.push(
             `Command "${input}" not recognized. Type "help" for a list of commands.`
