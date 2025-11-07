@@ -51,13 +51,13 @@ const INITIAL_FILE_LIST: FileList = {
 
 function FileManager() {
   const [currentDirectory, setCurrentDirectory] = useState<Directory>("home");
-  const [directories, setDirectories] = useState<Directory[]>([
+  const [directories] = useState<Directory[]>([
     "home",
     "downloads",
     "music",
     "pictures",
   ]);
-  const [fileList, setFileList] = useState<FileList>(INITIAL_FILE_LIST);
+  const [fileList] = useState<FileList>(INITIAL_FILE_LIST);
 
   return (
     <div className="flex flex-row gap-2 h-full">
