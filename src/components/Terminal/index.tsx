@@ -1,21 +1,5 @@
 import { useState } from "react";
-
-const COMMANDS = ["about", "clear", "echo", "help"];
-
-const SYSTEM_INFO = [
-  "OS: SyntaxoOS 1.0.0 (Powered by TypeScript)",
-  "Kernel: 1.0.0-typescript (Stable - probably)",
-  "Shell: SyntaxShell 1.0.0",
-  "CPU: Intel Core2 Duo E8400 (Still the best CPU)",
-  "Memory: 128TB",
-  "Author: SyntaxBreaker",
-];
-
-const commandHandlers = {
-  help: () => [`Available commands: ${COMMANDS.join(", ")}`],
-  about: () => SYSTEM_INFO,
-  echo: (input: string) => input.slice(5),
-};
+import { commandHandlers } from "../../constants";
 
 function Terminal() {
   const [input, setInput] = useState("");
