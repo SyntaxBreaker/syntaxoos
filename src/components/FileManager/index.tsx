@@ -1,5 +1,8 @@
+import { type MouseEvent } from "react";
 import { useState } from "react";
 import fileIcon from "../../assets/file.svg";
+import FileManagerContextMenu from "../FileManagerContextMenu";
+import { useContextMenuStore } from "../../store/contextMenuStore";
 
 type Directory = string;
 
@@ -58,9 +61,24 @@ function FileManager() {
     "pictures",
   ]);
   const [fileList] = useState<FileList>(INITIAL_FILE_LIST);
+  const openContextMenu = useContextMenuStore((state) => state.openContextMenu);
+
+  const handleContextMenu = (event: MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const rect = event.currentTarget.getBoundingClientRect();
+    openContextMenu(
+      "fileManager",
+      event.clientX - rect.left,
+      event.clientY - rect.top
+    );
+  };
 
   return (
-    <div className="flex flex-row gap-2 h-full">
+    <div
+      className="flex flex-row gap-2 h-full relative"
+      onContextMenu={handleContextMenu}
+    >
       <div className="flex flex-col border-r border-border-primary py-2 pr-16">
         <h2 className="text-white text-sm font-extrabold">Places</h2>
         {directories.map((directory) => (
@@ -81,6 +99,7 @@ function FileManager() {
           </div>
         ))}
       </div>
+      <FileManagerContextMenu />
     </div>
   );
 }

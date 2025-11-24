@@ -19,10 +19,6 @@ function FileManagerContextMenu() {
         label="Refresh"
         onClick={() => window.location.reload()}
       />
-      <ContextMenuItem
-        label="Create a new folder"
-        onClick={() => console.log(`xD`)}
-      />
     </ContextMenu>
   );
 }
