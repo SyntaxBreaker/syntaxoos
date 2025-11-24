@@ -7,13 +7,13 @@ interface ContextMenuItemProps {
 }
 
 function ContextMenuItem({ label, onClick, disabled }: ContextMenuItemProps) {
-  const setIsOpen = useContextMenuStore((state) => state.setIsOpen);
+  const closeContextMenu = useContextMenuStore((state) => state.closeContextMenu);
 
   const handleClick = (event: React.MouseEvent<HTMLLIElement>) => {
     event.stopPropagation();
     if (disabled) return;
     onClick();
-    setIsOpen(false);
+    closeContextMenu();
   };
 
   return (

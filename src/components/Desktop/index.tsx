@@ -1,12 +1,12 @@
 import { type MouseEvent } from "react";
 import Panel from "../Panel";
 import { useContextMenuStore } from "../../store/contextMenuStore";
-import ContextMenu from "../ContextMenu";
 import DesktopIconList from "../DesktopIconList";
 import Window from "../Window";
 import { useWindowsStore } from "../../store/windowsStore";
 import Terminal from "../Terminal";
 import FileManager from "../FileManager";
+import DesktopContextMenu from "../DesktopContextMenu";
 
 const WINDOWS = [
   {
@@ -22,14 +22,12 @@ const WINDOWS = [
 ];
 
 function Desktop() {
-  const setIsOpen = useContextMenuStore((state) => state.setIsOpen);
-  const setPosition = useContextMenuStore((state) => state.setPosition);
+  const openContextMenu = useContextMenuStore((state) => state.openContextMenu);
   const activeWindows = useWindowsStore((state) => state.activeWindows);
 
   const handleContextMenu = (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
-    setPosition(event.pageX, event.pageY);
-    setIsOpen(true);
+    openContextMenu("desktop", event.pageX, event.pageY);
   };
 
   return (
@@ -55,7 +53,7 @@ function Desktop() {
           />
         );
       })}
-      <ContextMenu />
+      <DesktopContextMenu />
       <Panel />
     </div>
   );

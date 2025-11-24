@@ -1,21 +1,17 @@
 import { create } from "zustand";
 
 interface ContextMenuStore {
-  isOpen: boolean;
+  activeId: string | null;
   x: number;
   y: number;
-  setIsOpen: (open?: boolean) => void;
-  setPosition: (x: number, y: number) => void;
+  openContextMenu: (id: string, x: number, y: number) => void;
+  closeContextMenu: () => void;
 }
 
 export const useContextMenuStore = create<ContextMenuStore>()((set) => ({
-  isOpen: false,
+  activeId: null,
   x: 0,
   y: 0,
-  setIsOpen: (isOpen) => {
-    set((state) => ({ isOpen: isOpen !== undefined ? isOpen : !state.isOpen }));
-  },
-  setPosition(x, y) {
-    set(() => ({ x, y }));
-  },
+  openContextMenu: (id, x, y) => set({ activeId: id, x, y }),
+  closeContextMenu: () => set({ activeId: null }),
 }));

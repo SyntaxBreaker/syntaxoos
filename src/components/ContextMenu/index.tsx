@@ -1,18 +1,27 @@
 import { useEffect, useRef } from "react";
-import { useContextMenuStore } from "../../store/contextMenuStore";
-import ContextMenuItem from "../ContextMenuItem";
 
-function ContextMenu() {
-  const isOpen = useContextMenuStore((state) => state.isOpen);
-  const setIsOpen = useContextMenuStore((state) => state.setIsOpen);
-  const x = useContextMenuStore((state) => state.x);
-  const y = useContextMenuStore((state) => state.y);
+interface ContextMenuProps {
+  isOpen: boolean;
+  position: {
+    x: number;
+    y: number;
+  };
+  onClose: () => void;
+  children: React.ReactNode;
+}
+
+function ContextMenu({
+  isOpen,
+  position,
+  onClose,
+  children,
+}: ContextMenuProps) {
   const menuRef = useRef<HTMLUListElement | null>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
+        onClose();
       }
     };
 
@@ -23,7 +32,7 @@ function ContextMenu() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isOpen, setIsOpen]);
+  }, [isOpen, onClose]);
 
   if (!isOpen) {
     return null;
@@ -32,15 +41,12 @@ function ContextMenu() {
   return (
     <ul
       className="absolute w-xs flex flex-col gap-2 bg-neutral-100 rounded-sm p-2"
-      style={{ top: `${y}px`, left: `${x}px` }}
+      style={{ top: `${position.y}px`, left: `${position.x}px` }}
       role="menu"
       aria-hidden={!isOpen}
       ref={menuRef}
     >
-      <ContextMenuItem
-        label="Refresh"
-        onClick={() => window.location.reload()}
-      />
+      {children}
     </ul>
   );
 }
