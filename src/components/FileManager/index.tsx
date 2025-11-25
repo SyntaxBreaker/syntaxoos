@@ -4,54 +4,10 @@ import fileIcon from "../../assets/file.svg";
 import FileManagerContextMenu from "../FileManagerContextMenu";
 import { useContextMenuStore } from "../../store/contextMenuStore";
 import FileItem from "../FileItem";
+import { INITIAL_FILE_LIST } from "../../constants";
+import type { FileList } from "../../types";
 
 type Directory = string;
-
-interface FileList {
-  [key: string]: {
-    id: number;
-    name: string;
-  }[];
-}
-
-const INITIAL_FILE_LIST: FileList = {
-  home: [
-    {
-      id: 0,
-      name: "password.txt",
-    },
-    {
-      id: 1,
-      name: "TODO.md",
-    },
-  ],
-  downloads: [
-    {
-      id: 2,
-      name: "install_me_totally_safe.sh",
-    },
-    {
-      id: 3,
-      name: "memes_backup.tar.gz",
-    },
-  ],
-  music: [
-    {
-      id: 4,
-      name: "random_noises_at_3am.wav",
-    },
-  ],
-  pictures: [
-    {
-      id: 5,
-      name: "never_send_anyone.png",
-    },
-    {
-      id: 6,
-      name: "meme_that_made_me_laugh.png",
-    },
-  ],
-};
 
 function FileManager() {
   const [currentDirectory, setCurrentDirectory] = useState<Directory>("home");
