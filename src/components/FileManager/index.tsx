@@ -3,6 +3,7 @@ import { useState } from "react";
 import fileIcon from "../../assets/file.svg";
 import FileManagerContextMenu from "../FileManagerContextMenu";
 import { useContextMenuStore } from "../../store/contextMenuStore";
+import FileItem from "../FileItem";
 
 type Directory = string;
 
@@ -93,10 +94,7 @@ function FileManager() {
       </div>
       <div className="p-2 flex flex-row gap-4 flex-wrap content-start">
         {fileList[currentDirectory].map((file) => (
-          <div key={file.id} className="flex flex-col gap-2 p-2 items-center">
-            <img src={fileIcon} alt={file.name} className="h-8 w-8" />
-            <p className="text-white text-sm">{file.name}</p>
-          </div>
+          <FileItem key={file.id} name={file.name} icon={fileIcon} />
         ))}
       </div>
       <FileManagerContextMenu />
