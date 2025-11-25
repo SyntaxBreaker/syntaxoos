@@ -7,6 +7,7 @@ import { useWindowsStore } from "../../store/windowsStore";
 import Terminal from "../Terminal";
 import FileManager from "../FileManager";
 import DesktopContextMenu from "../DesktopContextMenu";
+import ImageViewer from "../ImageViewer";
 
 const WINDOWS = [
   {
@@ -18,6 +19,11 @@ const WINDOWS = [
     id: 1,
     name: "Terminal",
     component: <Terminal />,
+  },
+  {
+    id: 2,
+    name: "Image Preview",
+    component: <ImageViewer />,
   },
 ];
 

@@ -69,10 +69,12 @@ export const INITIAL_FILE_LIST: FileList = {
     {
       id: 5,
       name: "never_send_anyone.png",
+      imgSrc: folderIcon,
     },
     {
       id: 6,
       name: "meme_that_made_me_laugh.png",
+      imgSrc: folderIcon,
     },
   ],
 };

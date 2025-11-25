@@ -50,7 +50,7 @@ function FileManager() {
       </div>
       <div className="p-2 flex flex-row gap-4 flex-wrap content-start">
         {fileList[currentDirectory].map((file) => (
-          <FileItem key={file.id} name={file.name} icon={fileIcon} />
+          <FileItem key={file.id} name={file.name} icon={fileIcon} imgSrc={file.imgSrc} />
         ))}
       </div>
       <FileManagerContextMenu />
