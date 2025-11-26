@@ -43,10 +43,12 @@ export const INITIAL_FILE_LIST: FileList = {
     {
       id: 0,
       name: "password.txt",
+      content: "You thought it would be that easy? LOL.",
     },
     {
       id: 1,
       name: "TODO.md",
+      content: "# Everything and Nothing",
     },
   ],
   downloads: [

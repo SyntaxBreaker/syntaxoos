@@ -3,5 +3,6 @@ export interface FileList {
     id: number;
     name: string;
     imgSrc?: string;
+    content?: string;
   }[];
 }
