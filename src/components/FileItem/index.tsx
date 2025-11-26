@@ -1,20 +1,26 @@
 import { useImageStore } from "../../store/imageStore";
+import { useTextStore } from "../../store/textStore";
 import { useWindowsStore } from "../../store/windowsStore";
 
 interface FileItemProps {
   icon: string;
   name: string;
   imgSrc?: string;
+  content?: string; 
 }
 
-function FileItem({ icon, name, imgSrc }: FileItemProps) {
+function FileItem({ icon, name, imgSrc, content }: FileItemProps) {
   const setImageSrc = useImageStore((state) => state.setImageSrc);
+  const setContent = useTextStore((state) => state.setContent);
   const openWindow = useWindowsStore((state) => state.openWindow);
 
   const handleFileOpen = () => {
     if (imgSrc) {
       setImageSrc(imgSrc, name);
       openWindow(2);
+    } else if(content) {
+      setContent(content);
+      openWindow(3);
     }
   };
 

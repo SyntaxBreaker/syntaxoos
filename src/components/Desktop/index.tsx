@@ -8,6 +8,7 @@ import Terminal from "../Terminal";
 import FileManager from "../FileManager";
 import DesktopContextMenu from "../DesktopContextMenu";
 import ImageViewer from "../ImageViewer";
+import TextReader from "../TextReader";
 
 const WINDOWS = [
   {
@@ -25,6 +26,11 @@ const WINDOWS = [
     name: "Image Preview",
     component: <ImageViewer />,
   },
+  {
+    id: 3,
+    name: "Text Reader",
+    component: <TextReader />
+  }
 ];
 
 function Desktop() {
