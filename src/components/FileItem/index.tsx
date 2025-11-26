@@ -13,7 +13,7 @@ function FileItem({ icon, name, imgSrc }: FileItemProps) {
 
   const handleFileOpen = () => {
     if (imgSrc) {
-      setImageSrc(imgSrc);
+      setImageSrc(imgSrc, name);
       openWindow(2);
     }
   };

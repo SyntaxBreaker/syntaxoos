@@ -2,10 +2,13 @@ import { create } from "zustand";
 
 interface ImageStore {
   imageSrc: string | null;
-  setImageSrc: (imageSrc: string) => void;
+  imageName: string | null;
+  setImageSrc: (imageSrc: string, imageName: string) => void;
 }
 
 export const useImageStore = create<ImageStore>()((set) => ({
   imageSrc: null,
-  setImageSrc: (imgSrc: string) => set({imageSrc: imgSrc})
+  imageName: null,
+  setImageSrc: (imgSrc: string, imgName: string) =>
+    set({ imageSrc: imgSrc, imageName: imgName }),
 }));
