@@ -19,7 +19,7 @@ export const APPS: App[] = [
     name: "Terminal",
     iconSrc: terminalIcon,
   },
-];
+] as const;
 
 export const WINDOW_ID = {
   FILE_MANAGER: 0,
@@ -28,7 +28,7 @@ export const WINDOW_ID = {
   TEXT_READER: 3,
 } as const;
 
-export const COMMANDS = ["about", "clear", "echo", "help"];
+export const COMMANDS = ["about", "clear", "echo", "help"] as const;
 
 export const SYSTEM_INFO = [
   "OS: SyntaxoOS 1.0.0 (Powered by TypeScript)",
@@ -37,13 +37,13 @@ export const SYSTEM_INFO = [
   "CPU: Intel Core2 Duo E8400 (Still the best CPU)",
   "Memory: 128TB",
   "Author: SyntaxBreaker",
-];
+] as const;
 
 export const commandHandlers = {
   help: () => [`Available commands: ${COMMANDS.join(", ")}`],
   about: () => SYSTEM_INFO,
   echo: (input: string) => input.slice(5),
-};
+} as const;
 
 export const INITIAL_FILE_LIST: FileList = {
   home: [
