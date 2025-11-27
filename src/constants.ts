@@ -51,30 +51,21 @@ export const INITIAL_FILE_LIST: FileList = {
       content: "# Everything and Nothing",
     },
   ],
-  downloads: [
-    {
-      id: 2,
-      name: "install_me_totally_safe.sh",
-    },
-    {
-      id: 3,
-      name: "memes_backup.tar.gz",
-    },
-  ],
+  downloads: [],
   music: [
     {
-      id: 4,
+      id: 2,
       name: "random_noises_at_3am.wav",
     },
   ],
   pictures: [
     {
-      id: 5,
+      id: 3,
       name: "never_send_anyone.png",
       imgSrc: folderIcon,
     },
     {
-      id: 6,
+      id: 4,
       name: "meme_that_made_me_laugh.png",
       imgSrc: folderIcon,
     },
