@@ -1,3 +1,4 @@
+import { WINDOW_ID } from "../../constants";
 import { useImageStore } from "../../store/imageStore";
 import { useTextStore } from "../../store/textStore";
 import { useWindowsStore } from "../../store/windowsStore";
@@ -17,11 +18,11 @@ function FileItem({ icon, name, imgSrc, content }: FileItemProps) {
   const handleFileOpen = () => {
     if (imgSrc) {
       setImage(imgSrc, name);
-      openWindow(2);
+      openWindow(WINDOW_ID.IMAGE_PREVIEW);
     } else if (content) {
       const fileFormat = name.split(".")[1];
       setDocument(content, fileFormat);
-      openWindow(3);
+      openWindow(WINDOW_ID.TEXT_READER);
     }
   };
 

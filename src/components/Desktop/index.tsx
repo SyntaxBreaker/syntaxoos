@@ -9,28 +9,29 @@ import FileManager from "../FileManager";
 import DesktopContextMenu from "../DesktopContextMenu";
 import ImageViewer from "../ImageViewer";
 import TextReader from "../TextReader";
+import { WINDOW_ID } from "../../constants";
 
 const WINDOWS = [
   {
-    id: 0,
+    id: WINDOW_ID.FILE_MANAGER,
     name: "File Manager",
     component: <FileManager />,
   },
   {
-    id: 1,
+    id: WINDOW_ID.TERMINAL,
     name: "Terminal",
     component: <Terminal />,
   },
   {
-    id: 2,
+    id: WINDOW_ID.IMAGE_PREVIEW,
     name: "Image Preview",
     component: <ImageViewer />,
   },
   {
-    id: 3,
+    id: WINDOW_ID.TEXT_READER,
     name: "Text Reader",
-    component: <TextReader />
-  }
+    component: <TextReader />,
+  },
 ];
 
 function Desktop() {

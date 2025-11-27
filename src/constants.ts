@@ -21,6 +21,13 @@ export const APPS: App[] = [
   },
 ];
 
+export const WINDOW_ID = {
+  FILE_MANAGER: 0,
+  TERMINAL: 1,
+  IMAGE_PREVIEW: 2,
+  TEXT_READER: 3,
+} as const;
+
 export const COMMANDS = ["about", "clear", "echo", "help"];
 
 export const SYSTEM_INFO = [
