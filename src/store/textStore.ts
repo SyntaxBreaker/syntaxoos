@@ -2,10 +2,13 @@ import { create } from "zustand";
 
 interface TextStore {
   content: string;
-  setContent: (content: string) => void;
+  fileFormat: string | null;
+  setDocument: (content: string, fileFormat: string | null) => void;
 }
 
 export const useTextStore = create<TextStore>()((set) => ({
   content: "",
-  setContent: (text: string) => set({ content: text }),
+  fileFormat: null,
+  setDocument: (content: string, fileFormat: string | null) =>
+    set({ content: content, fileFormat: fileFormat }),
 }));

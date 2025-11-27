@@ -11,7 +11,7 @@ interface FileItemProps {
 
 function FileItem({ icon, name, imgSrc, content }: FileItemProps) {
   const setImage = useImageStore((state) => state.setImage);
-  const setContent = useTextStore((state) => state.setContent);
+  const setDocument = useTextStore((state) => state.setDocument);
   const openWindow = useWindowsStore((state) => state.openWindow);
 
   const handleFileOpen = () => {
@@ -19,7 +19,8 @@ function FileItem({ icon, name, imgSrc, content }: FileItemProps) {
       setImage(imgSrc, name);
       openWindow(2);
     } else if (content) {
-      setContent(content);
+      const fileFormat = name.split(".")[1];
+      setDocument(content, fileFormat);
       openWindow(3);
     }
   };
