@@ -18,7 +18,7 @@ function FileItem({ icon, name, imgSrc, content }: FileItemProps) {
   const handleFileOpen = () => {
     if (imgSrc) {
       setImage(imgSrc, name);
-      openWindow(WINDOW_ID.IMAGE_PREVIEW);
+      openWindow(WINDOW_ID.IMAGE_VIEWER);
     } else if (content) {
       const fileFormat = name.split(".")[1];
       setDocument(content, fileFormat);

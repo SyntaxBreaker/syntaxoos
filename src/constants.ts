@@ -8,25 +8,25 @@ interface App {
   iconSrc: string;
 }
 
+export const WINDOW_ID = {
+  FILE_MANAGER: 0,
+  TERMINAL: 1,
+  IMAGE_VIEWER: 2,
+  TEXT_READER: 3,
+} as const;
+
 export const APPS: App[] = [
   {
-    id: 0,
+    id: WINDOW_ID.FILE_MANAGER,
     name: "File manager",
     iconSrc: folderIcon,
   },
   {
-    id: 1,
+    id: WINDOW_ID.TERMINAL,
     name: "Terminal",
     iconSrc: terminalIcon,
   },
 ] as const;
-
-export const WINDOW_ID = {
-  FILE_MANAGER: 0,
-  TERMINAL: 1,
-  IMAGE_PREVIEW: 2,
-  TEXT_READER: 3,
-} as const;
 
 export const COMMANDS = ["about", "clear", "echo", "help"] as const;
 

@@ -23,7 +23,7 @@ const WINDOWS = [
     component: <Terminal />,
   },
   {
-    id: WINDOW_ID.IMAGE_PREVIEW,
+    id: WINDOW_ID.IMAGE_VIEWER,
     name: "Image Preview",
     component: <ImageViewer />,
   },
