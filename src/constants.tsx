@@ -1,11 +1,19 @@
 import folderIcon from "./assets/folder.svg";
 import terminalIcon from "./assets/terminal.svg";
+import imageViewerIcon from "./assets/image.svg";
+import textReaderIcon from "./assets/text.svg";
+import FileManager from "./components/FileManager";
+import ImageViewer from "./components/ImageViewer";
+import Terminal from "./components/Terminal";
+import TextReader from "./components/TextReader";
 import type { FileList } from "./types";
 
 interface App {
   id: number;
   name: string;
+  component: React.ReactNode;
   iconSrc: string;
+  showOnDesktop: boolean;
 }
 
 export const WINDOW_ID = {
@@ -19,12 +27,30 @@ export const APPS: App[] = [
   {
     id: WINDOW_ID.FILE_MANAGER,
     name: "File manager",
+    component: <FileManager />,
     iconSrc: folderIcon,
+    showOnDesktop: true,
   },
   {
     id: WINDOW_ID.TERMINAL,
     name: "Terminal",
+    component: <Terminal />,
     iconSrc: terminalIcon,
+    showOnDesktop: true,
+  },
+  {
+    id: WINDOW_ID.IMAGE_VIEWER,
+    name: "Image Viewer",
+    component: <ImageViewer />,
+    iconSrc: imageViewerIcon,
+    showOnDesktop: false,
+  },
+  {
+    id: WINDOW_ID.TEXT_READER,
+    name: "Text Reader",
+    component: <TextReader />,
+    iconSrc: textReaderIcon,
+    showOnDesktop: false,
   },
 ] as const;
 

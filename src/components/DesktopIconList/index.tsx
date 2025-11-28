@@ -11,7 +11,7 @@ function DesktopIconList() {
 
   return (
     <div className="flex flex-col gap-4 h-[calc(100%-36px)] w-full p-4">
-      {APPS.map((app) => (
+      {APPS.filter((app) => app.showOnDesktop).map((app) => (
         <DesktopIcon
           key={app.id}
           name={app.name}

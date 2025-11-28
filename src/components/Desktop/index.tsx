@@ -4,35 +4,9 @@ import { useContextMenuStore } from "../../store/contextMenuStore";
 import DesktopIconList from "../DesktopIconList";
 import Window from "../Window";
 import { useWindowsStore } from "../../store/windowsStore";
-import Terminal from "../Terminal";
-import FileManager from "../FileManager";
 import DesktopContextMenu from "../DesktopContextMenu";
-import ImageViewer from "../ImageViewer";
-import TextReader from "../TextReader";
-import { WINDOW_ID } from "../../constants";
+import { APPS } from "../../constants";
 
-const WINDOWS = [
-  {
-    id: WINDOW_ID.FILE_MANAGER,
-    name: "File Manager",
-    component: <FileManager />,
-  },
-  {
-    id: WINDOW_ID.TERMINAL,
-    name: "Terminal",
-    component: <Terminal />,
-  },
-  {
-    id: WINDOW_ID.IMAGE_VIEWER,
-    name: "Image Preview",
-    component: <ImageViewer />,
-  },
-  {
-    id: WINDOW_ID.TEXT_READER,
-    name: "Text Reader",
-    component: <TextReader />,
-  },
-];
 
 function Desktop() {
   const openContextMenu = useContextMenuStore((state) => state.openContextMenu);
@@ -51,8 +25,8 @@ function Desktop() {
     >
       <DesktopIconList />
       {activeWindows.map((activeWindow) => {
-        const windowData = WINDOWS.find(
-          (window) => window.id === activeWindow.id
+        const windowData = APPS.find(
+          (app) => app.id === activeWindow.id
         );
         if (!windowData) return null;
         return (
