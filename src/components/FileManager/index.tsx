@@ -56,6 +56,7 @@ function FileManager() {
             icon={fileIcon}
             imgSrc={file.imgSrc}
             content={file.content}
+            audioSrc={file.audioSrc}
           />
         ))}
       </div>

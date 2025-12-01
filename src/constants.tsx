@@ -2,11 +2,14 @@ import folderIcon from "./assets/folder.svg";
 import terminalIcon from "./assets/terminal.svg";
 import imageViewerIcon from "./assets/image.svg";
 import textReaderIcon from "./assets/text.svg";
+import musicIcon from "./assets/music.svg";
 import FileManager from "./components/FileManager";
 import ImageViewer from "./components/ImageViewer";
 import Terminal from "./components/Terminal";
 import TextReader from "./components/TextReader";
 import type { FileList } from "./types";
+import MusicPlayer from "./components/MusicPlayer";
+import arcade from "./assets/arcade.wav";
 
 interface App {
   id: number;
@@ -21,6 +24,7 @@ export const WINDOW_ID = {
   TERMINAL: 1,
   IMAGE_VIEWER: 2,
   TEXT_READER: 3,
+  MUSIC_PLAYER: 4,
 } as const;
 
 export const APPS: App[] = [
@@ -50,6 +54,13 @@ export const APPS: App[] = [
     name: "Text Reader",
     component: <TextReader />,
     iconSrc: textReaderIcon,
+    showOnDesktop: false,
+  },
+  {
+    id: WINDOW_ID.MUSIC_PLAYER,
+    name: "Music Player",
+    component: <MusicPlayer />,
+    iconSrc: musicIcon,
     showOnDesktop: false,
   },
 ] as const;
@@ -89,6 +100,7 @@ export const INITIAL_FILE_LIST: FileList = {
     {
       id: 2,
       name: "random_noises_at_3am.wav",
+      audioSrc: arcade,
     },
   ],
   pictures: [

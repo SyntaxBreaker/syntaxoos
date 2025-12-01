@@ -4,5 +4,6 @@ export interface FileList {
     name: string;
     imgSrc?: string;
     content?: string;
+    audioSrc?: string;
   }[];
 }

@@ -1,4 +1,5 @@
 import { WINDOW_ID } from "../../constants";
+import { useAudioStore } from "../../store/audioStore";
 import { useImageStore } from "../../store/imageStore";
 import { useTextStore } from "../../store/textStore";
 import { useWindowsStore } from "../../store/windowsStore";
@@ -8,12 +9,14 @@ interface FileItemProps {
   name: string;
   imgSrc?: string;
   content?: string;
+  audioSrc?: string;
 }
 
-function FileItem({ icon, name, imgSrc, content }: FileItemProps) {
+function FileItem({ icon, name, imgSrc, content, audioSrc }: FileItemProps) {
   const setImage = useImageStore((state) => state.setImage);
   const setDocument = useTextStore((state) => state.setDocument);
   const openWindow = useWindowsStore((state) => state.openWindow);
+  const setAudio = useAudioStore((state) => state.setAudio);
 
   const handleFileOpen = () => {
     if (imgSrc) {
@@ -23,6 +26,9 @@ function FileItem({ icon, name, imgSrc, content }: FileItemProps) {
       const fileFormat = name.split(".")[1];
       setDocument(content, fileFormat);
       openWindow(WINDOW_ID.TEXT_READER);
+    } else if (audioSrc) {
+      setAudio(audioSrc, name);
+      openWindow(WINDOW_ID.MUSIC_PLAYER);
     }
   };
 
