@@ -10,6 +10,7 @@ import TextReader from "./components/TextReader";
 import type { FileList } from "./types";
 import MusicPlayer from "./components/MusicPlayer";
 import arcade from "./assets/arcade.wav";
+import moonwalk from "./assets/moonwalk.jpg";
 
 interface App {
   id: number;
@@ -107,12 +108,7 @@ export const INITIAL_FILE_LIST: FileList = {
     {
       id: 3,
       name: "never_send_anyone.png",
-      imgSrc: folderIcon,
-    },
-    {
-      id: 4,
-      name: "meme_that_made_me_laugh.png",
-      imgSrc: folderIcon,
+      imgSrc: moonwalk,
     },
   ],
 };
