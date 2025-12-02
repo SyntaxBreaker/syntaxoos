@@ -77,7 +77,7 @@ function Window({ id, x, y, name, children }: WindowProps) {
       ref={windowRef}
     >
       <div
-        className="flex flex-row justify-between items-center cursor-move p-2 border-b border-border-primary"
+        className="flex flex-row justify-between items-center cursor-move p-2 border-b border-border-primary sticky top-0 left-0"
         onMouseDown={handleMouseDown}
       >
         <p className="text-white text-sm font-bold select-none">{name}</p>
