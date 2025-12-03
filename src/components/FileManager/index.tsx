@@ -1,23 +1,19 @@
 import { type MouseEvent } from "react";
-import { useState } from "react";
 import fileIcon from "../../assets/file.svg";
 import FileManagerContextMenu from "../FileManagerContextMenu";
 import { useContextMenuStore } from "../../store/contextMenuStore";
 import FileItem from "../FileItem";
-import { INITIAL_FILE_LIST } from "../../constants";
-import type { FileList } from "../../types";
-
-type Directory = string;
+import { useFileSystemStore } from "../../store/fileSystemStore";
 
 function FileManager() {
-  const [currentDirectory, setCurrentDirectory] = useState<Directory>("home");
-  const [directories] = useState<Directory[]>([
-    "home",
-    "downloads",
-    "music",
-    "pictures",
-  ]);
-  const [fileList] = useState<FileList>(INITIAL_FILE_LIST);
+  const currentDirectory = useFileSystemStore(
+    (state) => state.currentDirectory
+  );
+  const directories = useFileSystemStore((state) => state.directories);
+  const fileList = useFileSystemStore((state) => state.fileList);
+  const setCurrentDirectory = useFileSystemStore(
+    (state) => state.setCurrentDirectory
+  );
   const openContextMenu = useContextMenuStore((state) => state.openContextMenu);
 
   const handleContextMenu = (event: MouseEvent<HTMLDivElement>) => {

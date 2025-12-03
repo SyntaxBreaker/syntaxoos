@@ -1,7 +1,7 @@
 import menuIcon from "../../assets/menuicon.svg";
 import { useWindowsStore } from "../../store/windowsStore";
 import Clock from "../Clock";
-import { APPS } from "../../constants";
+import { APPS } from "../../apps";
 
 function Panel() {
   const activeWindows = useWindowsStore((state) => state.activeWindows)

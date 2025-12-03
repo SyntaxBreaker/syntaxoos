@@ -1,6 +1,6 @@
 import DesktopIcon from "../DesktopIcon";
 import { useWindowsStore } from "../../store/windowsStore";
-import { APPS } from "../../constants";
+import { APPS } from "../../apps";
 
 function DesktopIconList() {
   const openWindow = useWindowsStore((state) => state.openWindow);

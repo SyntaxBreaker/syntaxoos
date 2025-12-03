@@ -5,7 +5,7 @@ import DesktopIconList from "../DesktopIconList";
 import Window from "../Window";
 import { useWindowsStore } from "../../store/windowsStore";
 import DesktopContextMenu from "../DesktopContextMenu";
-import { APPS } from "../../constants";
+import { APPS } from "../../apps";
 
 
 function Desktop() {

@@ -1,4 +1,4 @@
-import { WINDOW_ID } from "../../constants";
+import { WINDOW_ID } from "../../apps";
 import { useAudioStore } from "../../store/audioStore";
 import { useImageStore } from "../../store/imageStore";
 import { useTextStore } from "../../store/textStore";
