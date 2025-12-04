@@ -8,14 +8,7 @@ import ImageViewer from "./components/ImageViewer";
 import Terminal from "./components/Terminal";
 import TextReader from "./components/TextReader";
 import MusicPlayer from "./components/MusicPlayer";
-
-interface App {
-  id: number;
-  name: string;
-  component: React.ReactNode;
-  iconSrc: string;
-  showOnDesktop: boolean;
-}
+import type { App } from "./types";
 
 export const WINDOW_ID = {
   FILE_MANAGER: 0,
