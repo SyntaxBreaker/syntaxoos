@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { commandHandlers } from "../../constants";
 
+type CommandHandler = (...args: string[]) => string;
+
 function Terminal() {
   const [input, setInput] = useState("");
   const [lines, setLines] = useState([
@@ -9,32 +11,27 @@ function Terminal() {
   ]);
 
   const handleInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const command = input.toLowerCase().trim();
-    if (e.key === "Enter") {
-      if (command === "clear") {
-        setLines([]);
-      } else {
-        const newLines = [...lines, `guest@syntaxos:~$ ${input}`];
-        if (command === "help") {
-          newLines.push(...commandHandlers.help());
-        } else if (command === "about") {
-          newLines.push(...commandHandlers.about());
-        } else if (command.startsWith("echo")) {
-          newLines.push(commandHandlers.echo(command));
-        } else if (command.startsWith("whoami")) {
-          newLines.push(commandHandlers.whoami());
-        } else if (command.startsWith("date")) {
-          newLines.push(commandHandlers.date());
-        } else {
-          newLines.push(
-            `Command "${input}" not recognized. Type "help" for a list of commands.`
-          );
-        }
-        setLines(newLines);
-      }
+    if (e.key !== "Enter") return;
+    const [command, ...args] = input.toLowerCase().trim().split(/\s+/);
 
+    if (command === "clear") {
+      setLines(["guest@syntaxos:~$"]);
       setInput("");
+      return;
     }
+
+    const newLines = [...lines, `guest@syntaxos:~$ ${input}`];
+
+    if (command in commandHandlers) {
+      const handler = commandHandlers[
+        command as keyof typeof commandHandlers
+      ] as CommandHandler;
+      const output = handler(args.join(" "));
+      newLines.push(output);
+    }
+
+    setLines(newLines);
+    setInput("");
   };
 
   return (

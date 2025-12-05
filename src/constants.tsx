@@ -23,7 +23,7 @@ export const SYSTEM_INFO = [
 export const commandHandlers = {
   help: () => [`Available commands: ${COMMANDS.join(", ")}`],
   about: () => SYSTEM_INFO,
-  echo: (input: string) => input.slice(5),
+  echo: (input: string) => input,
   whoami: () => "guest",
   date: () => new Date().toLocaleString(),
 } as const;
