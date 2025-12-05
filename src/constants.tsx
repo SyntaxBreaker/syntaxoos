@@ -2,7 +2,14 @@ import type { FileList } from "./types";
 import arcade from "./assets/arcade.wav";
 import moonwalk from "./assets/moonwalk.jpg";
 
-export const COMMANDS = ["about", "clear", "echo", "help", "whoami"] as const;
+export const COMMANDS = [
+  "about",
+  "clear",
+  "echo",
+  "help",
+  "whoami",
+  "date",
+] as const;
 
 export const SYSTEM_INFO = [
   "OS: SyntaxoOS 1.0.0 (Powered by TypeScript)",
@@ -18,6 +25,7 @@ export const commandHandlers = {
   about: () => SYSTEM_INFO,
   echo: (input: string) => input.slice(5),
   whoami: () => "guest",
+  date: () => new Date().toLocaleString(),
 } as const;
 
 export const INITIAL_FILE_LIST: FileList = {

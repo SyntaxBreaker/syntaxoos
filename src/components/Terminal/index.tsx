@@ -23,6 +23,8 @@ function Terminal() {
           newLines.push(commandHandlers.echo(command));
         } else if (command.startsWith("whoami")) {
           newLines.push(commandHandlers.whoami());
+        } else if (command.startsWith("date")) {
+          newLines.push(commandHandlers.date());
         } else {
           newLines.push(
             `Command "${input}" not recognized. Type "help" for a list of commands.`
