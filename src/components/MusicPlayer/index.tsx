@@ -15,7 +15,7 @@ function MusicPlayer() {
         <div className="h-24 w-6 animate-pulse-wave [animation-delay:1.25s] bg-violet-400"></div>
         <div className="h-24 w-6 animate-pulse-wave [animation-delay:1.5s] bg-rose-400"></div>
       </div>
-      <audio controls src={audioSrc} className="-mx-2" />
+      <audio controls src={audioSrc} autoPlay className="-mx-2" />
     </div>
   );
 }
