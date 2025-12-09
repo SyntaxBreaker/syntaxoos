@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useWindowsStore } from "../../store/windowsStore";
+import TitleBar from "../TitleBar";
 
 interface WindowProps {
   id: number;
@@ -14,18 +15,7 @@ function Window({ id, x, y, name, children }: WindowProps) {
   const dragOffsetRef = useRef({ offsetX: 0, offsetY: 0 });
   const windowRef = useRef<HTMLDivElement>(null);
   const changePosition = useWindowsStore((state) => state.changePosition);
-  const closeWindow = useWindowsStore((state) => state.closeWindow);
-  const minimizeWindow = useWindowsStore((state) => state.minimizeWindow);
   const isWindowMinimized = useWindowsStore((state) => state.isWindowMinimized);
-
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-    dragOffsetRef.current = {
-      offsetX: e.clientX - x,
-      offsetY: e.clientY - y,
-    };
-
-    setIsDragging(true);
-  };
 
   const handleMouseMove = (e: MouseEvent) => {
     if (!isDragging) return;
@@ -76,23 +66,14 @@ function Window({ id, x, y, name, children }: WindowProps) {
       }}
       ref={windowRef}
     >
-      <div
-        className="flex flex-row justify-between items-center cursor-move p-2 border-b border-border-primary sticky top-0 left-0"
-        onMouseDown={handleMouseDown}
-      >
-        <p className="text-white text-sm font-bold select-none">{name}</p>
-        <div className="flex flex-row gap-1">
-          <div
-            className="h-2 w-2 bg-green-600 rounded-xs cursor-pointer"
-            onClick={() => minimizeWindow(id)}
-          ></div>
-          <div className="h-2 w-2 bg-yellow-600 rounded-xs"></div>
-          <div
-            className="h-2 w-2 bg-red-600 rounded-xs cursor-pointer"
-            onClick={() => closeWindow(id)}
-          ></div>
-        </div>
-      </div>
+      <TitleBar
+        dragOffsetRef={dragOffsetRef}
+        id={id}
+        name={name}
+        setIsDragging={setIsDragging}
+        x={x}
+        y={y}
+      />
       <div className="h-full w-full px-2 overflow-y-auto flex-grow">
         {children}
       </div>
