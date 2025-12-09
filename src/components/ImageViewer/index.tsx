@@ -5,7 +5,13 @@ function ImageViewer() {
 
   if (!imageSrc) return;
 
-  return <img src={imageSrc} alt="" className="w-lg h-lg mx-auto my-[36px]" />;
+  return (
+    <img
+      src={imageSrc}
+      alt=""
+      className="max-w-full max-h-full object-contain block mx-auto"
+    />
+  );
 }
 
 export default ImageViewer;

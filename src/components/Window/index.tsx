@@ -93,7 +93,9 @@ function Window({ id, x, y, name, children }: WindowProps) {
           ></div>
         </div>
       </div>
-      <div className="h-full w-full px-2">{children}</div>
+      <div className="h-full w-full px-2 overflow-y-auto flex-grow">
+        {children}
+      </div>
     </div>
   );
 }
