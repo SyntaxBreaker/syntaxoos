@@ -27,7 +27,7 @@ function Terminal() {
         command as keyof typeof commandHandlers
       ] as CommandHandler;
       const output = handler(args.join(" "));
-      newLines.push(output);
+      args.length > 0 ? newLines.push(output) : newLines.push(...output);
     }
 
     setLines(newLines);
