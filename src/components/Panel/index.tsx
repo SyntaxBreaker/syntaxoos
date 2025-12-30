@@ -19,7 +19,7 @@ function Panel() {
           {activeWindows.map((activeWindow) => (
             <div
               key={activeWindow.id}
-              className="flex flex-row gap-1 cursor-pointer"
+              className="flex flex-row gap-2 items-center cursor-pointer"
               onClick={() => toggleMinimize(activeWindow.id)}
             >
               <img
