@@ -9,6 +9,8 @@ import Terminal from "./components/Terminal";
 import TextReader from "./components/TextReader";
 import MusicPlayer from "./components/MusicPlayer";
 import type { App } from "./types";
+import Portfolio from "./components/Portfolio";
+import portfolioIcon from "./assets/portfolio.svg";
 
 export const WINDOW_ID = {
   FILE_MANAGER: 0,
@@ -16,6 +18,7 @@ export const WINDOW_ID = {
   IMAGE_VIEWER: 2,
   TEXT_READER: 3,
   MUSIC_PLAYER: 4,
+  PORTFOLIO: 5,
 } as const;
 
 export const APPS: App[] = [
@@ -53,5 +56,12 @@ export const APPS: App[] = [
     component: <MusicPlayer />,
     iconSrc: musicIcon,
     showOnDesktop: false,
+  },
+  {
+    id: WINDOW_ID.PORTFOLIO,
+    name: "Portfolio",
+    component: <Portfolio />,
+    iconSrc: portfolioIcon,
+    showOnDesktop: true,
   },
 ] as const;
