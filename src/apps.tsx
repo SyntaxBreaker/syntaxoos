@@ -1,18 +1,18 @@
-import folderIcon from "./assets/folder.svg";
-import terminalIcon from "./assets/terminal.svg";
-import imageViewerIcon from "./assets/image.svg";
-import textReaderIcon from "./assets/text.svg";
-import musicIcon from "./assets/music.svg";
+import type { App } from "./types";
+import Calculator from "./components/Calculator";
+import Portfolio from "./components/Portfolio";
 import FileManager from "./components/FileManager";
 import ImageViewer from "./components/ImageViewer";
+import MusicPlayer from "./components/MusicPlayer";
 import Terminal from "./components/Terminal";
 import TextReader from "./components/TextReader";
-import MusicPlayer from "./components/MusicPlayer";
-import type { App } from "./types";
-import Portfolio from "./components/Portfolio";
-import portfolioIcon from "./assets/portfolio.svg";
-import Calculator from "./components/Calculator";
 import calculatorIcon from "./assets/calculator.svg";
+import folderIcon from "./assets/folder.svg";
+import imageViewerIcon from "./assets/image.svg";
+import musicIcon from "./assets/music.svg";
+import portfolioIcon from "./assets/portfolio.svg";
+import terminalIcon from "./assets/terminal.svg";
+import textReaderIcon from "./assets/text.svg";
 
 export const WINDOW_ID = {
   FILE_MANAGER: 0,
