@@ -7,10 +7,10 @@ interface DesktopIconProps {
 function DesktopIcon({ name, iconSrc, onClick }: DesktopIconProps) {
   return (
     <div
-      className="flex flex-col gap-2 w-16 flex-wrap cursor-pointer"
+      className="flex flex-col gap-2 w-24 flex-wrap cursor-pointer"
       onClick={onClick}
     >
-      <img src={iconSrc} alt={name} className="h-6 w-6 m-auto" />
+      <img src={iconSrc} alt={name} className="h-8 w-8 m-auto" />
       <p className="text-white text-center">{name}</p>
     </div>
   );
