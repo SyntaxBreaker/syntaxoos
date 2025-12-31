@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { evaluate } from "mathjs";
 import { CALCULATOR_BUTTONS } from "../../constants";
+import CalculatorDisplay from "../CalculatorDisplay";
 
 function Calculator() {
   const [expression, setExpression] = useState("");
@@ -35,14 +36,7 @@ function Calculator() {
 
   return (
     <div className="h-full w-full shadow-2xl p-4">
-      <div className="bg-gray-800 rounded-lg p-4 mb-4 min-h-[80px] flex flex-col justify-end">
-        <p className="text-right text-gray-400 text-sm mb-1 truncate">
-          {expression || "0"}
-        </p>
-        <p className="text-right text-white text-3xl font-bold">
-          {result || "0"}
-        </p>
-      </div>
+      <CalculatorDisplay expression={expression} result={result} />
       <div className="grid grid-cols-4 gap-4 flex-1 h-[calc(100%-108px)]">
         {CALCULATOR_BUTTONS.map((button) => (
           <button
