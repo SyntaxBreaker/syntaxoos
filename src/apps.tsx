@@ -11,6 +11,8 @@ import MusicPlayer from "./components/MusicPlayer";
 import type { App } from "./types";
 import Portfolio from "./components/Portfolio";
 import portfolioIcon from "./assets/portfolio.svg";
+import Calculator from "./components/Calculator";
+import calculatorIcon from "./assets/calculator.svg";
 
 export const WINDOW_ID = {
   FILE_MANAGER: 0,
@@ -19,6 +21,7 @@ export const WINDOW_ID = {
   TEXT_READER: 3,
   MUSIC_PLAYER: 4,
   PORTFOLIO: 5,
+  CALCULATOR: 6,
 } as const;
 
 export const APPS: App[] = [
@@ -62,6 +65,13 @@ export const APPS: App[] = [
     name: "Portfolio",
     component: <Portfolio />,
     iconSrc: portfolioIcon,
+    showOnDesktop: true,
+  },
+  {
+    id: WINDOW_ID.CALCULATOR,
+    name: "Calculator",
+    component: <Calculator />,
+    iconSrc: calculatorIcon,
     showOnDesktop: true,
   },
 ] as const;

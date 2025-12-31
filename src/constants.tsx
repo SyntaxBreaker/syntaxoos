@@ -1,4 +1,4 @@
-import type { FileList } from "./types";
+import type { CalculatorButton, FileList } from "./types";
 import arcade from "./assets/arcade.wav";
 import moonwalk from "./assets/moonwalk.jpg";
 
@@ -57,3 +57,24 @@ export const INITIAL_FILE_LIST: FileList = {
     },
   ],
 };
+
+export const CALCULATOR_BUTTONS: CalculatorButton[] = [
+  { id: 0, label: "AC", span: 2, color: "bg-red-500 hover:bg-red-600" },
+  { id: 1, label: "DEL", span: 1, color: "bg-gray-500 hover:bg-gray-600" },
+  { id: 2, label: "/", span: 1, color: "bg-orange-500 hover:bg-orange-600" },
+  { id: 3, label: "7", span: 1, color: "bg-gray-700 hover:bg-gray-800" },
+  { id: 4, label: "8", span: 1, color: "bg-gray-700 hover:bg-gray-800" },
+  { id: 5, label: "9", span: 1, color: "bg-gray-700 hover:bg-gray-800" },
+  { id: 6, label: "*", span: 1, color: "bg-orange-500 hover:bg-orange-600" },
+  { id: 7, label: "4", span: 1, color: "bg-gray-700 hover:bg-gray-800" },
+  { id: 8, label: "5", span: 1, color: "bg-gray-700 hover:bg-gray-800" },
+  { id: 9, label: "6", span: 1, color: "bg-gray-700 hover:bg-gray-800" },
+  { id: 10, label: "-", span: 1, color: "bg-orange-500 hover:bg-orange-600" },
+  { id: 11, label: "1", span: 1, color: "bg-gray-700 hover:bg-gray-800" },
+  { id: 12, label: "2", span: 1, color: "bg-gray-700 hover:bg-gray-800" },
+  { id: 13, label: "3", span: 1, color: "bg-gray-700 hover:bg-gray-800" },
+  { id: 14, label: "+", span: 1, color: "bg-orange-500 hover:bg-orange-600" },
+  { id: 15, label: "0", span: 2, color: "bg-gray-700 hover:bg-gray-800" },
+  { id: 16, label: ".", span: 1, color: "bg-gray-700 hover:bg-gray-800" },
+  { id: 17, label: "=", span: 1, color: "bg-green-500 hover:bg-green-600" },
+];

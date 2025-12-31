@@ -15,3 +15,10 @@ export interface FileList {
     audioSrc?: string;
   }[];
 }
+
+export interface CalculatorButton {
+  id: number;
+  label: string;
+  span: number;
+  color: string;
+}
