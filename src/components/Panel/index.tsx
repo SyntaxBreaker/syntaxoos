@@ -1,4 +1,4 @@
-import menuIcon from "../../assets/menuicon.svg";
+import menuIcon from "../../assets/icons/menu.svg";
 import { useWindowsStore } from "../../store/windowsStore";
 import Clock from "../Clock";
 import { APPS } from "../../apps";

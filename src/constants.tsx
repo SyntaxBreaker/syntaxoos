@@ -1,6 +1,6 @@
 import type { CalculatorButton, FileList } from "./types";
-import arcade from "./assets/arcade.wav";
-import moonwalk from "./assets/moonwalk.jpg";
+import arcade from "./assets/sounds/arcade.wav";
+import moonwalk from "./assets/images/moonwalk.jpg";
 
 export const COMMANDS = [
   "about",

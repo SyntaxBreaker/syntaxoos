@@ -6,13 +6,13 @@ import ImageViewer from "./components/ImageViewer";
 import MusicPlayer from "./components/MusicPlayer";
 import Terminal from "./components/Terminal";
 import TextReader from "./components/TextReader";
-import calculatorIcon from "./assets/calculator.svg";
-import folderIcon from "./assets/folder.svg";
-import imageViewerIcon from "./assets/image.svg";
-import musicIcon from "./assets/music.svg";
-import portfolioIcon from "./assets/portfolio.svg";
-import terminalIcon from "./assets/terminal.svg";
-import textReaderIcon from "./assets/text.svg";
+import calculatorIcon from "./assets/icons/calculator.svg";
+import folderIcon from "./assets/icons/folder.svg";
+import imageViewerIcon from "./assets/icons/image.svg";
+import musicIcon from "./assets/icons/music.svg";
+import portfolioIcon from "./assets/icons/portfolio.svg";
+import terminalIcon from "./assets/icons/terminal.svg";
+import textReaderIcon from "./assets/icons/text.svg";
 
 export const WINDOW_ID = {
   FILE_MANAGER: 0,

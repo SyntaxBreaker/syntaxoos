@@ -1,5 +1,5 @@
 import { type MouseEvent } from "react";
-import fileIcon from "../../assets/file.svg";
+import fileIcon from "../../assets/icons/file.svg";
 import FileManagerContextMenu from "../FileManagerContextMenu";
 import { useContextMenuStore } from "../../store/contextMenuStore";
 import FileItem from "../FileItem";
