@@ -1,6 +1,7 @@
 import type { CalculatorButton, FileList } from "./types";
 import arcade from "./assets/sounds/arcade.wav";
 import moonwalk from "./assets/images/moonwalk.jpg";
+import defaultWallpaper from "./assets/wallpapers/1.jpg";
 
 export const COMMANDS = [
   "about",
@@ -77,4 +78,15 @@ export const CALCULATOR_BUTTONS: CalculatorButton[] = [
   { id: 15, label: "0", span: 2, color: "bg-gray-700 hover:bg-gray-800" },
   { id: 16, label: ".", span: 1, color: "bg-gray-700 hover:bg-gray-800" },
   { id: 17, label: "=", span: 1, color: "bg-green-500 hover:bg-green-600" },
+];
+
+export const WALLPAPERS = [
+  {
+    id: 0,
+    src: defaultWallpaper,
+  },
+  {
+    id: 1,
+    src: moonwalk,
+  },
 ];

@@ -6,15 +6,20 @@ import Window from "../Window";
 import { useWindowsStore } from "../../store/windowsStore";
 import DesktopContextMenu from "../DesktopContextMenu";
 import { APPS } from "../../apps";
-
+import { useSettingsStore } from "../../store/settingsStore";
 
 function Desktop() {
   const openContextMenu = useContextMenuStore((state) => state.openContextMenu);
   const activeWindows = useWindowsStore((state) => state.activeWindows);
+  const currentWallpaper = useSettingsStore((state) => state.currentWallpaper);
 
   const handleContextMenu = (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     openContextMenu("desktop", event.pageX, event.pageY);
+  };
+
+  const desktopStyle = {
+    backgroundImage: `url('${currentWallpaper}')`,
   };
 
   return (
@@ -22,12 +27,11 @@ function Desktop() {
       className="h-screen w-full"
       id="desktop"
       onContextMenu={handleContextMenu}
+      style={desktopStyle}
     >
       <DesktopIconList />
       {activeWindows.map((activeWindow) => {
-        const windowData = APPS.find(
-          (app) => app.id === activeWindow.id
-        );
+        const windowData = APPS.find((app) => app.id === activeWindow.id);
         if (!windowData) return null;
         return (
           <Window

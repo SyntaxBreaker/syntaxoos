@@ -13,6 +13,8 @@ import musicIcon from "./assets/icons/music.svg";
 import portfolioIcon from "./assets/icons/portfolio.svg";
 import terminalIcon from "./assets/icons/terminal.svg";
 import textReaderIcon from "./assets/icons/text.svg";
+import Settings from "./components/Settings";
+import settingsIcon from "./assets/icons/settings.svg";
 
 export const WINDOW_ID = {
   FILE_MANAGER: 0,
@@ -22,6 +24,7 @@ export const WINDOW_ID = {
   MUSIC_PLAYER: 4,
   PORTFOLIO: 5,
   CALCULATOR: 6,
+  SETTINGS: 7,
 } as const;
 
 export const APPS: App[] = [
@@ -74,4 +77,11 @@ export const APPS: App[] = [
     iconSrc: calculatorIcon,
     showOnDesktop: true,
   },
+  {
+    id: WINDOW_ID.SETTINGS,
+    name: "Settings",
+    component: <Settings />,
+    iconSrc: settingsIcon,
+    showOnDesktop: true,
+  }
 ] as const;
