@@ -11,7 +11,7 @@ function AppearanceSettings() {
   return (
     <div className="flex flex-col gap-2">
       <h3 className="text-white text-xs font-extrabold">Wallpaper</h3>
-      <div className="flex flex-row gap-4 flex-wrap">
+      <div className="flex flex-row gap-2 flex-wrap">
         {WALLPAPERS.map((wallpaper) => (
           <img
             key={wallpaper.id}
