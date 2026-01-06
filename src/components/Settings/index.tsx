@@ -1,21 +1,15 @@
 import { useSettingsStore } from "../../store/settingsStore";
 import AccountsSettings from "../AccountsSettings";
 import AppearanceSettings from "../AppearanceSettings";
-import GeneralSettings from "../GeneralSettings";
 
 export const SETTINGS_TABS = [
   {
     id: 0,
-    name: "General",
-    component: <GeneralSettings />,
-  },
-  {
-    id: 1,
     name: "Appearance",
     component: <AppearanceSettings />,
   },
   {
-    id: 2,
+    id: 1,
     name: "Accounts",
     component: <AccountsSettings />,
   },

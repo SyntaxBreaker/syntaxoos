@@ -9,7 +9,7 @@ interface SettingsStore {
 }
 
 export const useSettingsStore = create<SettingsStore>()((set) => ({
-  currentTab: "General",
+  currentTab: "Appearance",
   currentWallpaper: WALLPAPERS[0].src,
   setCurrentTab: (tabName: string) => {
     set({ currentTab: tabName });
