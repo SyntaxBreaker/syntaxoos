@@ -12,6 +12,9 @@ function Desktop() {
   const openContextMenu = useContextMenuStore((state) => state.openContextMenu);
   const activeWindows = useWindowsStore((state) => state.activeWindows);
   const currentWallpaper = useSettingsStore((state) => state.currentWallpaper);
+  const backgroundSize = useSettingsStore(
+    (state) => state.currentBackgroundSize
+  );
 
   const handleContextMenu = (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -20,6 +23,9 @@ function Desktop() {
 
   const desktopStyle = {
     backgroundImage: `url('${currentWallpaper}')`,
+    backgroundSize: `${
+      backgroundSize === "Full" ? "100% 100%" : backgroundSize
+    }`,
   };
 
   return (
