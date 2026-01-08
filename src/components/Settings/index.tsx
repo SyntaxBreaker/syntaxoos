@@ -1,5 +1,5 @@
 import { useSettingsStore } from "../../store/settingsStore";
-import AccountsSettings from "../AccountsSettings";
+import AccountSettings from "../AccountSettings";
 import AppearanceSettings from "../AppearanceSettings";
 
 export const SETTINGS_TABS = [
@@ -10,8 +10,8 @@ export const SETTINGS_TABS = [
   },
   {
     id: 1,
-    name: "Accounts",
-    component: <AccountsSettings />,
+    name: "Account",
+    component: <AccountSettings />,
   },
 ];
 

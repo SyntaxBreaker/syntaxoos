@@ -1,14 +1,9 @@
 import { create } from "zustand";
-
-interface User {
-  id: number;
-  username: string;
-  displayName: string;
-}
+import type { User } from "../types";
 
 interface AccountStore {
   user: User;
-  updateUsername: (username: string) => void;
+  updateUser: (user: Omit<User, "id">) => void;
 }
 
 export const useAccountStore = create<AccountStore>()((set) => ({
@@ -17,7 +12,7 @@ export const useAccountStore = create<AccountStore>()((set) => ({
     username: "guest",
     displayName: "guest",
   },
-  updateUsername: (username) => {
-    set((state) => ({ user: { ...state.user, username: username } }));
+  updateUser: (user) => {
+    set((state) => ({ user: { ...state.user, ...user } }));
   },
 }));

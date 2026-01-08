@@ -22,3 +22,9 @@ export interface CalculatorButton {
   span: number;
   color: string;
 }
+
+export interface User {
+  id: number;
+  username: string;
+  displayName: string;
+}
