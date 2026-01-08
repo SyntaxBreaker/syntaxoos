@@ -35,6 +35,10 @@ function Terminal() {
       } else {
         newLines.push(output);
       }
+    } else {
+      newLines.push(
+        `Command "${command}" not recognized. Type "help" for a list of commands.`
+      );
     }
 
     setLines(newLines);
