@@ -1,7 +1,7 @@
 import type { CalculatorButton, CommandHandler, FileList } from "./types";
 import arcade from "./assets/sounds/arcade.wav";
 import moonwalk from "./assets/images/moonwalk.jpg";
-import defaultWallpaper from "./assets/wallpapers/1.jpg";
+import defaultWallpaper from "./assets/wallpapers/default.jpg";
 
 export const COMMANDS: string[] = [
   "about",
