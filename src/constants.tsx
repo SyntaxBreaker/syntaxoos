@@ -1,9 +1,9 @@
-import type { CalculatorButton, FileList } from "./types";
+import type { CalculatorButton, CommandHandler, FileList } from "./types";
 import arcade from "./assets/sounds/arcade.wav";
 import moonwalk from "./assets/images/moonwalk.jpg";
 import defaultWallpaper from "./assets/wallpapers/1.jpg";
 
-export const COMMANDS = [
+export const COMMANDS: string[] = [
   "about",
   "clear",
   "echo",
@@ -12,7 +12,7 @@ export const COMMANDS = [
   "date",
 ] as const;
 
-export const SYSTEM_INFO = [
+export const SYSTEM_INFO: string[] = [
   "OS: SyntaxoOS 1.0.0 (Powered by TypeScript)",
   "Kernel: 1.0.0-typescript (Stable - probably)",
   "Shell: SyntaxShell 1.0.0",
@@ -21,11 +21,11 @@ export const SYSTEM_INFO = [
   "Author: SyntaxBreaker",
 ] as const;
 
-export const commandHandlers = {
+export const commandHandlers: Record<string, CommandHandler> = {
   help: () => [`Available commands: ${COMMANDS.join(", ")}`],
   about: () => SYSTEM_INFO,
   echo: (input: string) => input,
-  whoami: () => "guest",
+  whoami: (username: string) => username,
   date: () => new Date().toLocaleString(),
 } as const;
 

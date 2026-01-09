@@ -28,3 +28,5 @@ export interface User {
   username: string;
   displayName: string;
 }
+
+export type CommandHandler = (...args: string[]) => string | string[];

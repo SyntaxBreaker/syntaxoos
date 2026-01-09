@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { commandHandlers } from "../../constants";
 import { useAccountStore } from "../../store/useAccountStore";
-
-type CommandHandler = (...args: string[]) => string;
+import type { CommandHandler } from "../../types";
 
 function Terminal() {
   const [input, setInput] = useState("");
@@ -11,24 +10,26 @@ function Terminal() {
     "Type 'help' to see available commands.",
   ]);
   const user = useAccountStore((state) => state.user);
+  const PROMPT_PREFIX = `${user.username}@syntaxos:~$`;
 
   const handleInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key !== "Enter") return;
+    if (e.key !== "Enter" || input.trim() === "") return;
     const [command, ...args] = input.toLowerCase().trim().split(/\s+/);
+    setInput("");
 
     if (command === "clear") {
-      setLines([`${user.displayName}@syntaxos:~$`]);
-      setInput("");
+      setLines([]);
       return;
     }
 
-    const newLines = [...lines, `${user.displayName}@syntaxos:~$ ${input}`];
+    const newLines = [...lines, `${PROMPT_PREFIX} ${input}`];
 
     if (command in commandHandlers) {
       const handler = commandHandlers[
         command as keyof typeof commandHandlers
       ] as CommandHandler;
-      const output = handler(args.join(" "));
+      const output =
+        command === "whoami" ? handler(user.username) : handler(args.join(" "));
 
       if (Array.isArray(output)) {
         newLines.push(...output);
@@ -42,7 +43,6 @@ function Terminal() {
     }
 
     setLines(newLines);
-    setInput("");
   };
 
   return (
@@ -51,7 +51,7 @@ function Terminal() {
         <p key={idx}>{line}</p>
       ))}
       <div className="flex flex-row gap-1">
-        <p>{user.displayName}@syntaxos:~$</p>
+        <p>{PROMPT_PREFIX}</p>
         <input
           className="outline-none border-none text-green-400 flex-1"
           value={input}
