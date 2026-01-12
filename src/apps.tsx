@@ -1,5 +1,6 @@
 import type { App } from "./types";
 import Calculator from "./components/Calculator";
+import Contact from "./components/Contact";
 import Portfolio from "./components/Portfolio";
 import FileManager from "./components/FileManager";
 import ImageViewer from "./components/ImageViewer";
@@ -7,6 +8,7 @@ import MusicPlayer from "./components/MusicPlayer";
 import Terminal from "./components/Terminal";
 import TextReader from "./components/TextReader";
 import calculatorIcon from "./assets/icons/calculator.svg";
+import contactIcon from "./assets/icons/contact.svg";
 import folderIcon from "./assets/icons/folder.svg";
 import imageViewerIcon from "./assets/icons/image.svg";
 import musicIcon from "./assets/icons/music.svg";
@@ -25,6 +27,7 @@ export const WINDOW_ID = {
   PORTFOLIO: 5,
   CALCULATOR: 6,
   SETTINGS: 7,
+  CONTACT: 8,
 } as const;
 
 export const APPS: App[] = [
@@ -83,5 +86,12 @@ export const APPS: App[] = [
     component: <Settings />,
     iconSrc: settingsIcon,
     showOnDesktop: true,
-  }
+  },
+  {
+    id: WINDOW_ID.CONTACT,
+    name: "Contact",
+    component: <Contact />,
+    iconSrc: contactIcon,
+    showOnDesktop: true,
+  },
 ] as const;
