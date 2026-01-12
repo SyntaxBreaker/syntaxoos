@@ -9,8 +9,8 @@ interface AccountStore {
 export const useAccountStore = create<AccountStore>()((set) => ({
   user: {
     id: 0,
-    username: "guest",
-    displayName: "guest",
+    username: localStorage.getItem("username") || "guest",
+    displayName: localStorage.getItem("displayName") || "guest",
   },
   updateUser: (user) => {
     set((state) => ({ user: { ...state.user, ...user } }));
