@@ -36,7 +36,7 @@ function Settings() {
           </button>
         ))}
       </div>
-      <div className="flex flex-col gap-4 py-2">{activeComponent}</div>
+      <div className="flex flex-col gap-4 py-2 w-full">{activeComponent}</div>
     </div>
   );
 }
