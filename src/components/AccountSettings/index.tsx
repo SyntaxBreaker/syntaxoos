@@ -46,7 +46,7 @@ function AccountSettings() {
             Username
           </label>
           <input
-            className="p-2 bg-neutral-secondary-medium border text-xs rounded-base text-white focus:outline focus:outline-solid focus:outline-white"
+            className="p-2 bg-neutral-secondary-medium border text-xs rounded-sm text-white focus:outline focus:outline-solid focus:outline-white"
             name="username"
             onChange={handleChange}
             value={account.username}
@@ -60,7 +60,7 @@ function AccountSettings() {
             Display Name
           </label>
           <input
-            className="p-2 bg-neutral-secondary-medium border text-xs rounded-base text-white focus:outline focus:outline-solid focus:outline-white"
+            className="p-2 bg-neutral-secondary-medium border text-xs rounded-sm text-white focus:outline focus:outline-solid focus:outline-white"
             name="displayName"
             onChange={handleChange}
             value={account.displayName}
@@ -68,7 +68,7 @@ function AccountSettings() {
         </div>
         <button
           type="submit"
-          className="rounded-md bg-white py-2 px-4 border border-transparent text-center text-xs hover:shadow-lg hover:bg-gray-300 hover:cursor-pointer"
+          className="rounded-md bg-white py-2 px-8 border border-transparent text-center text-xs hover:shadow-lg hover:bg-gray-300 hover:cursor-pointer self-end"
         >
           Save
         </button>
