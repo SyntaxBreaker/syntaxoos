@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAccountStore } from "../../store/useAccountStore";
+import { useAccountStore } from "../../store/accountStore";
 import type { User } from "../../types";
 
 type AccountState = Omit<User, "id">;

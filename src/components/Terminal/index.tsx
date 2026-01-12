@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { commandHandlers } from "../../constants";
-import { useAccountStore } from "../../store/useAccountStore";
+import { useAccountStore } from "../../store/accountStore";
 import type { CommandHandler } from "../../types";
 
 function Terminal() {
