@@ -16,7 +16,9 @@ export const SYSTEM_INFO: string[] = [
   "OS: SyntaxoOS 1.0.0 (Powered by TypeScript)",
   "Kernel: 1.0.0-typescript (Stable - probably)",
   "Shell: SyntaxShell 1.0.0",
-  "CPU: Intel Core2 Duo E8400 (Still the best CPU)",
+  "CPU: Intel Core2 Duo E8400 (Still the best CPU 😆)",
+  "CPU @ 4.2GHz",
+  "CPU Cores: 2",
   "Memory: 128TB",
   "Author: SyntaxBreaker",
 ] as const;

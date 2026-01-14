@@ -5,6 +5,8 @@ import Portfolio from "./components/Portfolio";
 import FileManager from "./components/FileManager";
 import ImageViewer from "./components/ImageViewer";
 import MusicPlayer from "./components/MusicPlayer";
+import Settings from "./components/Settings";
+import SystemMonitor from "./components/SystemMonitor";
 import Terminal from "./components/Terminal";
 import TextReader from "./components/TextReader";
 import calculatorIcon from "./assets/icons/calculator.svg";
@@ -15,7 +17,7 @@ import musicIcon from "./assets/icons/music.svg";
 import portfolioIcon from "./assets/icons/portfolio.svg";
 import terminalIcon from "./assets/icons/terminal.svg";
 import textReaderIcon from "./assets/icons/text.svg";
-import Settings from "./components/Settings";
+import systemMonitorIcon from "./assets/icons/systemMonitor.svg";
 import settingsIcon from "./assets/icons/settings.svg";
 
 export const WINDOW_ID = {
@@ -28,6 +30,7 @@ export const WINDOW_ID = {
   CALCULATOR: 6,
   SETTINGS: 7,
   CONTACT: 8,
+  SYSTEM_MONITOR: 9,
 } as const;
 
 export const APPS: App[] = [
@@ -93,5 +96,12 @@ export const APPS: App[] = [
     component: <Contact />,
     iconSrc: contactIcon,
     showOnDesktop: true,
+  },
+  {
+    id: WINDOW_ID.SYSTEM_MONITOR,
+    name: "System Monitor",
+    component: <SystemMonitor />,
+    iconSrc: systemMonitorIcon,
+    showOnDesktop: false,
   },
 ] as const;
