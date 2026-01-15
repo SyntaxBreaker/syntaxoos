@@ -92,3 +92,11 @@ export const WALLPAPERS = [
     src: moonwalk,
   },
 ];
+
+export const RESOURCE_LIMITS = {
+  cpu: 100,
+  disk: 960,
+  download: 600,
+  memory: 32,
+  upload: 600,
+};
