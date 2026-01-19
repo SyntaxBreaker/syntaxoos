@@ -7,7 +7,7 @@ function TextReader() {
 
   if (fileFormat === "md") {
     return (
-      <div className="text-white">
+      <div className="text-white py-2">
         <Markdown>{content}</Markdown>
       </div>
     );
