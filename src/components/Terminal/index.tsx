@@ -12,7 +12,7 @@ function Terminal() {
   const user = useAccountStore((state) => state.user);
   const PROMPT_PREFIX = `${user.username}@syntaxos:~$`;
 
-  const handleInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleCommandExecution = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter" || input.trim() === "") return;
     const [command, ...args] = input.toLowerCase().trim().split(/\s+/);
     setInput("");
@@ -38,7 +38,7 @@ function Terminal() {
       }
     } else {
       newLines.push(
-        `Command "${command}" not recognized. Type "help" for a list of commands.`
+        `Command "${command}" not recognized. Type "help" for a list of commands.`,
       );
     }
 
@@ -56,7 +56,7 @@ function Terminal() {
           className="outline-none border-none text-green-400 flex-1"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleInput}
+          onKeyDown={handleCommandExecution}
           autoFocus
         />
       </div>
