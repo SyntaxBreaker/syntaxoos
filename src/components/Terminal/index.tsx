@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { commandHandlers } from "../../constants";
 import { useAccountStore } from "../../store/accountStore";
 import type { CommandHandler } from "../../types";
@@ -18,6 +18,7 @@ function Terminal() {
   const commandHistory = useCommandHistoryStore(
     (state) => state.commandHistory,
   );
+  const bottomRef = useRef<HTMLDivElement>(null);
 
   const handleCommandExecution = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter" || input.trim() === "") return;
@@ -52,12 +53,16 @@ function Terminal() {
     setLines(newLines);
   };
 
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [lines]);
+
   return (
     <div className="text-white text-sm flex flex-col gap-1 py-2">
       {lines.map((line, idx) => (
         <p key={idx}>{line}</p>
       ))}
-      <div className="flex flex-row gap-1">
+      <div className="flex flex-row gap-1" ref={bottomRef}>
         <p>{PROMPT_PREFIX}</p>
         <input
           className="outline-none border-none text-green-400 flex-1"
