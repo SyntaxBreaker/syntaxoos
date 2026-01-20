@@ -10,6 +10,7 @@ export const COMMANDS: string[] = [
   "help",
   "whoami",
   "date",
+  "history",
 ] as const;
 
 export const SYSTEM_INFO: string[] = [
@@ -26,9 +27,10 @@ export const SYSTEM_INFO: string[] = [
 export const commandHandlers: Record<string, CommandHandler> = {
   help: () => [`Available commands: ${COMMANDS.join(", ")}`],
   about: () => SYSTEM_INFO,
-  echo: (input: string) => input,
-  whoami: (username: string) => username,
+  echo: ({ args }) => args,
+  whoami: ({ user }) => user.username,
   date: () => new Date().toLocaleString(),
+  history: ({ commandHistory }) => commandHistory,
 } as const;
 
 export const INITIAL_FILE_LIST: FileList = {

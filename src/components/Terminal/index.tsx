@@ -2,6 +2,7 @@ import { useState } from "react";
 import { commandHandlers } from "../../constants";
 import { useAccountStore } from "../../store/accountStore";
 import type { CommandHandler } from "../../types";
+import { useCommandHistoryStore } from "../../store/commandHistoryStore";
 
 function Terminal() {
   const [input, setInput] = useState("");
@@ -11,6 +12,12 @@ function Terminal() {
   ]);
   const user = useAccountStore((state) => state.user);
   const PROMPT_PREFIX = `${user.username}@syntaxos:~$`;
+  const addCommandToHistory = useCommandHistoryStore(
+    (state) => state.addCommandToHistory,
+  );
+  const commandHistory = useCommandHistoryStore(
+    (state) => state.commandHistory,
+  );
 
   const handleCommandExecution = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter" || input.trim() === "") return;
@@ -28,8 +35,7 @@ function Terminal() {
       const handler = commandHandlers[
         command as keyof typeof commandHandlers
       ] as CommandHandler;
-      const output =
-        command === "whoami" ? handler(user.username) : handler(args.join(" "));
+      const output = handler({ args, user, commandHistory: commandHistory });
 
       if (Array.isArray(output)) {
         newLines.push(...output);
@@ -42,6 +48,7 @@ function Terminal() {
       );
     }
 
+    addCommandToHistory(command);
     setLines(newLines);
   };
 

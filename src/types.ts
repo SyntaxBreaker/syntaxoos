@@ -29,4 +29,10 @@ export interface User {
   displayName: string;
 }
 
-export type CommandHandler = (...args: string[]) => string | string[];
+export interface CommandPayload {
+  args: string[];
+  user: User;
+  commandHistory: string[];
+}
+
+export type CommandHandler = (data: CommandPayload) => string | string[];
