@@ -1,1 +1,1 @@
-# SyntaxoOS
+# Syntaxoos
