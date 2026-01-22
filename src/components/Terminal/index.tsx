@@ -3,6 +3,7 @@ import { commandHandlers } from "../../constants";
 import { useAccountStore } from "../../store/accountStore";
 import type { CommandHandler } from "../../types";
 import { useCommandHistoryStore } from "../../store/commandHistoryStore";
+import { useUptimeStore } from "../../store/useUptimeStore";
 
 function Terminal() {
   const [input, setInput] = useState("");
@@ -18,6 +19,7 @@ function Terminal() {
   const commandHistory = useCommandHistoryStore(
     (state) => state.commandHistory,
   );
+  const getUptime = useUptimeStore((state) => state.getUptime);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   const handleCommandExecution = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -36,7 +38,12 @@ function Terminal() {
       const handler = commandHandlers[
         command as keyof typeof commandHandlers
       ] as CommandHandler;
-      const output = handler({ args, user, commandHistory: commandHistory });
+      const output = handler({
+        args,
+        user,
+        commandHistory,
+        currentUptime: getUptime(),
+      });
 
       if (Array.isArray(output)) {
         newLines.push(...output);

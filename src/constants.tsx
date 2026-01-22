@@ -11,6 +11,7 @@ export const COMMANDS: string[] = [
   "whoami",
   "date",
   "history",
+  "uptime",
 ] as const;
 
 export const SYSTEM_INFO: string[] = [
@@ -31,6 +32,7 @@ export const commandHandlers: Record<string, CommandHandler> = {
   whoami: ({ user }) => user.username,
   date: () => new Date().toLocaleString(),
   history: ({ commandHistory }) => commandHistory,
+  uptime: ({ currentUptime }) => currentUptime,
 } as const;
 
 export const INITIAL_FILE_LIST: FileList = {
