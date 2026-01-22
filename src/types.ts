@@ -35,5 +35,3 @@ export interface CommandPayload {
   commandHistory: string[];
   currentUptime: string;
 }
-
-export type CommandHandler = (data: CommandPayload) => string | string[];

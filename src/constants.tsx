@@ -1,18 +1,7 @@
-import type { CalculatorButton, CommandHandler, FileList } from "./types";
+import type { CalculatorButton, CommandPayload, FileList } from "./types";
 import arcade from "./assets/sounds/arcade.wav";
 import moonwalk from "./assets/images/moonwalk.jpg";
 import defaultWallpaper from "./assets/wallpapers/default.jpg";
-
-export const COMMANDS: string[] = [
-  "about",
-  "clear",
-  "echo",
-  "help",
-  "whoami",
-  "date",
-  "history",
-  "uptime",
-] as const;
 
 export const SYSTEM_INFO: string[] = [
   "OS: SyntaxoOS 1.0.0 (Powered by TypeScript)",
@@ -25,15 +14,18 @@ export const SYSTEM_INFO: string[] = [
   "Author: SyntaxBreaker",
 ] as const;
 
-export const commandHandlers: Record<string, CommandHandler> = {
-  help: () => [`Available commands: ${COMMANDS.join(", ")}`],
+export const COMMANDS: Record<
+  string,
+  (data: CommandPayload) => string | string[]
+> = {
+  help: () => `Available commands: ${Object.keys(COMMANDS).join(", ")}`,
   about: () => SYSTEM_INFO,
   echo: ({ args }) => args,
   whoami: ({ user }) => user.username,
   date: () => new Date().toLocaleString(),
   history: ({ commandHistory }) => commandHistory,
   uptime: ({ currentUptime }) => currentUptime,
-} as const;
+};
 
 export const INITIAL_FILE_LIST: FileList = {
   home: [

@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { commandHandlers } from "../../constants";
+import { COMMANDS } from "../../constants";
 import { useAccountStore } from "../../store/accountStore";
-import type { CommandHandler } from "../../types";
 import { useCommandHistoryStore } from "../../store/commandHistoryStore";
 import { useUptimeStore } from "../../store/useUptimeStore";
 
@@ -23,21 +22,26 @@ function Terminal() {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   const handleCommandExecution = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key !== "Enter" || input.trim() === "") return;
-    const [command, ...args] = input.toLowerCase().trim().split(/\s+/);
-    setInput("");
-
-    if (command === "clear") {
-      setLines([]);
+    if (e.key !== "Enter") return;
+    if (input.trim() === "") {
+      setLines((prev) => [...prev, PROMPT_PREFIX]);
+      setInput("");
       return;
     }
 
-    const newLines = [...lines, `${PROMPT_PREFIX} ${input}`];
+    const [command, ...args] = input.toLowerCase().trim().split(/\s+/);
 
-    if (command in commandHandlers) {
-      const handler = commandHandlers[
-        command as keyof typeof commandHandlers
-      ] as CommandHandler;
+    if (command === "clear") {
+      setLines([]);
+      setInput("");
+      return;
+    }
+
+    const commandLine = `${PROMPT_PREFIX} ${input}`;
+    const newLines = [commandLine];
+
+    if (command in COMMANDS) {
+      const handler = COMMANDS[command as keyof typeof COMMANDS];
       const output = handler({
         args,
         user,
@@ -56,8 +60,9 @@ function Terminal() {
       );
     }
 
+    setLines((prev) => [...prev, ...newLines]);
+    setInput("");
     addCommandToHistory(command);
-    setLines(newLines);
   };
 
   useEffect(() => {
