@@ -18,11 +18,11 @@ function Terminal() {
   const commandHistory = useCommandHistoryStore(
     (state) => state.commandHistory,
   );
+  const getCommand = useCommandHistoryStore((state) => state.getCommand);
   const getUptime = useUptimeStore((state) => state.getUptime);
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  const handleCommandExecution = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key !== "Enter") return;
+  const handleCommandExecution = () => {
     if (input.trim() === "") {
       setLines((prev) => [...prev, PROMPT_PREFIX]);
       setInput("");
@@ -65,6 +65,20 @@ function Terminal() {
     addCommandToHistory(command);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleCommandExecution();
+      return;
+    } else if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+      const cmd = getCommand(e.key === "ArrowUp" ? "up" : "down");
+      console.log(cmd);
+      if (cmd !== null) {
+        setInput(cmd);
+        return;
+      }
+    }
+  };
+
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [lines]);
@@ -80,7 +94,7 @@ function Terminal() {
           className="outline-none border-none text-green-400 flex-1"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleCommandExecution}
+          onKeyDown={handleKeyDown}
           autoFocus
         />
       </div>
