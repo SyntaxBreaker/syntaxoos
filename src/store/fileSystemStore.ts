@@ -1,18 +1,18 @@
 import { create } from "zustand";
-import { INITIAL_FILE_LIST } from "../constants";
-import type { FileList } from "../types";
+import { VIRTUAL_FILE_SYSTEM } from "../constants";
+import type { FileSystemItem } from "../types";
 
 interface FileSystemStore {
   currentDirectory: string;
   directories: string[];
-  fileList: FileList;
+  fileList: Record<string, FileSystemItem[]>;
   setCurrentDirectory: (directory: string) => void;
 }
 
 export const useFileSystemStore = create<FileSystemStore>()((set) => ({
   currentDirectory: "home",
-  directories: ["home", "downloads", "music", "pictures"],
-  fileList: INITIAL_FILE_LIST,
+  directories: Object.keys(VIRTUAL_FILE_SYSTEM),
+  fileList: VIRTUAL_FILE_SYSTEM,
   setCurrentDirectory: (directory: string) =>
     set({ currentDirectory: directory }),
 }));

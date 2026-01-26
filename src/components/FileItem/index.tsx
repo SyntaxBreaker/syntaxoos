@@ -3,31 +3,31 @@ import { useAudioStore } from "../../store/audioStore";
 import { useImageStore } from "../../store/imageStore";
 import { useTextStore } from "../../store/textStore";
 import { useWindowsStore } from "../../store/windowsStore";
+import type { FileType } from "../../types";
 
 interface FileItemProps {
   icon: string;
   name: string;
-  imgSrc?: string;
-  content?: string;
-  audioSrc?: string;
+  src: string;
+  fileType: FileType;
 }
 
-function FileItem({ icon, name, imgSrc, content, audioSrc }: FileItemProps) {
+function FileItem({ icon, name, src, fileType }: FileItemProps) {
   const setImage = useImageStore((state) => state.setImage);
   const setDocument = useTextStore((state) => state.setDocument);
   const openWindow = useWindowsStore((state) => state.openWindow);
   const setAudio = useAudioStore((state) => state.setAudio);
 
   const handleFileOpen = () => {
-    if (imgSrc) {
-      setImage(imgSrc, name);
+    if (fileType === "image") {
+      setImage(src, name);
       openWindow(WINDOW_ID.IMAGE_VIEWER);
-    } else if (content) {
+    } else if (fileType === "text" || fileType === "markdown") {
       const fileFormat = name.split(".")[1];
-      setDocument(content, fileFormat);
+      setDocument(src, fileFormat);
       openWindow(WINDOW_ID.TEXT_READER);
-    } else if (audioSrc) {
-      setAudio(audioSrc, name);
+    } else if (fileType === "audio") {
+      setAudio(src, name);
       openWindow(WINDOW_ID.MUSIC_PLAYER);
     }
   };

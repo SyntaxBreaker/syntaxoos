@@ -6,14 +6,13 @@ export interface App {
   showOnDesktop: boolean;
 }
 
-export interface FileList {
-  [key: string]: {
-    id: number;
-    name: string;
-    imgSrc?: string;
-    content?: string;
-    audioSrc?: string;
-  }[];
+export type FileType = "text" | "markdown" | "audio" | "image";
+
+export interface FileSystemItem {
+  id: number;
+  name: string;
+  src: string;
+  fileType: FileType;
 }
 
 export interface CalculatorButton {

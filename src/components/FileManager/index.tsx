@@ -7,12 +7,12 @@ import { useFileSystemStore } from "../../store/fileSystemStore";
 
 function FileManager() {
   const currentDirectory = useFileSystemStore(
-    (state) => state.currentDirectory
+    (state) => state.currentDirectory,
   );
   const directories = useFileSystemStore((state) => state.directories);
   const fileList = useFileSystemStore((state) => state.fileList);
   const setCurrentDirectory = useFileSystemStore(
-    (state) => state.setCurrentDirectory
+    (state) => state.setCurrentDirectory,
   );
   const openContextMenu = useContextMenuStore((state) => state.openContextMenu);
 
@@ -23,7 +23,7 @@ function FileManager() {
     openContextMenu(
       "fileManager",
       event.clientX - rect.left,
-      event.clientY - rect.top
+      event.clientY - rect.top,
     );
   };
 
@@ -45,14 +45,13 @@ function FileManager() {
         ))}
       </div>
       <div className="p-2 flex flex-row gap-4 flex-wrap content-start">
-        {fileList[currentDirectory].map((file) => (
+        {fileList[currentDirectory].map(({ id, name, src, fileType }) => (
           <FileItem
-            key={file.id}
-            name={file.name}
+            key={id}
+            name={name}
             icon={fileIcon}
-            imgSrc={file.imgSrc}
-            content={file.content}
-            audioSrc={file.audioSrc}
+            src={src}
+            fileType={fileType}
           />
         ))}
       </div>

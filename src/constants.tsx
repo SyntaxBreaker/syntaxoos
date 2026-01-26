@@ -1,4 +1,4 @@
-import type { CalculatorButton, CommandPayload, FileList } from "./types";
+import type { CalculatorButton, CommandPayload, FileSystemItem } from "./types";
 import arcade from "./assets/sounds/arcade.wav";
 import moonwalk from "./assets/images/moonwalk.jpg";
 import defaultWallpaper from "./assets/wallpapers/default.jpg";
@@ -43,17 +43,19 @@ export const COMMANDS: Record<
   reverse: ({ args }) => args.join(" ").split("").reverse().join(""),
 };
 
-export const INITIAL_FILE_LIST: FileList = {
+export const VIRTUAL_FILE_SYSTEM: Record<string, FileSystemItem[]> = {
   home: [
     {
       id: 0,
       name: "password.txt",
-      content: "You thought it would be that easy? LOL.",
+      src: "You thought it would be that easy? LOL.",
+      fileType: "text",
     },
     {
       id: 1,
       name: "TODO.md",
-      content: "# Everything and Nothing",
+      src: "# Everything and Nothing",
+      fileType: "markdown",
     },
   ],
   downloads: [],
@@ -61,14 +63,16 @@ export const INITIAL_FILE_LIST: FileList = {
     {
       id: 2,
       name: "random_noises_at_3am.wav",
-      audioSrc: arcade,
+      src: arcade,
+      fileType: "audio",
     },
   ],
   pictures: [
     {
       id: 3,
       name: "never_send_anyone.png",
-      imgSrc: moonwalk,
+      src: moonwalk,
+      fileType: "image",
     },
   ],
 };
