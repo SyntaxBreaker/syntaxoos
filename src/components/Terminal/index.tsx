@@ -62,7 +62,7 @@ function Terminal() {
 
     setLines((prev) => [...prev, ...newLines]);
     setInput("");
-    addCommandToHistory(command);
+    addCommandToHistory(input);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
