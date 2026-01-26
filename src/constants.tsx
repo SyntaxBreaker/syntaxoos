@@ -14,6 +14,20 @@ export const SYSTEM_INFO: string[] = [
   "Author: SyntaxBreaker",
 ] as const;
 
+export const PS_OUTPUT = [
+  "┌────────┬──────┬──────┬──────┬───────────────────────────────┬─────────────┐",
+  "│ USER   │ PID  │ %CPU │ %MEM │ CMD                           │ STATUS      │",
+  "├────────┼──────┼──────┼──────┼───────────────────────────────┼─────────────┤",
+  "│ root   │ 1    │ 0.0  │ 0.1  │ /sbin/init                    │ Active      │",
+  "│ root   │ 42   │ 0.0  │ 0.0  │ [meaning_of_life]             │ Questioning │",
+  "│ root   │ 101  │ 99.9 │ 0.5  │ /usr/bin/node crypto_miner    │ Running     │",
+  "│ root   │ 404  │ 0.0  │ 0.0  │ searching_for_gf              │ Missing     │",
+  "│ root   │ 666  │ 6.6  │ 6.6  │ ./doom_eternal                │ Slaying     │",
+  "│ root   │ 5031 │ 0.1  │ 85.2 │ chrome --open-tabs=300        │ Hungry      │",
+  "│ root   │ 7777 │ 0.0  │ 0.0  │ FBI_VAN_SURVEILLANCE          │ Hidden      │",
+  "└────────┴──────┴──────┴──────┴───────────────────────────────┴─────────────┘",
+];
+
 export const COMMANDS: Record<
   string,
   (data: CommandPayload) => string | string[]
@@ -25,6 +39,7 @@ export const COMMANDS: Record<
   date: () => new Date().toLocaleString(),
   history: ({ commandHistory }) => commandHistory,
   uptime: ({ currentUptime }) => currentUptime,
+  ps: () => PS_OUTPUT,
 };
 
 export const INITIAL_FILE_LIST: FileList = {

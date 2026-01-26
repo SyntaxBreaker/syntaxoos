@@ -86,7 +86,9 @@ function Terminal() {
   return (
     <div className="text-white text-sm flex flex-col gap-1 py-2">
       {lines.map((line, idx) => (
-        <p key={idx}>{line}</p>
+        <p key={idx} className="whitespace-pre-wrap font-mono">
+          {line}
+        </p>
       ))}
       <div className="flex flex-row gap-1" ref={bottomRef}>
         <p>{PROMPT_PREFIX}</p>
