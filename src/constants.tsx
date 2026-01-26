@@ -40,6 +40,7 @@ export const COMMANDS: Record<
   history: ({ commandHistory }) => commandHistory,
   uptime: ({ currentUptime }) => currentUptime,
   ps: () => PS_OUTPUT,
+  reverse: ({ args }) => args.join(" ").split("").reverse().join(""),
 };
 
 export const INITIAL_FILE_LIST: FileList = {
