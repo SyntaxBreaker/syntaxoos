@@ -32,12 +32,12 @@ function FileManager() {
       className="flex flex-row gap-2 h-full relative"
       onContextMenu={handleContextMenu}
     >
-      <div className="flex flex-col border-r border-border-primary py-2 pr-16">
+      <div className="flex flex-col border-r border-border-primary py-2 pr-16 gap-1">
         <h2 className="text-white text-sm font-extrabold">Places</h2>
         {directories.map((directory) => (
           <button
             key={directory}
-            className="text-white text-sm cursor-pointer p-1 self-start capitalize"
+            className={`text-white text-sm cursor-pointer px-2 py-1 self-start capitalize ${currentDirectory === directory ? "bg-slate-700 shadow-sm" : "hover:bg-white/10"}`}
             onClick={() => setCurrentDirectory(directory)}
           >
             {directory}
