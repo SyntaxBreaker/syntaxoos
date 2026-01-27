@@ -45,10 +45,10 @@ function FileManager() {
         ))}
       </div>
       <div className="p-2 flex flex-row gap-4 flex-wrap content-start">
-        {fileList[currentDirectory].map(({ id, name, src, fileType }) => (
+        {fileList[currentDirectory].map(({ id, fileName, src, fileType }) => (
           <FileItem
             key={id}
-            name={name}
+            fileName={fileName}
             icon={fileIcon}
             src={src}
             fileType={fileType}

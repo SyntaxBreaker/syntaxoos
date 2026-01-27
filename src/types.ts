@@ -1,6 +1,6 @@
 export interface App {
   id: number;
-  name: string;
+  windowName: string;
   component: React.ReactNode;
   iconSrc: string;
   showOnDesktop: boolean;
@@ -10,7 +10,7 @@ export type FileType = "text" | "markdown" | "audio" | "image";
 
 export interface FileSystemItem {
   id: number;
-  name: string;
+  fileName: string;
   src: string;
   fileType: FileType;
 }

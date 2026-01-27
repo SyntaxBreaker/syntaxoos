@@ -13,6 +13,6 @@ export const useFileSystemStore = create<FileSystemStore>()((set) => ({
   currentDirectory: "home",
   directories: Object.keys(VIRTUAL_FILE_SYSTEM),
   fileList: VIRTUAL_FILE_SYSTEM,
-  setCurrentDirectory: (directory: string) =>
+  setCurrentDirectory: (directory) =>
     set({ currentDirectory: directory }),
 }));

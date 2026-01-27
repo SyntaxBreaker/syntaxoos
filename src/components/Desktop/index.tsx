@@ -13,7 +13,7 @@ function Desktop() {
   const activeWindows = useWindowsStore((state) => state.activeWindows);
   const currentWallpaper = useSettingsStore((state) => state.currentWallpaper);
   const backgroundSize = useSettingsStore(
-    (state) => state.currentBackgroundSize
+    (state) => state.currentBackgroundSize,
   );
 
   const handleContextMenu = (event: MouseEvent<HTMLDivElement>) => {
@@ -45,7 +45,7 @@ function Desktop() {
             id={activeWindow.id}
             x={activeWindow.x}
             y={activeWindow.y}
-            name={windowData.name}
+            windowName={windowData.windowName}
             children={windowData.component}
           />
         );

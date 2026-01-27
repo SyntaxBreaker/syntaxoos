@@ -24,10 +24,10 @@ function Panel() {
             >
               <img
                 src={activeWindow.iconSrc}
-                alt={activeWindow.name}
+                alt={activeWindow.windowName}
                 className="h-4 w-4 self-center"
               />
-              <p className="text-white text-sm">{activeWindow.name}</p>
+              <p className="text-white text-sm">{activeWindow.windowName}</p>
             </div>
           ))}
         </div>

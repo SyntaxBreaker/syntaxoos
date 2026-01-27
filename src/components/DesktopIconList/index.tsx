@@ -14,7 +14,7 @@ function DesktopIconList() {
       {APPS.filter((app) => app.showOnDesktop).map((app) => (
         <DesktopIcon
           key={app.id}
-          name={app.name}
+          name={app.windowName}
           iconSrc={app.iconSrc}
           onClick={() => handleIconClick(app.id)}
         />

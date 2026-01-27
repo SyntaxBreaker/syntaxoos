@@ -7,12 +7,12 @@ import type { FileType } from "../../types";
 
 interface FileItemProps {
   icon: string;
-  name: string;
+  fileName: string;
   src: string;
   fileType: FileType;
 }
 
-function FileItem({ icon, name, src, fileType }: FileItemProps) {
+function FileItem({ icon, fileName, src, fileType }: FileItemProps) {
   const setImage = useImageStore((state) => state.setImage);
   const setDocument = useTextStore((state) => state.setDocument);
   const openWindow = useWindowsStore((state) => state.openWindow);
@@ -20,14 +20,14 @@ function FileItem({ icon, name, src, fileType }: FileItemProps) {
 
   const handleFileOpen = () => {
     if (fileType === "image") {
-      setImage(src, name);
+      setImage(src, fileName);
       openWindow(WINDOW_ID.IMAGE_VIEWER);
     } else if (fileType === "text" || fileType === "markdown") {
-      const fileFormat = name.split(".")[1];
-      setDocument(src, fileFormat);
+      const fileFormat = fileName.split(".")[1];
+      setDocument(src, fileFormat, fileName);
       openWindow(WINDOW_ID.TEXT_READER);
     } else if (fileType === "audio") {
-      setAudio(src, name);
+      setAudio(src, fileName);
       openWindow(WINDOW_ID.MUSIC_PLAYER);
     }
   };
@@ -37,8 +37,8 @@ function FileItem({ icon, name, src, fileType }: FileItemProps) {
       className="flex flex-col gap-2 p-2 items-center cursor-pointer"
       onClick={handleFileOpen}
     >
-      <img src={icon} alt={name} className="h-8 w-8" />
-      <p className="text-white text-sm">{name}</p>
+      <img src={icon} alt={fileName} className="h-8 w-8" />
+      <p className="text-white text-sm">{fileName}</p>
     </button>
   );
 }

@@ -47,13 +47,13 @@ export const VIRTUAL_FILE_SYSTEM: Record<string, FileSystemItem[]> = {
   home: [
     {
       id: 0,
-      name: "password.txt",
+      fileName: "password.txt",
       src: "You thought it would be that easy? LOL.",
       fileType: "text",
     },
     {
       id: 1,
-      name: "TODO.md",
+      fileName: "TODO.md",
       src: "# Everything and Nothing",
       fileType: "markdown",
     },
@@ -62,7 +62,7 @@ export const VIRTUAL_FILE_SYSTEM: Record<string, FileSystemItem[]> = {
   music: [
     {
       id: 2,
-      name: "random_noises_at_3am.wav",
+      fileName: "random_noises_at_3am.wav",
       src: arcade,
       fileType: "audio",
     },
@@ -70,7 +70,7 @@ export const VIRTUAL_FILE_SYSTEM: Record<string, FileSystemItem[]> = {
   pictures: [
     {
       id: 3,
-      name: "never_send_anyone.png",
+      fileName: "never_send_anyone.png",
       src: moonwalk,
       fileType: "image",
     },

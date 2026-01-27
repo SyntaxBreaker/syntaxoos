@@ -2,13 +2,12 @@ import { create } from "zustand";
 
 interface AudioStore {
   audioSrc: string | null;
-  audioName: string | null;
-  setAudio: (audioSrc: string, audioName: string) => void;
+  audioFileName: string | null;
+  setAudio: (audioSrc: string, audioFileName: string) => void;
 }
 
 export const useAudioStore = create<AudioStore>()((set) => ({
   audioSrc: null,
-  audioName: null,
-  setAudio: (audioSrc: string, audioName: string) =>
-    set({ audioSrc, audioName }),
+  audioFileName: null,
+  setAudio: (audioSrc, audioFileName) => set({ audioSrc, audioFileName }),
 }));

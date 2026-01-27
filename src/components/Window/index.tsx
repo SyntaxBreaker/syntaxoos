@@ -1,21 +1,29 @@
 import { useEffect, useRef, useState } from "react";
 import { useWindowsStore } from "../../store/windowsStore";
 import TitleBar from "../TitleBar";
+import { useAudioStore } from "../../store/audioStore";
+import { useImageStore } from "../../store/imageStore";
+import { useTextStore } from "../../store/textStore";
 
 interface WindowProps {
   id: number;
   x: number;
   y: number;
-  name: string;
+  windowName: string;
   children: React.ReactNode;
 }
 
-function Window({ id, x, y, name, children }: WindowProps) {
+function Window({ id, x, y, windowName, children }: WindowProps) {
   const [isDragging, setIsDragging] = useState(false);
   const dragOffsetRef = useRef({ offsetX: 0, offsetY: 0 });
   const windowRef = useRef<HTMLDivElement>(null);
   const changePosition = useWindowsStore((state) => state.changePosition);
   const isWindowMinimized = useWindowsStore((state) => state.isWindowMinimized);
+  const audioFileName = useAudioStore((state) => state.audioFileName);
+  const imageFileName = useImageStore((state) => state.imageFileName);
+  const textFileName = useTextStore((state) => state.textFileName);
+
+  const fileName = audioFileName || imageFileName || textFileName || null;
 
   const handleMouseMove = (e: MouseEvent) => {
     if (!isDragging) return;
@@ -69,10 +77,11 @@ function Window({ id, x, y, name, children }: WindowProps) {
       <TitleBar
         dragOffsetRef={dragOffsetRef}
         id={id}
-        name={name}
+        windowName={windowName}
         setIsDragging={setIsDragging}
         x={x}
         y={y}
+        fileName={fileName}
       />
       <div className="h-full w-full px-2 overflow-y-auto flex-grow">
         {children}
