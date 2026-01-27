@@ -20,7 +20,7 @@ function Terminal() {
   );
   const getCommand = useCommandHistoryStore((state) => state.getCommand);
   const getUptime = useUptimeStore((state) => state.getUptime);
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleCommandExecution = () => {
     if (input.trim() === "") {
@@ -79,25 +79,33 @@ function Terminal() {
     }
   };
 
+  const handleTerminalClick = () => {
+    inputRef.current?.focus();
+  };
+
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    inputRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [lines]);
 
   return (
-    <div className="text-white text-sm flex flex-col gap-1 py-2">
+    <div
+      className="text-gray-100 text-sm flex flex-col gap-1 py-2 font-mono min-h-full"
+      onClick={handleTerminalClick}
+    >
       {lines.map((line, idx) => (
-        <p key={idx} className="whitespace-pre-wrap font-mono">
+        <p key={idx} className="whitespace-pre-wrap">
           {line}
         </p>
       ))}
-      <div className="flex flex-row gap-1" ref={bottomRef}>
+      <div className="flex flex-row gap-1">
         <p>{PROMPT_PREFIX}</p>
         <input
-          className="outline-none border-none text-green-400 flex-1"
+          className="outline-none border-none text-green-400 flex-1 font-bold"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           autoFocus
+          ref={inputRef}
         />
       </div>
     </div>
