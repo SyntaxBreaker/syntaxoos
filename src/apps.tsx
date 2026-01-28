@@ -1,16 +1,18 @@
 import type { App } from "./types";
 import Calculator from "./components/Calculator";
 import Contact from "./components/Contact";
-import Portfolio from "./components/Portfolio";
+import Dictionary from "./components/Dictionary";
 import FileManager from "./components/FileManager";
 import ImageViewer from "./components/ImageViewer";
 import MusicPlayer from "./components/MusicPlayer";
+import Portfolio from "./components/Portfolio";
 import Settings from "./components/Settings";
 import SystemMonitor from "./components/SystemMonitor";
 import Terminal from "./components/Terminal";
 import TextReader from "./components/TextReader";
 import calculatorIcon from "./assets/icons/calculator.svg";
 import contactIcon from "./assets/icons/contact.svg";
+import dictionaryIcon from "./assets/icons/dictionary.svg";
 import folderIcon from "./assets/icons/folder.svg";
 import imageViewerIcon from "./assets/icons/image.svg";
 import musicIcon from "./assets/icons/music.svg";
@@ -31,6 +33,7 @@ export const WINDOW_ID = {
   SETTINGS: 7,
   CONTACT: 8,
   SYSTEM_MONITOR: 9,
+  DICTIONARY: 10,
 } as const;
 
 export const APPS: App[] = [
@@ -103,5 +106,12 @@ export const APPS: App[] = [
     component: <SystemMonitor />,
     iconSrc: systemMonitorIcon,
     showOnDesktop: false,
+  },
+  {
+    id: WINDOW_ID.DICTIONARY,
+    windowName: "Dictionary",
+    component: <Dictionary />,
+    iconSrc: dictionaryIcon,
+    showOnDesktop: true,
   },
 ] as const;
