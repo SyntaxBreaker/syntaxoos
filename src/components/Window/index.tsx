@@ -1,9 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useWindowsStore } from "../../store/windowsStore";
 import TitleBar from "../TitleBar";
-import { useAudioStore } from "../../store/audioStore";
-import { useImageStore } from "../../store/imageStore";
-import { useTextStore } from "../../store/textStore";
 
 interface WindowProps {
   id: number;
@@ -19,11 +16,6 @@ function Window({ id, x, y, windowName, children }: WindowProps) {
   const windowRef = useRef<HTMLDivElement>(null);
   const changePosition = useWindowsStore((state) => state.changePosition);
   const isWindowMinimized = useWindowsStore((state) => state.isWindowMinimized);
-  const audioFileName = useAudioStore((state) => state.audioFileName);
-  const imageFileName = useImageStore((state) => state.imageFileName);
-  const textFileName = useTextStore((state) => state.textFileName);
-
-  const fileName = audioFileName || imageFileName || textFileName || null;
 
   const handleMouseMove = (e: MouseEvent) => {
     if (!isDragging) return;
@@ -81,7 +73,6 @@ function Window({ id, x, y, windowName, children }: WindowProps) {
         setIsDragging={setIsDragging}
         x={x}
         y={y}
-        fileName={fileName}
       />
       <div className="h-full w-full px-2 overflow-y-auto flex-grow">
         {children}

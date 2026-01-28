@@ -10,7 +10,6 @@ interface TitleBarProps {
   setIsDragging: React.Dispatch<React.SetStateAction<boolean>>;
   x: number;
   y: number;
-  fileName: string | null;
 }
 
 function TitleBar({
@@ -20,7 +19,6 @@ function TitleBar({
   setIsDragging,
   x,
   y,
-  fileName,
 }: TitleBarProps) {
   const closeWindow = useWindowsStore((state) => state.closeWindow);
   const minimizeWindow = useWindowsStore((state) => state.minimizeWindow);
@@ -39,7 +37,7 @@ function TitleBar({
       className="flex flex-row justify-between items-center cursor-move p-2 border-b border-border-primary sticky top-0 left-0"
       onMouseDown={handleMouseDown}
     >
-      <p className="text-white text-sm font-bold select-none">{`${windowName} ${fileName ?? `- ${fileName}`}`}</p>
+      <p className="text-white text-sm font-bold select-none">{windowName}</p>
       <div className="flex flex-row gap-1">
         <div
           className="h-2 w-2 bg-green-600 rounded-xs cursor-pointer"

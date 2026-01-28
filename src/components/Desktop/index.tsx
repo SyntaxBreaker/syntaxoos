@@ -39,13 +39,16 @@ function Desktop() {
       {activeWindows.map((activeWindow) => {
         const windowData = APPS.find((app) => app.id === activeWindow.id);
         if (!windowData) return null;
+        const windowName = activeWindow.fileName
+          ? `${windowData.windowName} - ${activeWindow.fileName}`
+          : windowData.windowName;
         return (
           <Window
             key={activeWindow.id}
             id={activeWindow.id}
             x={activeWindow.x}
             y={activeWindow.y}
-            windowName={windowData.windowName}
+            windowName={windowName}
             children={windowData.component}
           />
         );

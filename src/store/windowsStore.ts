@@ -5,11 +5,12 @@ interface ActiveWindowItem {
   x: number;
   y: number;
   isMinimized: boolean;
+  fileName?: string;
 }
 
 interface windowsStore {
   activeWindows: ActiveWindowItem[];
-  openWindow: (windowId: number) => void;
+  openWindow: (windowId: number, fileName?: string) => void;
   closeWindow: (windowId: number) => void;
   isWindowOpen: (windowId: number) => boolean;
   changePosition: (windowId: number, newX: number, newY: number) => void;
@@ -20,22 +21,38 @@ interface windowsStore {
 
 export const useWindowsStore = create<windowsStore>()((set, get) => ({
   activeWindows: [],
-  openWindow: (windowId) => {
-    set((state) => ({
-      activeWindows: state.activeWindows.some(
-        (activeWindow) => activeWindow.id === windowId
-      )
-        ? state.activeWindows
-        : [
-            ...state.activeWindows,
-            { id: windowId, x: 100, y: 100, isMinimized: false },
-          ],
-    }));
+  openWindow: (windowId, fileName) => {
+    set((state) => {
+      const isAlreadyOpen = state.activeWindows.some(
+        (window) => window.id === windowId,
+      );
+
+      if (isAlreadyOpen) {
+        return {
+          activeWindows: state.activeWindows.map((window) =>
+            window.id === windowId ? { ...window, fileName: fileName } : window,
+          ),
+        };
+      }
+
+      return {
+        activeWindows: [
+          ...state.activeWindows,
+          {
+            id: windowId,
+            x: 100,
+            y: 100,
+            isMinimized: false,
+            fileName: fileName,
+          },
+        ],
+      };
+    });
   },
   closeWindow: (windowId) => {
     set((state) => ({
       activeWindows: state.activeWindows.filter(
-        (activeWindow) => activeWindow.id !== windowId
+        (activeWindow) => activeWindow.id !== windowId,
       ),
     }));
   },
@@ -46,7 +63,7 @@ export const useWindowsStore = create<windowsStore>()((set, get) => ({
       activeWindows: state.activeWindows.map((activeWindow) =>
         activeWindow.id === windowId
           ? { ...activeWindow, x: newX, y: newY }
-          : activeWindow
+          : activeWindow,
       ),
     }));
   },
@@ -55,7 +72,7 @@ export const useWindowsStore = create<windowsStore>()((set, get) => ({
       activeWindows: state.activeWindows.map((activeWindow) =>
         activeWindow.id === windowId
           ? { ...activeWindow, isMinimized: true }
-          : activeWindow
+          : activeWindow,
       ),
     }));
   },
@@ -67,7 +84,7 @@ export const useWindowsStore = create<windowsStore>()((set, get) => ({
       activeWindows: state.activeWindows.map((activeWindow) =>
         activeWindow.id === windowId
           ? { ...activeWindow, isMinimized: !activeWindow.isMinimized }
-          : activeWindow
+          : activeWindow,
       ),
     }));
   },

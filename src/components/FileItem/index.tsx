@@ -21,14 +21,14 @@ function FileItem({ icon, fileName, src, fileType }: FileItemProps) {
   const handleFileOpen = () => {
     if (fileType === "image") {
       setImage(src, fileName);
-      openWindow(WINDOW_ID.IMAGE_VIEWER);
+      openWindow(WINDOW_ID.IMAGE_VIEWER, fileName);
     } else if (fileType === "text" || fileType === "markdown") {
       const fileFormat = fileName.split(".")[1];
-      setDocument(src, fileFormat, fileName);
-      openWindow(WINDOW_ID.TEXT_READER);
+      setDocument(src, fileFormat);
+      openWindow(WINDOW_ID.TEXT_READER, fileName);
     } else if (fileType === "audio") {
       setAudio(src, fileName);
-      openWindow(WINDOW_ID.MUSIC_PLAYER);
+      openWindow(WINDOW_ID.MUSIC_PLAYER, fileName);
     }
   };
 
