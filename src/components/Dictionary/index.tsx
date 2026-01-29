@@ -20,52 +20,52 @@ function Dictionary() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Enter a word..."
-          className="flex-1 p-2 border rounded-md shadow-sm focus:ring-2 focus:ring-gray-500 outline-none text-white"
+          className="flex-1 p-2 border border-gray-600 rounded-md shadow-sm outline-none text-white"
         />
         <button
           type="submit"
           disabled={isLoading}
-          className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 disabled:bg-gray-300"
+          className="px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-600"
         >
           {isLoading ? "Searching..." : "Search"}
         </button>
       </form>
       {wordDetails && (
-        <div className="w-full overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
-          <table className="w-full text-left border-collapse bg-white">
-            <thead className="bg-gray-50 border-b border-gray-200">
+        <div className="w-full overflow-x-auto rounded-lg border border-gray-800 shadow-sm">
+          <table className="w-full text-left border-collapse bg-gray-800">
+            <thead className="bg-gray-700 border-b border-gray-800">
               <tr>
-                <th className="px-6 py-4 font-semibold text-gray-900 w-2/3">
+                <th className="px-6 py-4 font-semibold text-white w-2/3">
                   Definitions
                 </th>
-                <th className="px-6 py-4 font-semibold text-gray-900 w-1/3">
+                <th className="px-6 py-4 font-semibold text-white w-1/3">
                   Synonyms
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-gray-600 bg-gray-800">
               {wordDetails.meanings.definitions.map((defintion, index) => (
-                <tr key={index} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-6 py-4 text-gray-700 leading-relaxed">
+                <tr key={index}>
+                  <td className="px-6 py-4 text-white leading-relaxed">
                     {defintion}
                   </td>
                   {index === 0 && (
                     <td
                       rowSpan={wordDetails.meanings.definitions.length}
-                      className="px-6 py-4 align-top border-l border-gray-100 bg-gray-50/20"
+                      className="px-6 py-4 align-top border-l border-gray-600"
                     >
                       <div className="flex flex-wrap gap-2">
                         {wordDetails.meanings.synonyms.length > 0 ? (
                           wordDetails.meanings.synonyms.map((synonym) => (
                             <span
                               key={synonym}
-                              className="px-2 py-1 bg-indigo-100 text-indigo-700 rounded text-xs font-medium"
+                              className="px-2 py-1 bg-gray-600 text-white rounded text-xs font-medium"
                             >
                               {synonym}
                             </span>
                           ))
                         ) : (
-                          <span className="text-gray-400 italic text-sm">
+                          <span className="text-white italic text-sm">
                             No synonyms
                           </span>
                         )}
