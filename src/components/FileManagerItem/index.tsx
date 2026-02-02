@@ -5,14 +5,19 @@ import { useTextStore } from "../../store/textStore";
 import { useWindowsStore } from "../../store/windowsStore";
 import type { FileType } from "../../types";
 
-interface FileItemProps {
+interface FileManagerItemProps {
   icon: string;
   fileName: string;
   src: string;
   fileType: FileType;
 }
 
-function FileItem({ icon, fileName, src, fileType }: FileItemProps) {
+function FileManagerItem({
+  icon,
+  fileName,
+  src,
+  fileType,
+}: FileManagerItemProps) {
   const setImage = useImageStore((state) => state.setImage);
   const setDocument = useTextStore((state) => state.setDocument);
   const openWindow = useWindowsStore((state) => state.openWindow);
@@ -43,4 +48,4 @@ function FileItem({ icon, fileName, src, fileType }: FileItemProps) {
   );
 }
 
-export default FileItem;
+export default FileManagerItem;

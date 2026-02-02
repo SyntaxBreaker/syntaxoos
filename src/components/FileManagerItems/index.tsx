@@ -1,5 +1,5 @@
 import { useFileSystemStore } from "../../store/fileSystemStore";
-import FileItem from "../FileItem";
+import FileManagerItem from "../FileManagerItem";
 import fileIcon from "../../assets/icons/file.svg";
 
 interface FileManagerItemsProps {
@@ -12,7 +12,7 @@ function FileManagerItems({ currentDirectory }: FileManagerItemsProps) {
   return (
     <div className="p-2 flex flex-row gap-4 flex-wrap content-start">
       {fileList[currentDirectory].map(({ id, fileName, src, fileType }) => (
-        <FileItem
+        <FileManagerItem
           key={id}
           fileName={fileName}
           icon={fileIcon}
