@@ -4,16 +4,13 @@ import FileManagerContextMenu from "../FileManagerContextMenu";
 import { useContextMenuStore } from "../../store/contextMenuStore";
 import FileItem from "../FileItem";
 import { useFileSystemStore } from "../../store/fileSystemStore";
+import FileManagerDirectoryList from "../FileManagerDirectoryList";
 
 function FileManager() {
   const currentDirectory = useFileSystemStore(
     (state) => state.currentDirectory,
   );
-  const directories = useFileSystemStore((state) => state.directories);
   const fileList = useFileSystemStore((state) => state.fileList);
-  const setCurrentDirectory = useFileSystemStore(
-    (state) => state.setCurrentDirectory,
-  );
   const openContextMenu = useContextMenuStore((state) => state.openContextMenu);
 
   const handleContextMenu = (event: MouseEvent<HTMLDivElement>) => {
@@ -32,18 +29,7 @@ function FileManager() {
       className="flex flex-row gap-2 h-full relative"
       onContextMenu={handleContextMenu}
     >
-      <div className="flex flex-col border-r border-border-primary py-2 pr-2 gap-1 w-[156px]">
-        <h2 className="text-white text-sm font-extrabold">Places</h2>
-        {directories.map((directory) => (
-          <button
-            key={directory}
-            className={`text-white text-sm cursor-pointer px-2 py-1 capitalize w-full text-left ${currentDirectory === directory ? "bg-slate-700 shadow-sm" : "hover:bg-white/10"}`}
-            onClick={() => setCurrentDirectory(directory)}
-          >
-            {directory}
-          </button>
-        ))}
-      </div>
+      <FileManagerDirectoryList currentDirectory={currentDirectory} />
       <div className="p-2 flex flex-row gap-4 flex-wrap content-start">
         {fileList[currentDirectory].map(({ id, fileName, src, fileType }) => (
           <FileItem
