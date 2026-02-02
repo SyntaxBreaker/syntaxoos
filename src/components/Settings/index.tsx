@@ -1,6 +1,7 @@
 import { useSettingsStore } from "../../store/settingsStore";
 import AccountSettings from "../AccountSettings";
 import AppearanceSettings from "../AppearanceSettings";
+import SettingsContent from "../SettingsContent";
 import SettingsTabs from "../SettingsTabs";
 
 const SETTINGS_TABS = [
@@ -26,7 +27,7 @@ function Settings() {
   return (
     <div className="flex flex-row gap-2 h-full relative">
       <SettingsTabs tabs={SETTINGS_TABS} />
-      <div className="flex flex-col gap-4 py-2 w-full">{activeComponent}</div>
+      <SettingsContent activeComponent={activeComponent} />
     </div>
   );
 }
