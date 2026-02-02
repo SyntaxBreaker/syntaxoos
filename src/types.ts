@@ -34,3 +34,9 @@ export interface CommandPayload {
   commandHistory: string[];
   currentUptime: string;
 }
+
+export interface SettingsTabItem {
+  id: number;
+  name: string;
+  component: React.ReactNode;
+}
