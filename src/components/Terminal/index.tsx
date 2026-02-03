@@ -4,6 +4,7 @@ import { useAccountStore } from "../../store/accountStore";
 import { useCommandHistoryStore } from "../../store/commandHistoryStore";
 import { useUptimeStore } from "../../store/useUptimeStore";
 import TerminalHistory from "../TerminalHistory";
+import TerminalPrompt from "../TerminalPrompt";
 
 function Terminal() {
   const [input, setInput] = useState("");
@@ -94,17 +95,13 @@ function Terminal() {
       onClick={handleTerminalClick}
     >
       <TerminalHistory lines={lines} />
-      <div className="flex flex-row gap-1">
-        <p>{PROMPT_PREFIX}</p>
-        <input
-          className="outline-none border-none text-green-400 flex-1 font-bold"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-          autoFocus
-          ref={inputRef}
-        />
-      </div>
+      <TerminalPrompt
+        prefix={PROMPT_PREFIX}
+        value={input}
+        onChange={setInput}
+        onKeyDown={handleKeyDown}
+        inputRef={inputRef}
+      />
     </div>
   );
 }
