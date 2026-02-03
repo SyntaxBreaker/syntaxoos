@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useWindowsStore } from "../../store/windowsStore";
-import TitleBar from "../TitleBar";
+import WindowTitleBar from "../WindowTitleBar";
 
 interface WindowProps {
   id: number;
@@ -66,7 +66,7 @@ function Window({ id, x, y, windowName, children }: WindowProps) {
       }}
       ref={windowRef}
     >
-      <TitleBar
+      <WindowTitleBar
         dragOffsetRef={dragOffsetRef}
         id={id}
         windowName={windowName}

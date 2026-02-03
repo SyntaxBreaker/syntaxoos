@@ -1,6 +1,6 @@
 import { useWindowsStore } from "../../store/windowsStore";
 
-interface TitleBarProps {
+interface WindowTitleBarProps {
   dragOffsetRef: React.RefObject<{
     offsetX: number;
     offsetY: number;
@@ -12,14 +12,14 @@ interface TitleBarProps {
   y: number;
 }
 
-function TitleBar({
+function WindowTitleBar({
   dragOffsetRef,
   id,
   windowName,
   setIsDragging,
   x,
   y,
-}: TitleBarProps) {
+}: WindowTitleBarProps) {
   const closeWindow = useWindowsStore((state) => state.closeWindow);
   const minimizeWindow = useWindowsStore((state) => state.minimizeWindow);
 
@@ -53,4 +53,4 @@ function TitleBar({
   );
 }
 
-export default TitleBar;
+export default WindowTitleBar;
