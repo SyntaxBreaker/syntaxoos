@@ -3,6 +3,7 @@ import { COMMANDS } from "../../constants";
 import { useAccountStore } from "../../store/accountStore";
 import { useCommandHistoryStore } from "../../store/commandHistoryStore";
 import { useUptimeStore } from "../../store/useUptimeStore";
+import TerminalHistory from "../TerminalHistory";
 
 function Terminal() {
   const [input, setInput] = useState("");
@@ -92,11 +93,7 @@ function Terminal() {
       className="text-gray-100 text-sm flex flex-col gap-1 py-2 font-mono min-h-full"
       onClick={handleTerminalClick}
     >
-      {lines.map((line, idx) => (
-        <p key={idx} className="whitespace-pre-wrap">
-          {line}
-        </p>
-      ))}
+      <TerminalHistory lines={lines} />
       <div className="flex flex-row gap-1">
         <p>{PROMPT_PREFIX}</p>
         <input
