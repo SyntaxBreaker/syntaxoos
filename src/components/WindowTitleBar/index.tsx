@@ -1,4 +1,4 @@
-import { useWindowsStore } from "../../store/windowsStore";
+import WindowControlButtons from "../WindowControlButtons";
 
 interface WindowTitleBarProps {
   dragOffsetRef: React.RefObject<{
@@ -20,9 +20,6 @@ function WindowTitleBar({
   x,
   y,
 }: WindowTitleBarProps) {
-  const closeWindow = useWindowsStore((state) => state.closeWindow);
-  const minimizeWindow = useWindowsStore((state) => state.minimizeWindow);
-
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     dragOffsetRef.current = {
       offsetX: e.clientX - x,
@@ -38,17 +35,7 @@ function WindowTitleBar({
       onMouseDown={handleMouseDown}
     >
       <p className="text-white text-sm font-bold select-none">{windowName}</p>
-      <div className="flex flex-row gap-1">
-        <div
-          className="h-2 w-2 bg-green-600 rounded-xs cursor-pointer"
-          onClick={() => minimizeWindow(id)}
-        ></div>
-        <div className="h-2 w-2 bg-yellow-600 rounded-xs"></div>
-        <div
-          className="h-2 w-2 bg-red-600 rounded-xs cursor-pointer"
-          onClick={() => closeWindow(id)}
-        ></div>
-      </div>
+      <WindowControlButtons id={id} />
     </div>
   );
 }
