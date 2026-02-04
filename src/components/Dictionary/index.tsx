@@ -6,7 +6,7 @@ function Dictionary() {
   const wordDetails = useDictionaryStore((state) => state.wordDetails);
 
   return (
-    <div className="max-w-full mx-auto p-6 space-y-6">
+    <div className="max-w-full mx-auto p-4">
       <DictionarySearch />
       {wordDetails && (
         <DictionaryTable
