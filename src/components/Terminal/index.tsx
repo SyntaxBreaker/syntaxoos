@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { COMMANDS } from "../../constants";
 import { useAccountStore } from "../../store/accountStore";
 import { useCommandHistoryStore } from "../../store/commandHistoryStore";
-import { useUptimeStore } from "../../store/useUptimeStore";
+import { useUptimeStore } from "../../store/uptimeStore";
 import TerminalHistory from "../TerminalHistory";
 import TerminalPrompt from "../TerminalPrompt";
 
