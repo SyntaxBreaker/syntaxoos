@@ -26,8 +26,6 @@ function AccountSettings() {
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     updateUser(account);
-    localStorage.setItem("username", account.username);
-    localStorage.setItem("displayName", account.displayName);
   };
 
   useEffect(() => {
