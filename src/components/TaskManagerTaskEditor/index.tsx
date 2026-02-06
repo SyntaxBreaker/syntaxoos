@@ -1,0 +1,66 @@
+import { useState } from "react";
+import type { Task } from "../../types";
+import { useTaskMangerStore } from "../../store/taskManagerStore";
+
+interface TaskManagerTaskEditorProps {
+  task: Task;
+  onCancel: () => void;
+}
+
+function TaskManagerTaskEditor({ task, onCancel }: TaskManagerTaskEditorProps) {
+  const [title, setTitle] = useState(task.title);
+  const [priority, setPriority] = useState(task.priority);
+  const updateTask = useTaskMangerStore((state) => state.updateTask);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    console.log(`Title: ${title}, Priority: ${priority}`);
+
+    updateTask(task.id, {
+      title: title,
+      priority: priority,
+    });
+
+    onCancel();
+  };
+
+  return (
+    <form
+      className="flex flex-col gap-2 bg-gray-700 p-2 rounded-md"
+      onSubmit={handleSubmit}
+    >
+      <input
+        className="bg-gray-800 text-white p-2 rounded-md"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <select
+        className="bg-gray-800 text-white p-2 rounded-md"
+        value={priority}
+        onChange={(e) => setPriority(e.target.value as Task["priority"])}
+      >
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+      </select>
+      <div className="flex flex-row gap-2 self-end">
+        <button
+          type="button"
+          onClick={onCancel}
+          className="px-4 py-2 rounded-md border border-slate-400 text-slate-200 hover:bg-slate-600 cursor-pointer"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          className="px-4 py-2 rounded-md bg-indigo-500 hover:bg-indigo-400 border border-transparent text-white cursor-pointer"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+  );
+}
+
+export default TaskManagerTaskEditor;

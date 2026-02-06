@@ -8,6 +8,7 @@ import MusicPlayer from "./components/MusicPlayer";
 import Portfolio from "./components/Portfolio";
 import Settings from "./components/Settings";
 import SystemMonitor from "./components/SystemMonitor";
+import TaskManager from "./components/TaskManager";
 import Terminal from "./components/Terminal";
 import TextReader from "./components/TextReader";
 import calculatorIcon from "./assets/icons/calculator.svg";
@@ -21,6 +22,7 @@ import terminalIcon from "./assets/icons/terminal.svg";
 import textReaderIcon from "./assets/icons/text.svg";
 import systemMonitorIcon from "./assets/icons/systemMonitor.svg";
 import settingsIcon from "./assets/icons/settings.svg";
+import TaskManagerIcon from "./assets/icons/task.svg";
 
 export const WINDOW_ID = {
   FILE_MANAGER: 0,
@@ -34,6 +36,7 @@ export const WINDOW_ID = {
   CONTACT: 8,
   SYSTEM_MONITOR: 9,
   DICTIONARY: 10,
+  TASK_MANAGER: 11,
 } as const;
 
 export const APPS: App[] = [
@@ -112,6 +115,13 @@ export const APPS: App[] = [
     windowName: "Dictionary",
     component: <Dictionary />,
     iconSrc: dictionaryIcon,
+    showOnDesktop: true,
+  },
+  {
+    id: WINDOW_ID.TASK_MANAGER,
+    windowName: "Task Manager",
+    component: <TaskManager />,
+    iconSrc: TaskManagerIcon,
     showOnDesktop: true,
   },
 ] as const;

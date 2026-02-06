@@ -40,3 +40,14 @@ export interface SettingsTabItem {
   name: string;
   component: React.ReactNode;
 }
+
+type Priority = "Low" | "Medium" | "High";
+
+export interface Task {
+  id: string;
+  title: string;
+  completed: boolean;
+  priority: Priority;
+  createdAt: number;
+  updatedAt: number;
+}
