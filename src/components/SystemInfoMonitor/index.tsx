@@ -3,7 +3,7 @@ import PerformanceMonitor from "../PerformanceMonitor";
 import SystemInfoList from "../SystemInfoList";
 import { RESOURCE_LIMITS } from "../../constants";
 
-function SystemMonitor() {
+function SystemInfoMonitor() {
   const [usage, setUsage] = useState({
     cpu: 21,
     download: 92,
@@ -72,4 +72,4 @@ function SystemMonitor() {
   );
 }
 
-export default SystemMonitor;
+export default SystemInfoMonitor;

@@ -7,7 +7,7 @@ import ImageViewer from "./components/ImageViewer";
 import MusicPlayer from "./components/MusicPlayer";
 import Portfolio from "./components/Portfolio";
 import Settings from "./components/Settings";
-import SystemMonitor from "./components/SystemMonitor";
+import SystemInfoMonitor from "./components/SystemInfoMonitor";
 import TaskManager from "./components/TaskManager";
 import Terminal from "./components/Terminal";
 import TextReader from "./components/TextReader";
@@ -20,7 +20,7 @@ import musicIcon from "./assets/icons/music.svg";
 import portfolioIcon from "./assets/icons/portfolio.svg";
 import terminalIcon from "./assets/icons/terminal.svg";
 import textReaderIcon from "./assets/icons/text.svg";
-import systemMonitorIcon from "./assets/icons/systemMonitor.svg";
+import systemInfoMonitorIcon from "./assets/icons/systemInfoMonitor.svg";
 import settingsIcon from "./assets/icons/settings.svg";
 import TaskManagerIcon from "./assets/icons/task.svg";
 
@@ -106,8 +106,8 @@ export const APPS: App[] = [
   {
     id: WINDOW_ID.SYSTEM_MONITOR,
     windowName: "System Monitor",
-    component: <SystemMonitor />,
-    iconSrc: systemMonitorIcon,
+    component: <SystemInfoMonitor />,
+    iconSrc: systemInfoMonitorIcon,
     showOnDesktop: false,
   },
   {
