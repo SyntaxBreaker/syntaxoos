@@ -1,11 +1,7 @@
+import IFrame from "../IFrame";
+
 function Portfolio() {
-  return (
-    <iframe
-      src="https://syntaxbreaker.netlify.app"
-      sandbox="allow-scripts allow-forms allow-popups"
-      className="h-full w-full"
-    ></iframe>
-  );
+  return <IFrame src="https://syntaxbreaker.netlify.app" />;
 }
 
 export default Portfolio;
