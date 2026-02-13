@@ -24,7 +24,7 @@ import terminalIcon from "./assets/icons/terminal.svg";
 import textReaderIcon from "./assets/icons/text.svg";
 import systemInfoMonitorIcon from "./assets/icons/systemInfoMonitor.svg";
 import settingsIcon from "./assets/icons/settings.svg";
-import TaskManagerIcon from "./assets/icons/task.svg";
+import taskManagerIcon from "./assets/icons/task.svg";
 
 export const WINDOW_ID = {
   FILE_MANAGER: 0,
@@ -124,7 +124,7 @@ export const APPS: App[] = [
     id: WINDOW_ID.TASK_MANAGER,
     windowName: "Task Manager",
     component: <TaskManager />,
-    iconSrc: TaskManagerIcon,
+    iconSrc: taskManagerIcon,
     showOnDesktop: true,
   },
   {
