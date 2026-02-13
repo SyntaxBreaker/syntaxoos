@@ -17,7 +17,7 @@ import contactIcon from "./assets/icons/contact.svg";
 import dictionaryIcon from "./assets/icons/dictionary.svg";
 import folderIcon from "./assets/icons/folder.svg";
 import imageViewerIcon from "./assets/icons/image.svg";
-import morseIcon from "./assets/icons/morse.svg";
+import morseCodeIcon from "./assets/icons/morseCode.svg";
 import musicIcon from "./assets/icons/music.svg";
 import portfolioIcon from "./assets/icons/portfolio.svg";
 import terminalIcon from "./assets/icons/terminal.svg";
@@ -131,7 +131,7 @@ export const APPS: App[] = [
     id: WINDOW_ID.MORSE_CODE_TRANSLATOR,
     windowName: "Morse Code Translator",
     component: <MorseCodeTranslator />,
-    iconSrc: morseIcon,
+    iconSrc: morseCodeIcon,
     showOnDesktop: true,
   },
 ] as const;
