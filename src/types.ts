@@ -1,3 +1,5 @@
+import { MORSE_CODE } from "./constants";
+
 export interface App {
   id: number;
   windowName: string;
@@ -51,3 +53,5 @@ export interface Task {
   createdAt: number;
   updatedAt: number;
 }
+
+export type Morse = keyof typeof MORSE_CODE;

@@ -4,6 +4,7 @@ import Contact from "./components/Contact";
 import Dictionary from "./components/Dictionary";
 import FileManager from "./components/FileManager";
 import ImageViewer from "./components/ImageViewer";
+import MorseCodeTranslator from "./components/MorseCodeTranslator";
 import MusicPlayer from "./components/MusicPlayer";
 import Portfolio from "./components/Portfolio";
 import Settings from "./components/Settings";
@@ -16,6 +17,7 @@ import contactIcon from "./assets/icons/contact.svg";
 import dictionaryIcon from "./assets/icons/dictionary.svg";
 import folderIcon from "./assets/icons/folder.svg";
 import imageViewerIcon from "./assets/icons/image.svg";
+import morseIcon from "./assets/icons/morse.svg";
 import musicIcon from "./assets/icons/music.svg";
 import portfolioIcon from "./assets/icons/portfolio.svg";
 import terminalIcon from "./assets/icons/terminal.svg";
@@ -37,6 +39,7 @@ export const WINDOW_ID = {
   SYSTEM_MONITOR: 9,
   DICTIONARY: 10,
   TASK_MANAGER: 11,
+  MORSE_CODE_TRANSLATOR: 12,
 } as const;
 
 export const APPS: App[] = [
@@ -122,6 +125,13 @@ export const APPS: App[] = [
     windowName: "Task Manager",
     component: <TaskManager />,
     iconSrc: TaskManagerIcon,
+    showOnDesktop: true,
+  },
+  {
+    id: WINDOW_ID.MORSE_CODE_TRANSLATOR,
+    windowName: "Morse Code Translator",
+    component: <MorseCodeTranslator />,
+    iconSrc: morseIcon,
     showOnDesktop: true,
   },
 ] as const;
