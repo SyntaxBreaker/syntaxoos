@@ -1,4 +1,3 @@
-import { type MouseEvent } from "react";
 import Panel from "../Panel";
 import { useContextMenuStore } from "../../store/contextMenuStore";
 import DesktopIconList from "../DesktopIconList";
@@ -16,7 +15,7 @@ function Desktop() {
     (state) => state.currentBackgroundSize,
   );
 
-  const handleContextMenu = (event: MouseEvent<HTMLDivElement>) => {
+  const handleContextMenu = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     openContextMenu("desktop", event.pageX, event.pageY);
   };
