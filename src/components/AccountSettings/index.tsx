@@ -36,44 +36,39 @@ function AccountSettings() {
   }, [currentUser]);
 
   return (
-    <div className="flex flex-col gap-4">
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-        <div className="flex flex-col gap-2">
-          <label
-            className="text-white text-xs font-extrabold"
-            htmlFor="username"
-          >
-            Username
-          </label>
-          <input
-            className="p-2 bg-neutral-secondary-medium border text-xs rounded-sm text-white focus:outline focus:outline-solid focus:outline-white"
-            name="username"
-            onChange={handleChange}
-            value={account.username}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label
-            className="text-white text-xs font-extrabold"
-            htmlFor="displayName"
-          >
-            Display Name
-          </label>
-          <input
-            className="p-2 bg-neutral-secondary-medium border text-xs rounded-sm text-white focus:outline focus:outline-solid focus:outline-white"
-            name="displayName"
-            onChange={handleChange}
-            value={account.displayName}
-          />
-        </div>
-        <button
-          type="submit"
-          className="rounded-md bg-white py-2 px-8 border border-transparent text-center text-xs hover:shadow-lg hover:bg-gray-300 hover:cursor-pointer self-end"
+    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+      <div className="flex flex-col gap-2">
+        <label className="text-white text-xs font-extrabold" htmlFor="username">
+          Username
+        </label>
+        <input
+          className="p-2 bg-neutral-secondary-medium border text-xs rounded-sm text-white focus:outline focus:outline-solid focus:outline-white"
+          name="username"
+          onChange={handleChange}
+          value={account.username}
+        />
+      </div>
+      <div className="flex flex-col gap-2">
+        <label
+          className="text-white text-xs font-extrabold"
+          htmlFor="displayName"
         >
-          Save
-        </button>
-      </form>
-    </div>
+          Display Name
+        </label>
+        <input
+          className="p-2 bg-neutral-secondary-medium border text-xs rounded-sm text-white focus:outline focus:outline-solid focus:outline-white"
+          name="displayName"
+          onChange={handleChange}
+          value={account.displayName}
+        />
+      </div>
+      <button
+        type="submit"
+        className="rounded-md bg-white py-2 px-8 border border-transparent text-center text-xs hover:shadow-lg hover:bg-gray-300 hover:cursor-pointer self-end"
+      >
+        Save
+      </button>
+    </form>
   );
 }
 
