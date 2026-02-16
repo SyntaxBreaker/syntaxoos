@@ -5,8 +5,8 @@ function TaskManagerTaskCreator() {
   const [input, setInput] = useState("");
   const addTask = useTaskMangerStore((state) => state.addTask);
 
-  const handleAddTask = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleAddTask = (event: React.FormEvent) => {
+    event.preventDefault();
     addTask(input);
   };
 
@@ -15,7 +15,7 @@ function TaskManagerTaskCreator() {
       <input
         type="text"
         value={input}
-        onChange={(e) => setInput(e.target.value)}
+        onChange={(event) => setInput(event.target.value)}
         placeholder="What needs to be done?"
         className="flex-1 p-2 border border-slate-600 rounded-md shadow-sm outline-none text-white"
       />
