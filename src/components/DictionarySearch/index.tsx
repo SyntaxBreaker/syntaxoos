@@ -6,8 +6,8 @@ function DictionarySearch() {
   const searchWord = useDictionaryStore((state) => state.searchWord);
   const isLoading = useDictionaryStore((state) => state.isLoading);
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSearch = (event: React.FormEvent) => {
+    event.preventDefault();
     searchWord(input);
   };
 
@@ -16,7 +16,7 @@ function DictionarySearch() {
       <input
         type="text"
         value={input}
-        onChange={(e) => setInput(e.target.value)}
+        onChange={(event) => setInput(event.target.value)}
         placeholder="Enter a word..."
         className="flex-1 p-2 border border-gray-600 rounded-md shadow-sm outline-none text-white"
       />
