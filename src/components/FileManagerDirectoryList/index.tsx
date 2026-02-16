@@ -18,7 +18,7 @@ function FileManagerDirectoryList({
       {directories.map((directory) => (
         <button
           key={directory}
-          className={`text-white text-sm cursor-pointer px-2 py-1 capitalize w-full text-left ${currentDirectory === directory ? "bg-slate-700 shadow-sm" : "hover:bg-white/10"}`}
+          className={`text-white text-sm cursor-pointer px-2 py-1 capitalize w-full text-left ${currentDirectory === directory ? "bg-slate-800 shadow-sm" : "hover:bg-gray-600"}`}
           onClick={() => setCurrentDirectory(directory)}
         >
           {directory}
