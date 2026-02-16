@@ -10,9 +10,9 @@ function AppearanceSettings() {
   );
 
   const handleBackgroundSizeChange = (
-    e: React.ChangeEvent<HTMLSelectElement>,
+    event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
-    setBackgroundSize(e.target.value);
+    setBackgroundSize(event.target.value);
   };
 
   return (
