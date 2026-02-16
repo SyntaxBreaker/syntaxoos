@@ -21,10 +21,10 @@ function WindowTitleBar({
   x,
   y,
 }: WindowTitleBarProps) {
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
     dragOffsetRef.current = {
-      offsetX: e.clientX - x,
-      offsetY: e.clientY - y,
+      offsetX: event.clientX - x,
+      offsetY: event.clientY - y,
     };
 
     setIsDragging(true);
