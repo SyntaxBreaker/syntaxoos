@@ -24,7 +24,7 @@ function AppearanceSettings() {
         </label>
         <select
           id="size"
-          className="w-full p-2 bg-neutral-secondary-medium border text-xs rounded-sm text-white"
+          className="w-full p-2 bg-transparent border border-gray-600 text-xs rounded-sm text-white"
           defaultValue={currentBackgroundSize}
           onChange={handleBackgroundSizeChange}
         >
