@@ -1,12 +1,12 @@
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import { MORSE_CODE } from "../../constants";
 
 function MorseCodeTranslator() {
   const [input, setInput] = useState("");
   const [morseOutput, setMorseOutput] = useState("");
 
-  const handleTranslate = (e: FormEvent) => {
-    e.preventDefault();
+  const handleTranslate = (event: React.FormEvent) => {
+    event.preventDefault();
 
     const morseCode = input
       .toUpperCase()
@@ -30,7 +30,7 @@ function MorseCodeTranslator() {
           aria-label="Enter text to translate into Morse code"
           aria-required="true"
           required
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(event) => setInput(event.target.value)}
           placeholder="Type something..."
           value={input}
         />
@@ -43,7 +43,7 @@ function MorseCodeTranslator() {
       </form>
       <p
         className="p-2 border border-gray-400 rounded-md shadow-sm font-mono text-md text-gray-400 break-words"
-        onContextMenu={(e) => e.stopPropagation()}
+        onContextMenu={(event) => event.stopPropagation()}
       >
         <strong>Morse Code:</strong> {morseOutput}
       </p>
