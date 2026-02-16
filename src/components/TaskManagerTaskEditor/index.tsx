@@ -12,10 +12,8 @@ function TaskManagerTaskEditor({ task, onCancel }: TaskManagerTaskEditorProps) {
   const [priority, setPriority] = useState(task.priority);
   const updateTask = useTaskMangerStore((state) => state.updateTask);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    console.log(`Title: ${title}, Priority: ${priority}`);
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
 
     updateTask(task.id, {
       title: title,
@@ -33,12 +31,14 @@ function TaskManagerTaskEditor({ task, onCancel }: TaskManagerTaskEditorProps) {
       <input
         className="bg-gray-800 text-white p-2 rounded-md"
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(event) => setTitle(event.target.value)}
       />
       <select
         className="bg-gray-800 text-white p-2 rounded-md"
         value={priority}
-        onChange={(e) => setPriority(e.target.value as Task["priority"])}
+        onChange={(event) =>
+          setPriority(event.target.value as Task["priority"])
+        }
       >
         <option value="Low">Low</option>
         <option value="Medium">Medium</option>
