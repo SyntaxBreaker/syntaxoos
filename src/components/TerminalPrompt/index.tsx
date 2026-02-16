@@ -19,7 +19,7 @@ function TerminalPrompt({
       <input
         className="outline-none border-none text-green-400 flex-1 font-bold"
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(event) => onChange(event.target.value)}
         onKeyDown={onKeyDown}
         autoFocus
         ref={inputRef}
