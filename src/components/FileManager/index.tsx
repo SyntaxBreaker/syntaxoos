@@ -1,4 +1,3 @@
-import { type MouseEvent } from "react";
 import FileManagerContextMenu from "../FileManagerContextMenu";
 import { useContextMenuStore } from "../../store/contextMenuStore";
 import { useFileSystemStore } from "../../store/fileSystemStore";
@@ -11,7 +10,7 @@ function FileManager() {
   );
   const openContextMenu = useContextMenuStore((state) => state.openContextMenu);
 
-  const handleContextMenu = (event: MouseEvent<HTMLDivElement>) => {
+  const handleContextMenu = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     event.stopPropagation();
     const rect = event.currentTarget.getBoundingClientRect();
