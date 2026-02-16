@@ -17,7 +17,7 @@ function Window({ id, x, y, windowName, children }: WindowProps) {
   const changePosition = useWindowsStore((state) => state.changePosition);
   const isWindowMinimized = useWindowsStore((state) => state.isWindowMinimized);
 
-  const handleMouseMove = (e: MouseEvent) => {
+  const handleMouseMove = (event: MouseEvent) => {
     if (!isDragging) return;
 
     const desktop = document.getElementById("desktop");
@@ -26,8 +26,8 @@ function Window({ id, x, y, windowName, children }: WindowProps) {
     const desktopRect = desktop.getBoundingClientRect();
     const windowRect = windowRef.current.getBoundingClientRect();
 
-    const rawX = e.clientX - dragOffsetRef.current.offsetX;
-    const rawY = e.clientY - dragOffsetRef.current.offsetY;
+    const rawX = event.clientX - dragOffsetRef.current.offsetX;
+    const rawY = event.clientY - dragOffsetRef.current.offsetY;
 
     const minX = desktopRect.left;
     const minY = desktopRect.top;
