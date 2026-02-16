@@ -67,13 +67,12 @@ function Terminal() {
     addCommandToHistory(input);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
       handleCommandExecution();
       return;
-    } else if (e.key === "ArrowUp" || e.key === "ArrowDown") {
-      const cmd = getCommand(e.key === "ArrowUp" ? "up" : "down");
-      console.log(cmd);
+    } else if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+      const cmd = getCommand(event.key === "ArrowUp" ? "up" : "down");
       if (cmd !== null) {
         setInput(cmd);
         return;
