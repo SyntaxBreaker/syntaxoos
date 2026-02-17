@@ -12,7 +12,7 @@ function CalculatorKeypad({ handleClick }: CalculatorKeypadProps) {
           key={button.id}
           className={`${button.color} ${
             button.span === 2 ? "col-span-2" : ""
-          } text-white text-xl font-semibold rounded-lg transition-all duration-200 active:scale-95 shadow-md`}
+          } text-gray-200 text-xl font-semibold rounded-lg transition-all duration-200 active:scale-95 shadow-md`}
           onClick={() => handleClick(button.label)}
         >
           {button.label}

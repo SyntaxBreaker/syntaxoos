@@ -9,10 +9,10 @@ function DictionaryTable({ definitions, synonyms }: DictionaryTableProps) {
       <table className="w-full text-left border-collapse bg-gray-800">
         <thead className="bg-gray-700 border-b border-gray-800">
           <tr>
-            <th className="px-6 py-4 font-semibold text-white w-2/3">
+            <th className="px-6 py-4 font-semibold text-gray-200 w-2/3">
               Definitions
             </th>
-            <th className="px-6 py-4 font-semibold text-white w-1/3">
+            <th className="px-6 py-4 font-semibold text-gray-200 w-1/3">
               Synonyms
             </th>
           </tr>
@@ -20,7 +20,7 @@ function DictionaryTable({ definitions, synonyms }: DictionaryTableProps) {
         <tbody className="divide-y divide-gray-600 bg-gray-800">
           {definitions.map((defintion, index) => (
             <tr key={index}>
-              <td className="px-6 py-4 text-white leading-relaxed">
+              <td className="px-6 py-4 text-gray-200 leading-relaxed">
                 {defintion}
               </td>
               {index === 0 && (
@@ -33,13 +33,13 @@ function DictionaryTable({ definitions, synonyms }: DictionaryTableProps) {
                       synonyms.map((synonym) => (
                         <span
                           key={synonym}
-                          className="px-2 py-1 bg-gray-600 text-white rounded text-xs font-medium"
+                          className="px-2 py-1 bg-gray-600 text-gray-200 rounded text-xs font-medium"
                         >
                           {synonym}
                         </span>
                       ))
                     ) : (
-                      <span className="text-white italic text-sm">
+                      <span className="text-gray-200 italic text-sm">
                         No synonyms
                       </span>
                     )}

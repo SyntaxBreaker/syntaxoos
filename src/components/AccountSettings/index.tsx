@@ -38,11 +38,14 @@ function AccountSettings() {
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-2">
-        <label className="text-white text-xs font-extrabold" htmlFor="username">
+        <label
+          className="text-gray-200 text-xs font-extrabold"
+          htmlFor="username"
+        >
           Username
         </label>
         <input
-          className="p-2 border-gray-600 border text-xs rounded-sm text-white focus:outline focus:outline-solid focus:outline-gray-400"
+          className="p-2 border-gray-600 border text-xs rounded-sm text-gray-200 focus:outline focus:outline-solid focus:outline-gray-400"
           name="username"
           onChange={handleChange}
           value={account.username}
@@ -50,13 +53,13 @@ function AccountSettings() {
       </div>
       <div className="flex flex-col gap-2">
         <label
-          className="text-white text-xs font-extrabold"
+          className="text-gray-200 text-xs font-extrabold"
           htmlFor="displayName"
         >
           Display Name
         </label>
         <input
-          className="p-2 border-gray-600 border text-xs rounded-sm text-white focus:outline focus:outline-solid focus:outline-gray-400"
+          className="p-2 border-gray-600 border text-xs rounded-sm text-gray-200 focus:outline focus:outline-solid focus:outline-gray-400"
           name="displayName"
           onChange={handleChange}
           value={account.displayName}
@@ -64,7 +67,7 @@ function AccountSettings() {
       </div>
       <button
         type="submit"
-        className="rounded-md bg-gray-800 py-2 px-8 border border-transparent text-white text-center text-xs hover:shadow-lg hover:bg-gray-600 hover:cursor-pointer self-end"
+        className="rounded-md bg-gray-800 py-2 px-8 border border-transparent text-gray-200 text-center text-xs hover:shadow-lg hover:bg-gray-600 hover:cursor-pointer self-end"
       >
         Save
       </button>

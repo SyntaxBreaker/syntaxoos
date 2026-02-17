@@ -90,7 +90,7 @@ function Terminal() {
 
   return (
     <div
-      className="text-gray-100 text-sm flex flex-col gap-1 py-2 font-mono min-h-full"
+      className="text-gray-200 text-sm flex flex-col gap-1 py-2 font-mono min-h-full"
       onClick={handleTerminalClick}
     >
       <TerminalHistory lines={lines} />

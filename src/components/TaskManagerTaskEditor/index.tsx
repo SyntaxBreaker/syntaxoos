@@ -29,12 +29,12 @@ function TaskManagerTaskEditor({ task, onCancel }: TaskManagerTaskEditorProps) {
       onSubmit={handleSubmit}
     >
       <input
-        className="bg-gray-800 text-white p-2 rounded-md"
+        className="bg-gray-800 text-gray-200 p-2 rounded-md"
         value={title}
         onChange={(event) => setTitle(event.target.value)}
       />
       <select
-        className="bg-gray-800 text-white p-2 rounded-md"
+        className="bg-gray-800 text-gray-200 p-2 rounded-md"
         value={priority}
         onChange={(event) =>
           setPriority(event.target.value as Task["priority"])
@@ -54,7 +54,7 @@ function TaskManagerTaskEditor({ task, onCancel }: TaskManagerTaskEditorProps) {
         </button>
         <button
           type="submit"
-          className="px-4 py-2 rounded-md bg-indigo-500 hover:bg-indigo-400 border border-transparent text-white cursor-pointer"
+          className="px-4 py-2 rounded-md bg-indigo-500 hover:bg-indigo-400 border border-transparent text-gray-200 cursor-pointer"
         >
           Save
         </button>

@@ -18,8 +18,8 @@ function TaskManagerItem({ task }: TaskManagerItemProps) {
     <li className="flex flex-col gap-4 bg-gray-800 p-4 rounded-md shadow-sm">
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-col gap-2">
-          <span className="text-xs text-gray-100">{task.priority}</span>
-          <p className="text-white">{task.title}</p>
+          <span className="text-xs text-gray-300">{task.priority}</span>
+          <p className="text-gray-200">{task.title}</p>
         </div>
         <div className="flex flex-row gap-2">
           <button

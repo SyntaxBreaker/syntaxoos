@@ -19,12 +19,12 @@ function AppearanceSettings() {
     <div className="flex flex-col gap-4">
       <SettingsWallpapers />
       <div className="flex flex-col gap-2">
-        <label className="text-white text-xs font-extrabold">
+        <label className="text-gray-200 text-xs font-extrabold">
           Background size
         </label>
         <select
           id="size"
-          className="w-full p-2 bg-transparent border border-gray-600 text-xs rounded-sm text-white"
+          className="w-full p-2 bg-transparent border border-gray-600 text-xs rounded-sm text-gray-200"
           defaultValue={currentBackgroundSize}
           onChange={handleBackgroundSizeChange}
         >

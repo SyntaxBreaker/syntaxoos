@@ -4,7 +4,7 @@ interface WindowTitleProps {
 
 function WindowTitle({ title }: WindowTitleProps) {
   return (
-    <p className="text-white text-sm font-bold select-none">
+    <p className="text-gray-200 text-sm font-bold select-none">
       {title ?? "Untitled"}
     </p>
   );

@@ -11,7 +11,7 @@ function DesktopIcon({ name, iconSrc, onClick }: DesktopIconProps) {
       onClick={onClick}
     >
       <img src={iconSrc} alt={name} className="h-8 w-8 m-auto" />
-      <p className="text-white text-center">{name}</p>
+      <p className="text-gray-200 text-center">{name}</p>
     </div>
   );
 }

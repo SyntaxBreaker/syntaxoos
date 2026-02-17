@@ -14,11 +14,11 @@ function FileManagerDirectoryList({
 
   return (
     <div className="flex flex-col border-r border-border-primary py-2 pr-2 gap-1 w-[156px]">
-      <h2 className="text-white text-sm font-extrabold">Places</h2>
+      <h2 className="text-gray-200 text-sm font-extrabold">Places</h2>
       {directories.map((directory) => (
         <button
           key={directory}
-          className={`text-white text-sm cursor-pointer px-2 py-1 capitalize w-full text-left ${currentDirectory === directory ? "bg-slate-800 shadow-sm" : "hover:bg-gray-600"}`}
+          className={`text-gray-200 text-sm cursor-pointer px-2 py-1 capitalize w-full text-left ${currentDirectory === directory ? "bg-slate-800 shadow-sm" : "hover:bg-gray-600"}`}
           onClick={() => setCurrentDirectory(directory)}
         >
           {directory}

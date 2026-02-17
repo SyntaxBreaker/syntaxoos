@@ -34,7 +34,7 @@ function PerformanceMonitor({
     <div
       className={`flex flex-col gap-4 bg-[#313E41] ${containerClassName} h-xs p-4`}
     >
-      <h2 className="text-white">{label}</h2>
+      <h2 className="text-gray-200">{label}</h2>
       <div className="relative flex flex-col gap-8 items-center justify-center">
         <svg
           width="100"
@@ -62,7 +62,7 @@ function PerformanceMonitor({
             strokeLinecap="round"
           />
         </svg>
-        <span className="text-white font-bold text-sm">
+        <span className="text-gray-200 font-bold text-sm">
           {unit === "%" ? `${value}${unit}` : `${value}${unit}/${total}${unit}`}
         </span>
       </div>

@@ -20,7 +20,7 @@ function PanelTaskItem({ activeWindow }: PanelTaskItemProps) {
         alt={activeWindow.windowName}
         className="h-4 w-4 self-center"
       />
-      <p className="text-white text-sm">{activeWindow.windowName}</p>
+      <p className="text-gray-200 text-sm">{activeWindow.windowName}</p>
     </button>
   );
 }

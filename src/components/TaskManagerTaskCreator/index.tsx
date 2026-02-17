@@ -17,11 +17,11 @@ function TaskManagerTaskCreator() {
         value={input}
         onChange={(event) => setInput(event.target.value)}
         placeholder="What needs to be done?"
-        className="flex-1 p-2 border border-slate-600 rounded-md shadow-sm outline-none text-white"
+        className="flex-1 p-2 border border-slate-600 rounded-md shadow-sm outline-none text-gray-200"
       />
       <button
         type="submit"
-        className="px-4 py-2 bg-slate-800 text-white rounded-md hover:bg-slate-600"
+        className="px-4 py-2 bg-slate-800 text-gray-200 rounded-md hover:bg-slate-600"
       >
         Add
       </button>

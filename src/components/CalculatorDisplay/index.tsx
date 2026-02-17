@@ -9,7 +9,7 @@ function CalculatorDisplay({ expression, result }: CalculatorDisplayProps) {
       <p className="text-right text-gray-400 text-sm mb-1 truncate">
         {expression || "0"}
       </p>
-      <p className="text-right text-white text-3xl font-bold">
+      <p className="text-right text-gray-200 text-3xl font-bold">
         {result || "0"}
       </p>
     </div>

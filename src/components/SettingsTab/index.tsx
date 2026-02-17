@@ -10,7 +10,7 @@ function SettingsTab({ tab }: SettingsTabProps) {
 
   return (
     <button
-      className="text-white text-sm cursor-pointer p-1 self-start capitalize"
+      className="text-gray-200 text-sm cursor-pointer p-1 self-start capitalize"
       onClick={() => setCurrentTab(tab.name)}
     >
       {tab.name}

@@ -26,7 +26,7 @@ function MorseCodeTranslator() {
     <div className="flex flex-col gap-4 max-w-full mx-auto p-4">
       <form className="flex gap-2" onSubmit={handleTranslate}>
         <input
-          className="flex-1 p-2 border border-gray-600 rounded-md shadow-sm outline-none text-white"
+          className="flex-1 p-2 border border-gray-600 rounded-md shadow-sm outline-none text-gray-200"
           aria-label="Enter text to translate into Morse code"
           aria-required="true"
           required
@@ -35,14 +35,14 @@ function MorseCodeTranslator() {
           value={input}
         />
         <button
-          className="px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-600 hover:cursor-pointer"
+          className="px-4 py-2 bg-gray-800 text-gray-200 rounded-md hover:bg-gray-600 hover:cursor-pointer"
           type="submit"
         >
           Translate
         </button>
       </form>
       <p
-        className="p-2 border border-gray-400 rounded-md shadow-sm font-mono text-md text-gray-400 break-words"
+        className="p-2 border border-gray-400 rounded-md shadow-sm font-mono text-md text-gray-200 break-words"
         onContextMenu={(event) => event.stopPropagation()}
       >
         <strong>Morse Code:</strong> {morseOutput}

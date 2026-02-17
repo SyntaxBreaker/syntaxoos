@@ -9,7 +9,7 @@ function Clock() {
   }, []);
 
   return (
-    <p className="text-white text-sm">{time.toLocaleTimeString("en-US")}</p>
+    <p className="text-gray-200 text-sm">{time.toLocaleTimeString("en-US")}</p>
   );
 }
 

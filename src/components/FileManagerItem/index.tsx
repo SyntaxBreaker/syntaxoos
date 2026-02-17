@@ -43,7 +43,7 @@ function FileManagerItem({
       onClick={handleFileOpen}
     >
       <img src={icon} alt={fileName} className="h-8 w-8" />
-      <p className="text-white text-sm">{fileName}</p>
+      <p className="text-gray-200 text-sm">{fileName}</p>
     </button>
   );
 }
