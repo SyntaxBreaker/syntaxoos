@@ -42,7 +42,7 @@ function MorseCodeTranslator() {
         </button>
       </form>
       <p
-        className="p-2 border border-gray-400 rounded-md shadow-sm font-mono text-md text-gray-200 break-words"
+        className="p-2 border border-gray-600 rounded-md shadow-sm font-mono text-md text-gray-200 break-words"
         onContextMenu={(event) => event.stopPropagation()}
       >
         <strong>Morse Code:</strong> {morseOutput}
