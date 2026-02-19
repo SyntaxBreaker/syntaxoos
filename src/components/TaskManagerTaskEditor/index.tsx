@@ -48,13 +48,13 @@ function TaskManagerTaskEditor({ task, onCancel }: TaskManagerTaskEditorProps) {
         <button
           type="button"
           onClick={onCancel}
-          className="px-4 py-2 rounded-md border border-slate-400 text-slate-200 hover:bg-slate-600 cursor-pointer"
+          className="px-4 py-2 rounded-md border border-gray-400 text-gray-200 hover:bg-gray-600 cursor-pointer"
         >
           Cancel
         </button>
         <button
           type="submit"
-          className="px-4 py-2 rounded-md bg-indigo-500 hover:bg-indigo-400 border border-transparent text-gray-200 cursor-pointer"
+          className="px-4 py-2 rounded-md bg-indigo-700 hover:bg-indigo-600 border border-transparent text-gray-200 cursor-pointer"
         >
           Save
         </button>
