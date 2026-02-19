@@ -13,7 +13,7 @@ function SettingsWallpapers() {
           <img
             key={wallpaper.id}
             src={wallpaper.src}
-            className={`h-32 w-32 cursor-pointer border-2 ${currentWallpaper === wallpaper.src ? "border-gray-500" : "border-transparent"}`}
+            className={`h-32 w-32 cursor-pointer border ${currentWallpaper === wallpaper.src ? "border-gray-600" : "border-transparent"}`}
             onClick={() => setWallpaper(wallpaper.src)}
           />
         ))}
