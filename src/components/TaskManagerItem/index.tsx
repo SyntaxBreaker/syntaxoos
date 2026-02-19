@@ -23,7 +23,7 @@ function TaskManagerItem({ task }: TaskManagerItemProps) {
         </div>
         <div className="flex flex-row gap-2">
           <button
-            className="w-12 h-12 bg-slate-700 p-2 rounded-md hover:cursor-pointer hover:bg-slate-600"
+            className="w-12 h-12 bg-gray-700 p-2 rounded-md hover:cursor-pointer hover:bg-gray-600"
             onClick={() => setIsEditing((state) => !state)}
           >
             <img src={editIcon} className="fill-current h-[32px] w-[32px]" />
