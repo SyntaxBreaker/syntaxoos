@@ -7,7 +7,7 @@ function DictionaryTable({ definitions, synonyms }: DictionaryTableProps) {
   return (
     <div className="w-full overflow-x-auto rounded-lg border border-gray-800 shadow-sm">
       <table className="w-full text-left border-collapse bg-gray-800">
-        <thead className="bg-gray-700 border-b border-gray-800">
+        <thead className="bg-gray-600 border-b border-gray-800">
           <tr>
             <th className="px-6 py-4 font-semibold text-gray-200 w-2/3">
               Definitions
