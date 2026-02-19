@@ -18,7 +18,7 @@ function TaskManagerItem({ task }: TaskManagerItemProps) {
     <li className="flex flex-col gap-4 bg-gray-800 p-4 rounded-md shadow-sm">
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-col gap-2">
-          <span className="text-xs text-gray-300">{task.priority}</span>
+          <span className="text-xs text-gray-400">{task.priority}</span>
           <p className="text-gray-200">{task.title}</p>
         </div>
         <div className="flex flex-row gap-2">
@@ -26,7 +26,7 @@ function TaskManagerItem({ task }: TaskManagerItemProps) {
             className="w-12 h-12 bg-slate-700 p-2 rounded-md hover:cursor-pointer hover:bg-slate-600"
             onClick={() => setIsEditing((state) => !state)}
           >
-            <img src={editIcon} className="fill-current" />
+            <img src={editIcon} className="fill-current h-[32px] w-[32px]" />
           </button>
           <button
             className="w-12 h-12 bg-red-600/90 p-2 rounded-md hover:cursor-pointer hover:bg-red-500"
