@@ -1,4 +1,5 @@
 import type { App } from "./types";
+import APIClient from "./components/APIClient";
 import Calculator from "./components/Calculator";
 import Contact from "./components/Contact";
 import Dictionary from "./components/Dictionary";
@@ -12,6 +13,7 @@ import SystemInfoMonitor from "./components/SystemInfoMonitor";
 import TaskManager from "./components/TaskManager";
 import Terminal from "./components/Terminal";
 import TextReader from "./components/TextReader";
+import apiIcon from "./assets/icons/api.svg";
 import calculatorIcon from "./assets/icons/calculator.svg";
 import contactIcon from "./assets/icons/contact.svg";
 import dictionaryIcon from "./assets/icons/dictionary.svg";
@@ -40,6 +42,7 @@ export const WINDOW_ID = {
   DICTIONARY: 10,
   TASK_MANAGER: 11,
   MORSE_CODE_TRANSLATOR: 12,
+  API_CLIENT: 13,
 } as const;
 
 export const APPS: App[] = [
@@ -132,6 +135,13 @@ export const APPS: App[] = [
     windowName: "Morse Code Translator",
     component: <MorseCodeTranslator />,
     iconSrc: morseCodeIcon,
+    showOnDesktop: true,
+  },
+  {
+    id: WINDOW_ID.API_CLIENT,
+    windowName: "API Client",
+    component: <APIClient />,
+    iconSrc: apiIcon,
     showOnDesktop: true,
   },
 ] as const;

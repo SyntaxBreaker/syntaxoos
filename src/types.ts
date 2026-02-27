@@ -55,3 +55,16 @@ export interface Task {
 }
 
 export type Morse = keyof typeof MORSE_CODE;
+
+export type API_CLIENT_TAB = "Parameters" | "Headers" | "Body" | "Response";
+
+export interface KeyValueItem {
+  id: string;
+  key: string;
+  value: string;
+}
+
+export type APIClientBodyContentType =
+  | "application/json"
+  | "application/xml"
+  | "text/plain";
