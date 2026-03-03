@@ -4,6 +4,7 @@ import trashIcon from "../../assets/icons/trash.svg";
 import editIcon from "../../assets/icons/edit.svg";
 import { useState } from "react";
 import TaskManagerTaskEditor from "../TaskManagerTaskEditor";
+import TaskManagerPriorityBadge from "../TaskManagerPriorityBadge";
 
 interface TaskManagerItemProps {
   task: Task;
@@ -18,7 +19,7 @@ function TaskManagerItem({ task }: TaskManagerItemProps) {
     <li className="flex flex-col gap-4 bg-gray-800 p-4 rounded-md shadow-sm">
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-col gap-2">
-          <span className="text-xs text-gray-400">{task.priority}</span>
+          <TaskManagerPriorityBadge priority={task.priority} />
           <p className="text-gray-200">{task.title}</p>
         </div>
         <div className="flex flex-row gap-2">
