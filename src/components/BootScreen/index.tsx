@@ -14,7 +14,7 @@ function BootScreen() {
     return () => {
       clearTimeout(timeoutId);
     };
-  }, []);
+  }, [toggleBootScreen, toggleDesktop]);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-gray-950 via-gray-800 to-gray-950">
