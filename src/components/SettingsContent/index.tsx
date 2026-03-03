@@ -4,7 +4,9 @@ interface SettingsContentProps {
 
 function SettingsContent({ activeComponent }: SettingsContentProps) {
   return (
-    <div className="flex flex-col gap-4 py-4 px-2 w-full">{activeComponent}</div>
+    <div className="flex flex-col gap-4 py-4 px-2 w-full">
+      {activeComponent}
+    </div>
   );
 }
 

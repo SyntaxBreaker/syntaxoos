@@ -6,7 +6,9 @@ function FileManagerContextMenu() {
   const activeId = useContextMenuStore((state) => state.activeId);
   const x = useContextMenuStore((state) => state.x);
   const y = useContextMenuStore((state) => state.y);
-  const closeContextMenu = useContextMenuStore((state) => state.closeContextMenu);
+  const closeContextMenu = useContextMenuStore(
+    (state) => state.closeContextMenu,
+  );
   const isOpen = activeId === "fileManager";
 
   return (

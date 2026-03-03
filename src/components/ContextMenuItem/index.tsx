@@ -7,7 +7,9 @@ interface ContextMenuItemProps {
 }
 
 function ContextMenuItem({ label, onClick, disabled }: ContextMenuItemProps) {
-  const closeContextMenu = useContextMenuStore((state) => state.closeContextMenu);
+  const closeContextMenu = useContextMenuStore(
+    (state) => state.closeContextMenu,
+  );
 
   const handleClick = (event: React.MouseEvent<HTMLLIElement>) => {
     event.stopPropagation();

@@ -9,7 +9,7 @@ function DesktopContextMenu() {
   const x = useContextMenuStore((state) => state.x);
   const y = useContextMenuStore((state) => state.y);
   const closeContextMenu = useContextMenuStore(
-    (state) => state.closeContextMenu
+    (state) => state.closeContextMenu,
   );
   const openWindow = useWindowsStore((state) => state.openWindow);
   const isOpen = activeId === "desktop";

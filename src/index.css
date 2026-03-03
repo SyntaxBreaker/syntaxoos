@@ -2,24 +2,24 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Geist", sans-serif;
-  --color-panel: #1b2224;
-  --color-border-primary: #2e3436;
-  --animate-pulse-wave: pulse-wave 1s ease-in-out infinite alternate;
+    --font-sans: "Geist", sans-serif;
+    --color-panel: #1b2224;
+    --color-border-primary: #2e3436;
+    --animate-pulse-wave: pulse-wave 1s ease-in-out infinite alternate;
 
-  @keyframes pulse-wave {
-    0%,
-    100% {
-      transform: scaleY(0.2);
+    @keyframes pulse-wave {
+        0%,
+        100% {
+            transform: scaleY(0.2);
+        }
+        25% {
+            transform: scaleY(1);
+        }
+        50% {
+            transform: scaleY(0.4);
+        }
+        75% {
+            transform: scaleY(0.8);
+        }
     }
-    25% {
-      transform: scaleY(1);
-    }
-    50% {
-      transform: scaleY(0.4);
-    }
-    75% {
-      transform: scaleY(0.8);
-    }
-  }
 }
