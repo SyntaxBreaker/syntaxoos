@@ -7,10 +7,10 @@ function MusicPlayer() {
   if (!audioSrc) return null;
 
   return (
-    <div className="flex flex-col h-full">
+    <article className="flex flex-col h-full">
       <EqualizerBars />
       <audio controls src={audioSrc} autoPlay className="-mx-2" />
-    </div>
+    </article>
   );
 }
 
