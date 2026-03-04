@@ -9,13 +9,13 @@ function Clock() {
   }, []);
 
   return (
-    <p className="text-gray-200 text-sm tabular-nums">
+    <time className="text-gray-200 text-sm tabular-nums">
       {time.toLocaleTimeString("en-US", {
         hour: "numeric",
         minute: "2-digit",
         hour12: true,
       })}
-    </p>
+    </time>
   );
 }
 
