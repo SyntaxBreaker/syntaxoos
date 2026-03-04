@@ -23,7 +23,7 @@ function MorseCodeTranslator() {
   };
 
   return (
-    <div className="flex flex-col gap-4 max-w-full mx-auto p-4">
+    <article className="flex flex-col gap-4 max-w-full mx-auto p-4">
       <form className="flex gap-2" onSubmit={handleTranslate}>
         <input
           className="flex-1 p-2 border border-gray-600 rounded-md shadow-sm outline-none text-gray-200"
@@ -41,13 +41,13 @@ function MorseCodeTranslator() {
           Translate
         </button>
       </form>
-      <p
+      <output
         className="p-2 border border-gray-600 rounded-md shadow-sm font-mono text-md text-gray-200 break-words"
         onContextMenu={(event) => event.stopPropagation()}
       >
         <strong>Morse Code:</strong> {morseOutput}
-      </p>
-    </div>
+      </output>
+    </article>
   );
 }
 
