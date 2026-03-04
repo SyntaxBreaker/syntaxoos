@@ -54,10 +54,10 @@ function Window({ id, x, y, windowName, children }: WindowProps) {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [isDragging]);
+  }, [handleMouseMove, isDragging]);
 
   return (
-    <div
+    <section
       className="flex-col h-[600px] w-[1024px] min-w-3xl min-h-[600px] bg-panel absolute rounded-sm resize overflow-auto"
       style={{
         left: `${x}px`,
@@ -77,7 +77,7 @@ function Window({ id, x, y, windowName, children }: WindowProps) {
       <div className="h-full w-full px-2 overflow-y-auto flex-grow">
         {children}
       </div>
-    </div>
+    </section>
   );
 }
 

@@ -31,13 +31,13 @@ function WindowTitleBar({
   };
 
   return (
-    <div
+    <header
       className="flex flex-row justify-between items-center cursor-move p-2 border-b border-border-primary sticky top-0 left-0"
       onMouseDown={handleMouseDown}
     >
       <WindowTitle title={windowName} />
       <WindowControlButtons id={id} />
-    </div>
+    </header>
   );
 }
 
