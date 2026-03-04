@@ -8,11 +8,13 @@ function PanelTaskList() {
     .filter((app) => app !== undefined);
 
   return (
-    <div className="flex flex-row gap-4">
+    <ul className="flex flex-row gap-4">
       {activeWindows.map((activeWindow) => (
-        <PanelTaskItem activeWindow={activeWindow} key={activeWindow.id} />
+        <li key={activeWindow.id}>
+          <PanelTaskItem activeWindow={activeWindow} />
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
 
