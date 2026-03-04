@@ -31,10 +31,10 @@ function PerformanceMonitor({
   };
 
   return (
-    <div
+    <figure
       className={`flex flex-col gap-4 bg-[#313E41] ${containerClassName} h-xs p-4`}
     >
-      <h2 className="text-gray-200">{label}</h2>
+      <figcaption className="text-gray-200">{label}</figcaption>
       <div className="relative flex flex-col gap-8 items-center justify-center">
         <svg
           width="100"
@@ -66,7 +66,7 @@ function PerformanceMonitor({
           {unit === "%" ? `${value}${unit}` : `${value}${unit}/${total}${unit}`}
         </span>
       </div>
-    </div>
+    </figure>
   );
 }
 
