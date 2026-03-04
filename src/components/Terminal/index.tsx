@@ -89,7 +89,7 @@ function Terminal() {
   }, [lines]);
 
   return (
-    <div
+    <article
       className="text-gray-200 text-sm flex flex-col gap-1 py-2 font-mono min-h-full"
       onClick={handleTerminalClick}
     >
@@ -101,7 +101,7 @@ function Terminal() {
         onKeyDown={handleKeyDown}
         inputRef={inputRef}
       />
-    </div>
+    </article>
   );
 }
 

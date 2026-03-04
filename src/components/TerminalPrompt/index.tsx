@@ -15,7 +15,7 @@ function TerminalPrompt({
 }: TerminalPromptProps) {
   return (
     <div className="flex flex-row gap-1">
-      <p>{prefix}</p>
+      <span>{prefix}</span>
       <input
         className="outline-none border-none text-green-400 flex-1 font-bold"
         value={value}
