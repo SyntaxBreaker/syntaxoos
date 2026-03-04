@@ -13,7 +13,7 @@ function TaskManagerTaskContent({
   return (
     <div className="flex flex-col gap-2">
       <TaskManagerPriorityBadge priority={priority} />
-      <p className="text-gray-200">{title}</p>
+      <h3 className="text-gray-200">{title}</h3>
     </div>
   );
 }
