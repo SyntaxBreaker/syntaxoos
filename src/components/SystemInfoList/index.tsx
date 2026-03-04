@@ -3,12 +3,12 @@ import SystemInfoItem from "../SystemInfoItem";
 
 function SystemInfoList() {
   return (
-    <div className="flex flex-col gap-2 text-gray-200">
+    <ul className="flex flex-col gap-2 text-gray-200">
       <h2 className="text-sm">System Info</h2>
       {SYSTEM_INFO.map((info, id) => (
         <SystemInfoItem key={id} label={info} />
       ))}
-    </div>
+    </ul>
   );
 }
 

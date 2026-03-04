@@ -25,7 +25,7 @@ function SystemInfoMonitor() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-4 p-4">
+    <section className="flex flex-col gap-4 p-4">
       <div className="flex flex-row gap-4 flex-wrap">
         <PerformanceMonitor
           containerClassName="w-[calc(100%/3-11px)]"
@@ -68,7 +68,7 @@ function SystemInfoMonitor() {
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
