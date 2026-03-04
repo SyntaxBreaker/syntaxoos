@@ -10,16 +10,17 @@ function DesktopIconList() {
   };
 
   return (
-    <div className="flex flex-col flex-wrap content-start gap-4 h-[calc(100%-36px)] w-full p-4">
+    <ul className="flex flex-col flex-wrap content-start gap-4 h-[calc(100%-36px)] w-full p-4">
       {APPS.filter((app) => app.showOnDesktop).map((app) => (
-        <DesktopIcon
-          key={app.id}
-          name={app.windowName}
-          iconSrc={app.iconSrc}
-          onClick={() => handleIconClick(app.id)}
-        />
+        <li key={app.id}>
+          <DesktopIcon
+            name={app.windowName}
+            iconSrc={app.iconSrc}
+            onClick={() => handleIconClick(app.id)}
+          />
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
 

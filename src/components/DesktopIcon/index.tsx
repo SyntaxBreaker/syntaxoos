@@ -6,13 +6,13 @@ interface DesktopIconProps {
 
 function DesktopIcon({ name, iconSrc, onClick }: DesktopIconProps) {
   return (
-    <div
+    <button
       className="flex flex-col gap-2 w-24 flex-wrap cursor-pointer"
       onClick={onClick}
     >
       <img src={iconSrc} alt={name} className="h-8 w-8 m-auto" />
       <p className="text-gray-200 text-center">{name}</p>
-    </div>
+    </button>
   );
 }
 
