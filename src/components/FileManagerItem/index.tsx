@@ -40,7 +40,7 @@ function FileManagerItem({
   return (
     <button
       className="flex flex-col gap-2 p-2 items-center cursor-pointer"
-      onClick={handleFileOpen}
+      onDoubleClick={handleFileOpen}
     >
       <img src={icon} alt={fileName} className="h-8 w-8" />
       <p className="text-gray-200 text-sm">{fileName}</p>

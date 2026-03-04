@@ -10,17 +10,18 @@ function FileManagerItems({ currentDirectory }: FileManagerItemsProps) {
   const fileList = useFileSystemStore((state) => state.fileList);
 
   return (
-    <div className="p-2 flex flex-row gap-4 flex-wrap content-start">
+    <ul className="p-2 flex flex-row gap-4 flex-wrap content-start">
       {fileList[currentDirectory].map(({ id, fileName, src, fileType }) => (
-        <FileManagerItem
-          key={id}
-          fileName={fileName}
-          icon={fileIcon}
-          src={src}
-          fileType={fileType}
-        />
+        <li key={id}>
+          <FileManagerItem
+            fileName={fileName}
+            icon={fileIcon}
+            src={src}
+            fileType={fileType}
+          />
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
 

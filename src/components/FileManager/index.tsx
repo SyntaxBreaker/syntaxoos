@@ -22,14 +22,14 @@ function FileManager() {
   };
 
   return (
-    <div
+    <article
       className="flex flex-row gap-2 h-full relative"
       onContextMenu={handleContextMenu}
     >
       <FileManagerDirectoryList currentDirectory={currentDirectory} />
       <FileManagerItems currentDirectory={currentDirectory} />
       <FileManagerContextMenu />
-    </div>
+    </article>
   );
 }
 
