@@ -6,11 +6,13 @@ function ImageViewer() {
   if (!imageSrc) return;
 
   return (
-    <img
-      src={imageSrc}
-      alt=""
-      className="max-w-full max-h-full object-contain block mx-auto"
-    />
+    <figure>
+      <img
+        src={imageSrc}
+        alt=""
+        className="max-w-full max-h-full object-contain block mx-auto"
+      />
+    </figure>
   );
 }
 
