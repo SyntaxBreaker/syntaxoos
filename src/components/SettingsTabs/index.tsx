@@ -7,11 +7,15 @@ interface SettingssTabsProps {
 
 function SettingsTabs({ tabs }: SettingssTabsProps) {
   return (
-    <div className="flex flex-col border-r border-border-primary py-2 pr-16">
-      {tabs.map((tab) => (
-        <SettingsTab tab={tab} key={tab.id} />
-      ))}
-    </div>
+    <nav className="flex flex-col border-r border-border-primary py-2 pr-16">
+      <ul>
+        {tabs.map((tab) => (
+          <li key={tab.id}>
+            <SettingsTab tab={tab} />
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 }
 

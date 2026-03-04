@@ -15,7 +15,7 @@ function SettingsBackgroundSize() {
   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <section className="flex flex-col gap-2">
       <label className="text-gray-200 text-xs font-extrabold">
         Background size
       </label>
@@ -29,7 +29,7 @@ function SettingsBackgroundSize() {
         <option value="Cover">Cover</option>
         <option value="Full">Full</option>
       </select>
-    </div>
+    </section>
   );
 }
 

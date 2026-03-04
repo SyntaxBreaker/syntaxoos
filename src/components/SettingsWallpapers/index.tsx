@@ -6,7 +6,7 @@ function SettingsWallpapers() {
   const setWallpaper = useSettingsStore((state) => state.setWallpaper);
 
   return (
-    <div className="flex flex-col gap-2">
+    <section className="flex flex-col gap-2">
       <h3 className="text-gray-200 text-xs font-extrabold">Wallpaper</h3>
       <div className="flex flex-row gap-2 flex-wrap">
         {WALLPAPERS.map((wallpaper) => (
@@ -18,7 +18,7 @@ function SettingsWallpapers() {
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 }
 

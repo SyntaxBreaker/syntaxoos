@@ -25,10 +25,10 @@ function Settings() {
   )?.component;
 
   return (
-    <div className="flex flex-row gap-2 h-full relative">
+    <section className="flex flex-row gap-2 h-full relative">
       <SettingsTabs tabs={SETTINGS_TABS} />
       <SettingsContent activeComponent={activeComponent} />
-    </div>
+    </section>
   );
 }
 

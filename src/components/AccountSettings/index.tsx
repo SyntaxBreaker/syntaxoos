@@ -13,14 +13,8 @@ function AccountSettings() {
   const updateUser = useAccountStore((state) => state.updateUser);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
     const { name, value } = event.target;
-
-    if (name === "displayName") {
-      setAccount({ ...account, displayName: value });
-    } else if (name === "username") {
-      setAccount({ ...account, username: value });
-    }
+    setAccount((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
