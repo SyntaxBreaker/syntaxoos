@@ -9,12 +9,12 @@ function APIClient() {
   const [activeTab, setActiveTab] = useState<API_CLIENT_TAB>("Parameters");
 
   return (
-    <div className="flex flex-col gap-4 p-2">
+    <article className="flex flex-col gap-4 p-2">
       <APIClientToolbar />
       <APIClientRequestTabs activeTab={activeTab} setActiveTab={setActiveTab} />
       <Separator />
       <APIClientContent activeTab={activeTab} />
-    </div>
+    </article>
   );
 }
 

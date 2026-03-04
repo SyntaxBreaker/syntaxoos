@@ -16,7 +16,7 @@ const API_CLIENT_CONTENT: Record<API_CLIENT_TAB, React.ReactNode> = {
 };
 
 function APIClientContent({ activeTab }: APIClientContentProps) {
-  return <div>{API_CLIENT_CONTENT[activeTab]}</div>;
+  return <section>{API_CLIENT_CONTENT[activeTab]}</section>;
 }
 
 export default APIClientContent;

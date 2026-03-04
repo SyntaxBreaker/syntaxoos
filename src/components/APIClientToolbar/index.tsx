@@ -12,10 +12,10 @@ function APIClientToolbar() {
 
   return (
     <form onSubmit={handleRequest} className="flex gap-2">
-      <div className="flex flex-row w-full">
+      <header className="flex flex-row w-full">
         <APIClientMethodSelector />
         <APIClientAddressBar />
-      </div>
+      </header>
       <button
         type="submit"
         className="px-4 py-2 bg-gray-800 text-gray-200 rounded-md hover:bg-gray-600 hover:cursor-pointer"

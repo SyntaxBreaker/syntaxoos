@@ -8,7 +8,7 @@ function APIClientResponse() {
   const isJSON = typeof response.data === "object" && response.data !== null;
 
   return (
-    <div className="flex flex-col gap-4 max-w-full">
+    <section className="flex flex-col gap-4 max-w-full">
       <p className="text-xs text-gray-200">
         Status: <span className="text-green-400">{response.status}</span>
       </p>
@@ -21,7 +21,7 @@ function APIClientResponse() {
           <pre>{String(response.data)}</pre>
         )}
       </div>
-    </div>
+    </section>
   );
 }
 
