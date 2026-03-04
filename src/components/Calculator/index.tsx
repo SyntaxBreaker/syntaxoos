@@ -35,10 +35,10 @@ function Calculator() {
   };
 
   return (
-    <div className="h-full w-full shadow-2xl p-4">
+    <article className="h-full w-full shadow-2xl p-4">
       <CalculatorDisplay expression={expression} result={result} />
       <CalculatorKeypad handleClick={handleClick} />
-    </div>
+    </article>
   );
 }
 
