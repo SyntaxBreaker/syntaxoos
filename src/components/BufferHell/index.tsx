@@ -4,6 +4,7 @@ import useBufferHellEngine from "../../hooks/useBufferHellEngine";
 import BufferHellHeader from "../BufferHellHeader";
 import BufferHellCanvas from "../BufferHellCanvas";
 import BufferHellMenu from "../BufferHellMenu";
+import BufferHellGameOver from "../BufferHellGameOver";
 
 const CANVAS_HEIGHT = 500;
 const CANVAS_WIDTH = 500;
@@ -12,7 +13,6 @@ function BufferHell() {
   const status = useBufferHellStore((state) => state.status);
   const score = useBufferHellStore((state) => state.score);
   const highScore = useBufferHellStore((state) => state.highScore);
-  const resetGame = useBufferHellStore((state) => state.resetGame);
 
   const { bullets, player, tick } = useBufferHellEngine({
     canvasHeight: CANVAS_HEIGHT,
@@ -81,18 +81,7 @@ function BufferHell() {
           canvasWidth={CANVAS_WIDTH}
         />
         {status === "MENU" && <BufferHellMenu />}
-        {status == "GAME_OVER" && (
-          <div className="absolute inset-0 bg-red-800 flex flex-col items-center justify-center gap-2">
-            <h2 className="text-slate-200 text-3xl font-bold">KERNEL PANIC</h2>
-            <p className="text-slate-200">Final Score: {score}</p>
-            <button
-              className="bg-slate-200 text-red-800 px-4 py-2 rounded hover:cursor-pointer mt-2"
-              onClick={resetGame}
-            >
-              RETRY
-            </button>
-          </div>
-        )}
+        {status == "GAME_OVER" && <BufferHellGameOver score={score} />}
       </div>
     </article>
   );
