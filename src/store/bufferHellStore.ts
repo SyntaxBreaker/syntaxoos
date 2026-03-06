@@ -2,13 +2,11 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
 export type GameStatus = "MENU" | "PLAYING" | "GAME_OVER";
-type Difficulty = "EASY" | "NORMAL" | "HARD";
 
 interface BufferHellStore {
   status: GameStatus;
   score: number;
   highScore: number;
-  difficulty: Difficulty;
   startGame: () => void;
   endGame: () => void;
   addScore: (points: number) => void;
@@ -21,12 +19,10 @@ export const useBufferHellStore = create<BufferHellStore>()(
       status: "MENU",
       score: 0,
       highScore: 0,
-      difficulty: "NORMAL",
       startGame: () =>
         set({
           status: "PLAYING",
           score: 0,
-          difficulty: "NORMAL",
         }),
       endGame: () =>
         set((state) => ({
@@ -44,7 +40,6 @@ export const useBufferHellStore = create<BufferHellStore>()(
         set({
           status: "PLAYING",
           score: 0,
-          difficulty: "NORMAL",
         }),
     }),
     {
