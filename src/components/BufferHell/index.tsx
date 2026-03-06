@@ -12,7 +12,6 @@ const CANVAS_WIDTH = 500;
 function BufferHell() {
   const status = useBufferHellStore((state) => state.status);
   const score = useBufferHellStore((state) => state.score);
-  const highScore = useBufferHellStore((state) => state.highScore);
 
   const { bullets, player, tick } = useBufferHellEngine({
     canvasHeight: CANVAS_HEIGHT,
@@ -73,7 +72,7 @@ function BufferHell() {
 
   return (
     <article className="flex flex-col bg-slate-900 border border-slate-700 rounded-lg w-[500px] overflow-hidden p-2">
-      <BufferHellHeader score={score} highScore={highScore} />
+      <BufferHellHeader score={score} />
       <div className="relative">
         <BufferHellCanvas
           canvasRef={canvasRef}
