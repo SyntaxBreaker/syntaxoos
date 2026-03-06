@@ -18,6 +18,7 @@ function useBufferHellEngine({
   canvasHeight,
   canvasWidth,
 }: UseBufferHellEngineProps) {
+  const score = useBufferHellStore((state) => state.score);
   const status = useBufferHellStore((state) => state.status);
   const addScore = useBufferHellStore((state) => state.addScore);
   const endGame = useBufferHellStore((state) => state.endGame);
@@ -60,7 +61,9 @@ function useBufferHellEngine({
       if (keys["ArrowDown"] && player.current.y < canvasHeight - 10)
         player.current.y += playerSpeed;
 
-      if (frameCount.current % 5 === 0) {
+      const bulletSpawnRate = Math.max(2, 12 - Math.floor(score / 300));
+
+      if (frameCount.current % bulletSpawnRate === 0) {
         const angle = frameCount.current * 0.15;
         bullets.current.push({
           x: canvasWidth / 2,
@@ -93,7 +96,7 @@ function useBufferHellEngine({
           bullet.y < canvasHeight,
       );
     },
-    [status, addScore, endGame, canvasHeight, canvasWidth],
+    [status, addScore, endGame, canvasHeight, canvasWidth, score],
   );
 
   return { player, bullets, tick, frameCount };
