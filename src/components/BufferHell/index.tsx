@@ -3,6 +3,7 @@ import { useBufferHellStore } from "../../store/bufferHellStore";
 import useBufferHellEngine from "../../hooks/useBufferHellEngine";
 import BufferHellHeader from "../BufferHellHeader";
 import BufferHellCanvas from "../BufferHellCanvas";
+import BufferHellMenu from "../BufferHellMenu";
 
 const CANVAS_HEIGHT = 500;
 const CANVAS_WIDTH = 500;
@@ -11,7 +12,6 @@ function BufferHell() {
   const status = useBufferHellStore((state) => state.status);
   const score = useBufferHellStore((state) => state.score);
   const highScore = useBufferHellStore((state) => state.highScore);
-  const startGame = useBufferHellStore((state) => state.startGame);
   const resetGame = useBufferHellStore((state) => state.resetGame);
 
   const { bullets, player, tick } = useBufferHellEngine({
@@ -80,19 +80,7 @@ function BufferHell() {
           canvasHeight={CANVAS_HEIGHT}
           canvasWidth={CANVAS_WIDTH}
         />
-        {status === "MENU" && (
-          <div className="absolute inset-0 bg-slate-400 flex flex-col items-center justify-center gap-2">
-            <h2 className="text-slate-800 text-3xl font-bold font-mono">
-              BUFFER HELL
-            </h2>
-            <button
-              className="bg-slate-600 text-slate-200 px-8 py-4 rounded hover:cursor-pointer mt-2"
-              onClick={startGame}
-            >
-              START
-            </button>
-          </div>
-        )}
+        {status === "MENU" && <BufferHellMenu />}
         {status == "GAME_OVER" && (
           <div className="absolute inset-0 bg-red-800 flex flex-col items-center justify-center gap-2">
             <h2 className="text-slate-200 text-3xl font-bold">KERNEL PANIC</h2>
