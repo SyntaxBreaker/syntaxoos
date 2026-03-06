@@ -164,3 +164,24 @@ export const MORSE_CODE: { [key: string]: string } = {
   "'": ".----.",
   "!": "-.-.--",
 };
+
+export type GameStatus = "MENU" | "PLAYING" | "GAME_OVER";
+
+export const BUFFER_HELL_CONFIG = {
+  PLAYER: {
+    MARGIN: 10,
+    NORMAL_SPEED: 4,
+    RADIUS: 5,
+    SLOW_SPEED: 2,
+    START_Y_OFFSET: 100,
+  },
+  ENEMY: {
+    ANGLE_INCREMENT: 0.15,
+    INITIAL_SPAWN_RATE: 12,
+    MIN_SPAWN_RATE: 2,
+    RADIUS: 3,
+    SPAWN_ACCELERATION: 300,
+    SPAWN_Y: 150,
+    SPEED: 3,
+  },
+};

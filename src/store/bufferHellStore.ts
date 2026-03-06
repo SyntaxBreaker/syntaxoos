@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-
-export type GameStatus = "MENU" | "PLAYING" | "GAME_OVER";
+import type { GameStatus } from "../constants";
 
 interface BufferHellStore {
   status: GameStatus;

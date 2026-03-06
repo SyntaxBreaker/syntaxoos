@@ -13,7 +13,7 @@ function BufferHell() {
   const status = useBufferHellStore((state) => state.status);
   const score = useBufferHellStore((state) => state.score);
 
-  const { bullets, player, tick } = useBufferHellEngine({
+  const { enemies, player, tick } = useBufferHellEngine({
     canvasHeight: CANVAS_HEIGHT,
     canvasWidth: CANVAS_WIDTH,
   });
@@ -47,9 +47,9 @@ function BufferHell() {
         context.fill();
 
         context.fillStyle = "#FB7185";
-        bullets.current.forEach((bullet) => {
+        enemies.current.forEach((enemy) => {
           context.beginPath();
-          context.arc(bullet.x, bullet.y, bullet.radius, 0, Math.PI * 2);
+          context.arc(enemy.x, enemy.y, enemy.radius, 0, Math.PI * 2);
           context.fill();
         });
       }
