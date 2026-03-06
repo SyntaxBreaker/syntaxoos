@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { useBufferHellStore } from "../../store/bufferHellStore";
 import useBufferHellEngine from "../../hooks/useBufferHellEngine";
 import BufferHellHeader from "../BufferHellHeader";
+import BufferHellCanvas from "../BufferHellCanvas";
 
 const CANVAS_HEIGHT = 500;
 const CANVAS_WIDTH = 500;
@@ -74,7 +75,11 @@ function BufferHell() {
     <article className="flex flex-col bg-slate-900 border border-slate-700 rounded-lg w-[500px] overflow-hidden p-2">
       <BufferHellHeader score={score} highScore={highScore} />
       <div className="relative">
-        <canvas ref={canvasRef} width={CANVAS_WIDTH} height={CANVAS_HEIGHT} />
+        <BufferHellCanvas
+          canvasRef={canvasRef}
+          canvasHeight={CANVAS_HEIGHT}
+          canvasWidth={CANVAS_WIDTH}
+        />
         {status === "MENU" && (
           <div className="absolute inset-0 bg-slate-400 flex flex-col items-center justify-center gap-2">
             <h2 className="text-slate-800 text-3xl font-bold font-mono">
