@@ -50,7 +50,7 @@ function useBufferHellEngine({
 
       frameCount.current++;
 
-      const playerSpeed = 4;
+      const playerSpeed = keys["Shift"] ? 2 : 4;
       if (keys["ArrowLeft"] && player.current.x > 10)
         player.current.x -= playerSpeed;
       if (keys["ArrowRight"] && player.current.x < canvasWidth - 10)
