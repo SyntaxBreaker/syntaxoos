@@ -168,6 +168,10 @@ export const MORSE_CODE: { [key: string]: string } = {
 export type GameStatus = "MENU" | "PLAYING" | "GAME_OVER";
 
 export const BUFFER_HELL_CONFIG = {
+  CANVAS: {
+    HEIGHT: 500,
+    WIDTH: 500,
+  },
   PLAYER: {
     MARGIN: 10,
     NORMAL_SPEED: 4,
@@ -183,5 +187,10 @@ export const BUFFER_HELL_CONFIG = {
     SPAWN_ACCELERATION: 300,
     SPAWN_Y: 150,
     SPEED: 3,
+  },
+  BULLET: {
+    SPEED: 8,
+    RADIUS: 2,
+    FIRE_RATE: 10,
   },
 };

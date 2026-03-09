@@ -15,6 +15,12 @@ interface EnemyState {
   radius: number;
 }
 
+interface BulletState {
+  x: number;
+  y: number;
+  radius: number;
+}
+
 function useBufferHellEngine({
   canvasHeight,
   canvasWidth,
@@ -31,10 +37,13 @@ function useBufferHellEngine({
   });
   const enemies = useRef<EnemyState[]>([]);
   const frameCount = useRef(0);
+  const bullets = useRef<BulletState[]>([]);
+  const lastFireFrame = useRef(0);
 
   useEffect(() => {
     if (status === "PLAYING") {
       enemies.current = [];
+      bullets.current = [];
 
       player.current = {
         x: canvasWidth / 2,
@@ -43,6 +52,7 @@ function useBufferHellEngine({
       };
 
       frameCount.current = 0;
+      lastFireFrame.current = 0;
     }
   }, [status, canvasHeight, canvasWidth]);
 
@@ -51,30 +61,41 @@ function useBufferHellEngine({
       if (status !== "PLAYING") return;
 
       frameCount.current++;
+      const moveLeft = keys["a"] || keys["A"];
+      const moveRight = keys["d"] || keys["D"];
+      const moveUp = keys["w"] || keys["W"];
+      const moveDown = keys["s"] || keys["S"];
 
       const playerSpeed = keys["Shift"]
         ? BUFFER_HELL_CONFIG.PLAYER.SLOW_SPEED
         : BUFFER_HELL_CONFIG.PLAYER.NORMAL_SPEED;
-      if (
-        keys["ArrowLeft"] &&
-        player.current.x > BUFFER_HELL_CONFIG.PLAYER.MARGIN
-      )
+      if (moveLeft && player.current.x > BUFFER_HELL_CONFIG.PLAYER.MARGIN)
         player.current.x -= playerSpeed;
       if (
-        keys["ArrowRight"] &&
+        moveRight &&
         player.current.x < canvasWidth - BUFFER_HELL_CONFIG.PLAYER.MARGIN
       )
         player.current.x += playerSpeed;
-      if (
-        keys["ArrowUp"] &&
-        player.current.y > BUFFER_HELL_CONFIG.PLAYER.MARGIN
-      )
+      if (moveUp && player.current.y > BUFFER_HELL_CONFIG.PLAYER.MARGIN)
         player.current.y -= playerSpeed;
       if (
-        keys["ArrowDown"] &&
+        moveDown &&
         player.current.y < canvasHeight - BUFFER_HELL_CONFIG.PLAYER.MARGIN
       )
         player.current.y += playerSpeed;
+
+      if (
+        keys[" "] &&
+        frameCount.current - lastFireFrame.current >=
+          BUFFER_HELL_CONFIG.BULLET.FIRE_RATE
+      ) {
+        bullets.current.push({
+          x: player.current.x,
+          y: player.current.y - player.current.radius,
+          radius: BUFFER_HELL_CONFIG.BULLET.RADIUS,
+        });
+        lastFireFrame.current = frameCount.current;
+      }
 
       const enemySpawnRate = Math.max(
         BUFFER_HELL_CONFIG.ENEMY.MIN_SPAWN_RATE,
@@ -108,6 +129,24 @@ function useBufferHellEngine({
         }
       });
 
+      bullets.current.forEach((bullet) => {
+        bullet.y -= BUFFER_HELL_CONFIG.BULLET.SPEED;
+      });
+
+      bullets.current.forEach((bullet) => {
+        enemies.current.forEach((enemy) => {
+          const deltaX = bullet.x - enemy.x;
+          const deltaY = bullet.y - enemy.y;
+          const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+          if (distance < bullet.radius + enemy.radius) {
+            bullet.y = -100;
+            enemy.x = -1000;
+            addScore(10);
+          }
+        });
+      });
+
       enemies.current = enemies.current.filter(
         (enemy) =>
           enemy.x > -50 &&
@@ -115,11 +154,13 @@ function useBufferHellEngine({
           enemy.y > -50 &&
           enemy.y < canvasHeight,
       );
+
+      bullets.current = bullets.current.filter((bullet) => bullet.y > -20);
     },
     [status, addScore, endGame, canvasHeight, canvasWidth, score],
   );
 
-  return { player, enemies, tick, frameCount };
+  return { player, enemies, tick, bullets };
 }
 
 export default useBufferHellEngine;
