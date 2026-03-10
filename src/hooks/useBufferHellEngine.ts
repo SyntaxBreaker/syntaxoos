@@ -69,20 +69,21 @@ function useBufferHellEngine({
       const playerSpeed = keys["Shift"]
         ? BUFFER_HELL_CONFIG.PLAYER.SLOW_SPEED
         : BUFFER_HELL_CONFIG.PLAYER.NORMAL_SPEED;
-      if (moveLeft && player.current.x > BUFFER_HELL_CONFIG.PLAYER.MARGIN)
-        player.current.x -= playerSpeed;
-      if (
-        moveRight &&
-        player.current.x < canvasWidth - BUFFER_HELL_CONFIG.PLAYER.MARGIN
-      )
-        player.current.x += playerSpeed;
-      if (moveUp && player.current.y > BUFFER_HELL_CONFIG.PLAYER.MARGIN)
-        player.current.y -= playerSpeed;
-      if (
-        moveDown &&
-        player.current.y < canvasHeight - BUFFER_HELL_CONFIG.PLAYER.MARGIN
-      )
-        player.current.y += playerSpeed;
+
+      if (moveLeft) player.current.x -= playerSpeed;
+      if (moveRight) player.current.x += playerSpeed;
+      if (moveUp) player.current.y -= playerSpeed;
+      if (moveDown) player.current.y += playerSpeed;
+
+      const playerMargin = BUFFER_HELL_CONFIG.PLAYER.MARGIN;
+      player.current.x = Math.max(
+        playerMargin,
+        Math.min(canvasWidth - playerMargin, player.current.x),
+      );
+      player.current.y = Math.max(
+        playerMargin,
+        Math.min(canvasHeight - playerMargin, player.current.y),
+      );
 
       if (
         keys[" "] &&
