@@ -39,6 +39,7 @@ function useBufferHellEngine({
   const frameCount = useRef(0);
   const bullets = useRef<BulletState[]>([]);
   const lastFireFrame = useRef(0);
+  const weaponLevel = useRef(1);
 
   useEffect(() => {
     if (status === "PLAYING") {
@@ -53,6 +54,7 @@ function useBufferHellEngine({
 
       frameCount.current = 0;
       lastFireFrame.current = 0;
+      weaponLevel.current = 1;
     }
   }, [status, canvasHeight, canvasWidth]);
 
@@ -85,16 +87,48 @@ function useBufferHellEngine({
         Math.min(canvasHeight - playerMargin, player.current.y),
       );
 
+      if (score >= 500 && weaponLevel.current === 1) {
+        weaponLevel.current = 2;
+      }
+      if (score >= 1000 && weaponLevel.current === 2) {
+        weaponLevel.current = 3;
+      }
+
       if (
         keys[" "] &&
         frameCount.current - lastFireFrame.current >=
           BUFFER_HELL_CONFIG.BULLET.FIRE_RATE
       ) {
+        const { x, y, radius: playerRadius } = player.current;
+        const bulletRadius = BUFFER_HELL_CONFIG.BULLET.RADIUS;
+
         bullets.current.push({
-          x: player.current.x,
-          y: player.current.y - player.current.radius,
-          radius: BUFFER_HELL_CONFIG.BULLET.RADIUS,
+          x: x,
+          y: y - playerRadius,
+          radius: bulletRadius,
         });
+
+        if (weaponLevel.current === 2) {
+          bullets.current.push({
+            x: x + 15,
+            y: y - playerRadius + 5,
+            radius: bulletRadius,
+          });
+        }
+
+        if (weaponLevel.current > 2) {
+          bullets.current.push({
+            x: x - 15,
+            y: y - playerRadius + 5,
+            radius: bulletRadius,
+          });
+          bullets.current.push({
+            x: x + 15,
+            y: y - playerRadius + 5,
+            radius: bulletRadius,
+          });
+        }
+
         lastFireFrame.current = frameCount.current;
       }
 
