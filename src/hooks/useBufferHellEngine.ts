@@ -1,24 +1,11 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useBufferHellStore } from "../store/bufferHellStore";
 import { BUFFER_HELL_CONFIG } from "../constants";
+import type { BufferHellBullet, BufferHellEnemy } from "../types";
 
 interface UseBufferHellEngineProps {
   canvasHeight: number;
   canvasWidth: number;
-}
-
-interface EnemyState {
-  x: number;
-  y: number;
-  velocityX: number;
-  velocityY: number;
-  radius: number;
-}
-
-interface BulletState {
-  x: number;
-  y: number;
-  radius: number;
 }
 
 function useBufferHellEngine({
@@ -35,9 +22,9 @@ function useBufferHellEngine({
     y: canvasHeight - BUFFER_HELL_CONFIG.PLAYER.START_Y_OFFSET,
     radius: BUFFER_HELL_CONFIG.PLAYER.RADIUS,
   });
-  const enemies = useRef<EnemyState[]>([]);
+  const enemies = useRef<BufferHellEnemy[]>([]);
   const frameCount = useRef(0);
-  const bullets = useRef<BulletState[]>([]);
+  const bullets = useRef<BufferHellBullet[]>([]);
   const lastFireFrame = useRef(0);
   const weaponLevel = useRef(1);
 

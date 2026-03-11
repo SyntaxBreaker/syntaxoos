@@ -68,3 +68,17 @@ export type APIClientBodyContentType =
   | "application/json"
   | "application/xml"
   | "text/plain";
+
+export interface BufferHellEnemy {
+  x: number;
+  y: number;
+  velocityX: number;
+  velocityY: number;
+  radius: number;
+}
+
+export interface BufferHellBullet {
+  x: number;
+  y: number;
+  radius: number;
+}
