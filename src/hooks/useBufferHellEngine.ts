@@ -3,6 +3,7 @@ import { useBufferHellStore } from "../store/bufferHellStore";
 import { BUFFER_HELL_CONFIG } from "../constants";
 import type { BufferHellBullet, BufferHellEnemy } from "../types";
 import { handlePlayerMovement } from "../utils/bufferHell/movement";
+import { createBullets } from "../utils/bufferHell/combat";
 
 interface UseBufferHellEngineProps {
   canvasHeight: number;
@@ -71,35 +72,14 @@ function useBufferHellEngine({
         frameCount.current - lastFireFrame.current >=
           BUFFER_HELL_CONFIG.BULLET.FIRE_RATE
       ) {
-        const { x, y, radius: playerRadius } = player.current;
-        const bulletRadius = BUFFER_HELL_CONFIG.BULLET.RADIUS;
-
-        bullets.current.push({
-          x: x,
-          y: y - playerRadius,
-          radius: bulletRadius,
+        const newBullets = createBullets({
+          playerX: player.current.x,
+          playerY: player.current.y,
+          playerRadius: player.current.radius,
+          weaponLevel: weaponLevel,
         });
 
-        if (weaponLevel.current === 2) {
-          bullets.current.push({
-            x: x + 15,
-            y: y - playerRadius + 5,
-            radius: bulletRadius,
-          });
-        }
-
-        if (weaponLevel.current > 2) {
-          bullets.current.push({
-            x: x - 15,
-            y: y - playerRadius + 5,
-            radius: bulletRadius,
-          });
-          bullets.current.push({
-            x: x + 15,
-            y: y - playerRadius + 5,
-            radius: bulletRadius,
-          });
-        }
+        bullets.current.push(...newBullets);
 
         lastFireFrame.current = frameCount.current;
       }
