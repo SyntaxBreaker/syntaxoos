@@ -6,6 +6,7 @@ import BufferHellCanvas from "../BufferHellCanvas";
 import BufferHellMenu from "../BufferHellMenu";
 import BufferHellGameOver from "../BufferHellGameOver";
 import { BUFFER_HELL_CONFIG } from "../../constants";
+import { clearCanvas, drawCircle } from "../../utils/bufferHell/draw";
 
 function BufferHell() {
   const status = useBufferHellStore((state) => state.status);
@@ -29,37 +30,21 @@ function BufferHell() {
       tick(keys);
 
       if (context) {
-        context.fillStyle = "#0F172A";
-        context.fillRect(
-          0,
-          0,
-          BUFFER_HELL_CONFIG.CANVAS.WIDTH,
-          BUFFER_HELL_CONFIG.CANVAS.HEIGHT,
-        );
-
-        context.fillStyle = "#38BDF8";
-        context.beginPath();
-        context.arc(
-          player.current.x,
-          player.current.y,
-          player.current.radius,
-          0,
-          Math.PI * 2,
-        );
-        context.fill();
-
-        context.fillStyle = "#FB7185";
-        enemies.current.forEach((enemy) => {
-          context.beginPath();
-          context.arc(enemy.x, enemy.y, enemy.radius, 0, Math.PI * 2);
-          context.fill();
+        clearCanvas({
+          context: context,
+          width: BUFFER_HELL_CONFIG.CANVAS.WIDTH,
+          height: BUFFER_HELL_CONFIG.CANVAS.HEIGHT,
+          color: "#0F172A",
         });
 
-        context.fillStyle = "#38BDF8";
+        drawCircle({ context: context, ...player.current, color: "#38BDF8" });
+
+        enemies.current.forEach((enemy) => {
+          drawCircle({ context: context, ...enemy, color: "#FB7185" });
+        });
+
         bullets.current.forEach((bullet) => {
-          context.beginPath();
-          context.arc(bullet.x, bullet.y, bullet.radius, 0, Math.PI * 2);
-          context.fill();
+          drawCircle({ context: context, ...bullet, color: "#38BDF8" });
         });
       }
       frameId = requestAnimationFrame(render);

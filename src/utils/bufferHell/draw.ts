@@ -1,0 +1,38 @@
+interface ClearCanvasProps {
+  context: CanvasRenderingContext2D;
+  width: number;
+  height: number;
+  color: string;
+}
+
+interface DrawCircleProps {
+  context: CanvasRenderingContext2D;
+  x: number;
+  y: number;
+  radius: number;
+  color: string;
+}
+
+export const clearCanvas = ({
+  context,
+  width,
+  height,
+  color,
+}: ClearCanvasProps) => {
+  context.fillStyle = color;
+  context.fillRect(0, 0, width, height);
+};
+
+export const drawCircle = ({
+  context,
+  x,
+  y,
+  radius,
+  color,
+}: DrawCircleProps) => {
+  context.fillStyle = color;
+  context.beginPath();
+  context.arc(x, y, radius, 0, Math.PI * 2);
+  context.fill();
+  context.closePath();
+};
