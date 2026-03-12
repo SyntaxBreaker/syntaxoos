@@ -5,6 +5,7 @@ import type { BufferHellBullet, BufferHellEnemy } from "../types";
 import { handlePlayerMovement } from "../utils/bufferHell/movement";
 import { createBullets } from "../utils/bufferHell/combat";
 import { createEnemy, getEnemySpawnRate } from "../utils/bufferHell/spawner";
+import { checkCircleCollision } from "../utils/bufferHell/collision";
 
 interface UseBufferHellEngineProps {
   canvasHeight: number;
@@ -100,11 +101,7 @@ function useBufferHellEngine({
         enemy.x += enemy.velocityX;
         enemy.y += enemy.velocityY;
 
-        const deltaX = enemy.x - player.current.x;
-        const deltaY = enemy.y - player.current.y;
-        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-        if (distance < enemy.radius + player.current.radius) {
+        if (checkCircleCollision({ circleA: enemy, circleB: player.current })) {
           endGame();
         }
       });
@@ -115,11 +112,7 @@ function useBufferHellEngine({
 
       bullets.current.forEach((bullet) => {
         enemies.current.forEach((enemy) => {
-          const deltaX = bullet.x - enemy.x;
-          const deltaY = bullet.y - enemy.y;
-          const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-          if (distance < bullet.radius + enemy.radius) {
+          if (checkCircleCollision({ circleA: bullet, circleB: enemy })) {
             bullet.y = -100;
             enemy.x = -1000;
             addScore(10);
