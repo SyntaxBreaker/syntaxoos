@@ -1,9 +1,9 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import type { GameStatus } from "../constants";
+import type { BufferHellGameStatus } from "../types";
 
 interface BufferHellStore {
-  status: GameStatus;
+  status: BufferHellGameStatus;
   score: number;
   highScore: number;
   startGame: () => void;

@@ -165,8 +165,6 @@ export const MORSE_CODE: { [key: string]: string } = {
   "!": "-.-.--",
 };
 
-export type GameStatus = "MENU" | "PLAYING" | "GAME_OVER";
-
 export const BUFFER_HELL_CONFIG = {
   CANVAS: {
     HEIGHT: 500,

@@ -11,13 +11,13 @@ function BufferHell() {
   const status = useBufferHellStore((state) => state.status);
   const score = useBufferHellStore((state) => state.score);
 
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const keys = useRef<Record<string, boolean>>({});
+
   const { enemies, player, tick, bullets } = useBufferHellEngine({
     canvasHeight: BUFFER_HELL_CONFIG.CANVAS.HEIGHT,
     canvasWidth: BUFFER_HELL_CONFIG.CANVAS.WIDTH,
   });
-
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const keys = useRef<Record<string, boolean>>({});
 
   useEffect(() => {
     if (status !== "PLAYING") return;
@@ -26,7 +26,7 @@ function BufferHell() {
     let frameId: number;
 
     const render = () => {
-      tick(keys.current);
+      tick(keys);
 
       if (context) {
         context.fillStyle = "#0F172A";

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef } from "react";
 import { useBufferHellStore } from "../store/bufferHellStore";
 import { BUFFER_HELL_CONFIG } from "../constants";
 import type { BufferHellBullet, BufferHellEnemy } from "../types";
+import { handlePlayerMovement } from "../utils/bufferHell/movement";
 
 interface UseBufferHellEngineProps {
   canvasHeight: number;
@@ -46,33 +47,17 @@ function useBufferHellEngine({
   }, [status, canvasHeight, canvasWidth]);
 
   const tick = useCallback(
-    (keys: Record<string, boolean>) => {
-      if (status !== "PLAYING") return;
+    (keys: React.RefObject<Record<string, boolean>>) => {
+      if (status !== "PLAYING" || !keys) return;
 
       frameCount.current++;
-      const moveLeft = keys["a"] || keys["A"];
-      const moveRight = keys["d"] || keys["D"];
-      const moveUp = keys["w"] || keys["W"];
-      const moveDown = keys["s"] || keys["S"];
 
-      const playerSpeed = keys["Shift"]
-        ? BUFFER_HELL_CONFIG.PLAYER.SLOW_SPEED
-        : BUFFER_HELL_CONFIG.PLAYER.NORMAL_SPEED;
-
-      if (moveLeft) player.current.x -= playerSpeed;
-      if (moveRight) player.current.x += playerSpeed;
-      if (moveUp) player.current.y -= playerSpeed;
-      if (moveDown) player.current.y += playerSpeed;
-
-      const playerMargin = BUFFER_HELL_CONFIG.PLAYER.MARGIN;
-      player.current.x = Math.max(
-        playerMargin,
-        Math.min(canvasWidth - playerMargin, player.current.x),
-      );
-      player.current.y = Math.max(
-        playerMargin,
-        Math.min(canvasHeight - playerMargin, player.current.y),
-      );
+      handlePlayerMovement({
+        keysRef: keys,
+        playerRef: player,
+        canvasWidth: canvasWidth,
+        canvasHeight: canvasHeight,
+      });
 
       if (score >= 500 && weaponLevel.current === 1) {
         weaponLevel.current = 2;
@@ -82,7 +67,7 @@ function useBufferHellEngine({
       }
 
       if (
-        keys[" "] &&
+        keys.current[" "] &&
         frameCount.current - lastFireFrame.current >=
           BUFFER_HELL_CONFIG.BULLET.FIRE_RATE
       ) {
