@@ -4,6 +4,7 @@ import { BUFFER_HELL_CONFIG } from "../constants";
 import type { BufferHellBullet, BufferHellEnemy } from "../types";
 import { handlePlayerMovement } from "../utils/bufferHell/movement";
 import { createBullets } from "../utils/bufferHell/combat";
+import { createEnemy, getEnemySpawnRate } from "../utils/bufferHell/spawner";
 
 interface UseBufferHellEngineProps {
   canvasHeight: number;
@@ -84,22 +85,14 @@ function useBufferHellEngine({
         lastFireFrame.current = frameCount.current;
       }
 
-      const enemySpawnRate = Math.max(
-        BUFFER_HELL_CONFIG.ENEMY.MIN_SPAWN_RATE,
-        BUFFER_HELL_CONFIG.ENEMY.INITIAL_SPAWN_RATE -
-          Math.floor(score / BUFFER_HELL_CONFIG.ENEMY.SPAWN_ACCELERATION),
-      );
+      const enemySpawnRate = getEnemySpawnRate({ score: score });
 
       if (frameCount.current % enemySpawnRate === 0) {
-        const angle =
-          frameCount.current * BUFFER_HELL_CONFIG.ENEMY.ANGLE_INCREMENT;
-        enemies.current.push({
-          x: canvasWidth / 2,
-          y: BUFFER_HELL_CONFIG.ENEMY.SPAWN_Y,
-          velocityX: Math.cos(angle) * BUFFER_HELL_CONFIG.ENEMY.SPEED,
-          velocityY: Math.sin(angle) * BUFFER_HELL_CONFIG.ENEMY.SPEED,
-          radius: BUFFER_HELL_CONFIG.ENEMY.RADIUS,
+        const newEnemy = createEnemy({
+          canvasWidth: canvasWidth,
+          frameCount: frameCount,
         });
+        enemies.current.push(newEnemy);
         addScore(1);
       }
 
