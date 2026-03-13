@@ -6,6 +6,7 @@ import { handlePlayerMovement } from "../utils/bufferHell/movement";
 import { createBullets } from "../utils/bufferHell/combat";
 import { createEnemy, getEnemySpawnRate } from "../utils/bufferHell/spawner";
 import { checkCircleCollision } from "../utils/bufferHell/collision";
+import { getWeaponLevel } from "../utils/bufferHell/weapon";
 
 interface UseBufferHellEngineProps {
   canvasHeight: number;
@@ -62,12 +63,7 @@ function useBufferHellEngine({
         canvasHeight: canvasHeight,
       });
 
-      if (score >= 500 && weaponLevel.current === 1) {
-        weaponLevel.current = 2;
-      }
-      if (score >= 1000 && weaponLevel.current === 2) {
-        weaponLevel.current = 3;
-      }
+      weaponLevel.current = getWeaponLevel({ score: score });
 
       if (
         keys.current[" "] &&
