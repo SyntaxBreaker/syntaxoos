@@ -7,6 +7,7 @@ import { createBullets } from "../utils/bufferHell/combat";
 import { createEnemy, getEnemySpawnRate } from "../utils/bufferHell/spawner";
 import { checkCircleCollision } from "../utils/bufferHell/collision";
 import { getWeaponLevel } from "../utils/bufferHell/weapon";
+import { cleanUpEntities } from "../utils/bufferHell/physics";
 
 interface UseBufferHellEngineProps {
   canvasHeight: number;
@@ -116,15 +117,19 @@ function useBufferHellEngine({
         });
       });
 
-      enemies.current = enemies.current.filter(
-        (enemy) =>
-          enemy.x > -50 &&
-          enemy.x < canvasWidth &&
-          enemy.y > -50 &&
-          enemy.y < canvasHeight,
-      );
+      cleanUpEntities({
+        entities: enemies,
+        height: BUFFER_HELL_CONFIG.CANVAS.HEIGHT,
+        width: BUFFER_HELL_CONFIG.CANVAS.WIDTH,
+        margin: 50,
+      });
 
-      bullets.current = bullets.current.filter((bullet) => bullet.y > -20);
+      cleanUpEntities({
+        entities: bullets,
+        height: BUFFER_HELL_CONFIG.CANVAS.HEIGHT,
+        width: BUFFER_HELL_CONFIG.CANVAS.WIDTH,
+        margin: 50,
+      });
     },
     [status, addScore, endGame, canvasHeight, canvasWidth, score],
   );
