@@ -6,7 +6,13 @@ import BufferHellCanvas from "../BufferHellCanvas";
 import BufferHellMenu from "../BufferHellMenu";
 import BufferHellGameOver from "../BufferHellGameOver";
 import { BUFFER_HELL_CONFIG } from "../../constants";
-import { clearCanvas, drawCircle } from "../../utils/bufferHell/draw";
+import {
+  clearCanvas,
+  drawCircle,
+  drawPlayer,
+} from "../../utils/bufferHell/draw";
+import playerImageSource from "../../assets/bufferHell/player.png";
+import useImageLoader from "../../hooks/useImageLoader";
 
 function BufferHell() {
   const status = useBufferHellStore((state) => state.status);
@@ -14,6 +20,7 @@ function BufferHell() {
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const keys = useRef<Record<string, boolean>>({});
+  const playerSprite = useImageLoader({ imageUrl: playerImageSource });
 
   const { enemies, player, tick, bullets } = useBufferHellEngine({
     canvasHeight: BUFFER_HELL_CONFIG.CANVAS.HEIGHT,
@@ -37,7 +44,13 @@ function BufferHell() {
           color: "#0F172A",
         });
 
-        drawCircle({ context: context, ...player.current, color: "#38BDF8" });
+        drawPlayer({
+          context,
+          radius: player.current.radius,
+          sprite: playerSprite,
+          x: player.current.x,
+          y: player.current.y,
+        });
 
         enemies.current.forEach((enemy) => {
           drawCircle({ context: context, ...enemy, color: "#FB7185" });
