@@ -6,14 +6,11 @@ import BufferHellCanvas from "../BufferHellCanvas";
 import BufferHellMenu from "../BufferHellMenu";
 import BufferHellGameOver from "../BufferHellGameOver";
 import { BUFFER_HELL_CONFIG } from "../../constants";
-import {
-  clearCanvas,
-  drawCircle,
-  renderSprite,
-} from "../../utils/bufferHell/draw";
+import { clearCanvas, renderSprite } from "../../utils/bufferHell/draw";
 import useImageLoader from "../../hooks/useImageLoader";
 import playerImageSource from "../../assets/bufferHell/player.png";
 import enemyImageSource from "../../assets/bufferHell/enemy.png";
+import bulletImageSource from "../../assets/bufferHell/bullet.png";
 
 function BufferHell() {
   const status = useBufferHellStore((state) => state.status);
@@ -23,6 +20,7 @@ function BufferHell() {
   const keys = useRef<Record<string, boolean>>({});
   const playerSprite = useImageLoader({ imageUrl: playerImageSource });
   const enemySprite = useImageLoader({ imageUrl: enemyImageSource });
+  const bulletSprite = useImageLoader({ imageUrl: bulletImageSource });
 
   const { enemies, player, tick, bullets } = useBufferHellEngine({
     canvasHeight: BUFFER_HELL_CONFIG.CANVAS.HEIGHT,
@@ -68,8 +66,16 @@ function BufferHell() {
           });
         });
 
-        bullets.current.forEach((bullet) => {
-          drawCircle({ context: context, ...bullet, color: "#38BDF8" });
+        bullets.current.forEach(({ radius, x, y }) => {
+          renderSprite({
+            context,
+            fallbackColor: "#38BDF8",
+            radius,
+            sprite: bulletSprite,
+            x,
+            y,
+            scale: 4,
+          });
         });
       }
       frameId = requestAnimationFrame(render);

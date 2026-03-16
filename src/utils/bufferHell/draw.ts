@@ -33,20 +33,6 @@ export const clearCanvas = ({
   context.fillRect(0, 0, width, height);
 };
 
-export const drawCircle = ({
-  context,
-  x,
-  y,
-  radius,
-  color,
-}: DrawCircleProps) => {
-  context.fillStyle = color;
-  context.beginPath();
-  context.arc(x, y, radius, 0, Math.PI * 2);
-  context.fill();
-  context.closePath();
-};
-
 export const renderSprite = ({
   context,
   fallbackColor,
