@@ -13,12 +13,14 @@ interface DrawCircleProps {
   color: string;
 }
 
-interface DrawPlayerProps {
+interface RenderSpriteProps {
   context: CanvasRenderingContext2D;
   x: number;
   y: number;
   radius: number;
   sprite: HTMLImageElement | null;
+  scale?: number;
+  fallbackColor: string;
 }
 
 export const clearCanvas = ({
@@ -45,22 +47,24 @@ export const drawCircle = ({
   context.closePath();
 };
 
-export const drawPlayer = ({
+export const renderSprite = ({
   context,
+  fallbackColor,
   radius,
+  scale = 2.5,
   sprite,
   x,
   y,
-}: DrawPlayerProps) => {
+}: RenderSpriteProps) => {
   if (!sprite) {
+    context.fillStyle = fallbackColor;
     context.beginPath();
     context.arc(x, y, radius, 0, Math.PI * 2);
-    context.fillStyle = "#38BDF8";
     context.fill();
     context.closePath();
     return;
   }
 
-  const size = radius * 2.5;
+  const size = radius * scale;
   context.drawImage(sprite, x - size / 2, y - size / 2, size, size);
 };

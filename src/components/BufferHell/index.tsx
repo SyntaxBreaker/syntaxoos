@@ -9,7 +9,7 @@ import { BUFFER_HELL_CONFIG } from "../../constants";
 import {
   clearCanvas,
   drawCircle,
-  drawPlayer,
+  renderSprite,
 } from "../../utils/bufferHell/draw";
 import playerImageSource from "../../assets/bufferHell/player.png";
 import useImageLoader from "../../hooks/useImageLoader";
@@ -44,9 +44,11 @@ function BufferHell() {
           color: "#0F172A",
         });
 
-        drawPlayer({
+        renderSprite({
           context,
+          fallbackColor: "38BDF8",
           radius: player.current.radius,
+          scale: 4,
           sprite: playerSprite,
           x: player.current.x,
           y: player.current.y,
