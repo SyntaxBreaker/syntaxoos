@@ -11,8 +11,9 @@ import {
   drawCircle,
   renderSprite,
 } from "../../utils/bufferHell/draw";
-import playerImageSource from "../../assets/bufferHell/player.png";
 import useImageLoader from "../../hooks/useImageLoader";
+import playerImageSource from "../../assets/bufferHell/player.png";
+import enemyImageSource from "../../assets/bufferHell/enemy.png";
 
 function BufferHell() {
   const status = useBufferHellStore((state) => state.status);
@@ -21,6 +22,7 @@ function BufferHell() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const keys = useRef<Record<string, boolean>>({});
   const playerSprite = useImageLoader({ imageUrl: playerImageSource });
+  const enemySprite = useImageLoader({ imageUrl: enemyImageSource });
 
   const { enemies, player, tick, bullets } = useBufferHellEngine({
     canvasHeight: BUFFER_HELL_CONFIG.CANVAS.HEIGHT,
@@ -54,8 +56,16 @@ function BufferHell() {
           y: player.current.y,
         });
 
-        enemies.current.forEach((enemy) => {
-          drawCircle({ context: context, ...enemy, color: "#FB7185" });
+        enemies.current.forEach(({ radius, x, y }) => {
+          renderSprite({
+            context,
+            fallbackColor: "#FB7185",
+            radius,
+            scale: 4,
+            sprite: enemySprite,
+            x,
+            y,
+          });
         });
 
         bullets.current.forEach((bullet) => {
