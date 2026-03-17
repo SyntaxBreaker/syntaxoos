@@ -166,29 +166,29 @@ export const MORSE_CODE: { [key: string]: string } = {
 };
 
 export const BUFFER_HELL_CONFIG = {
-  CANVAS: {
-    HEIGHT: 500,
-    WIDTH: 500,
+  canvas: {
+    height: 500,
+    width: 500,
   },
-  PLAYER: {
-    MARGIN: 10,
-    NORMAL_SPEED: 4,
-    RADIUS: 5,
-    SLOW_SPEED: 2,
-    START_Y_OFFSET: 100,
+  player: {
+    margin: 10,
+    normalSpeed: 4,
+    radius: 5,
+    slowSpeed: 2,
+    startYOffset: 100,
   },
-  ENEMY: {
-    ANGLE_INCREMENT: 0.15,
-    INITIAL_SPAWN_RATE: 12,
-    MIN_SPAWN_RATE: 2,
-    RADIUS: 3,
-    SPAWN_ACCELERATION: 300,
-    SPAWN_Y: 150,
-    SPEED: 3,
+  enemy: {
+    angleIncrement: 0.15,
+    initialSpawnRate: 12,
+    minSpawnRate: 2,
+    radius: 3,
+    spawnAcceleration: 300,
+    spawnY: 150,
+    speed: 3,
   },
-  BULLET: {
-    SPEED: 8,
-    RADIUS: 2,
-    FIRE_RATE: 10,
+  bullet: {
+    speed: 8,
+    radius: 2,
+    fireRate: 10,
   },
 };

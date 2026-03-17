@@ -14,7 +14,7 @@ export const createBullets = ({
   playerRadius,
   weaponLevel,
 }: CreateBulletsProps): BufferHellBullet[] => {
-  const bulletRadius = BUFFER_HELL_CONFIG.BULLET.RADIUS;
+  const bulletRadius = BUFFER_HELL_CONFIG.bullet.radius;
   const newBullets: BufferHellBullet[] = [];
 
   newBullets.push({

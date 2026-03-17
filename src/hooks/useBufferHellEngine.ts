@@ -25,8 +25,8 @@ function useBufferHellEngine({
 
   const player = useRef({
     x: canvasWidth / 2,
-    y: canvasHeight - BUFFER_HELL_CONFIG.PLAYER.START_Y_OFFSET,
-    radius: BUFFER_HELL_CONFIG.PLAYER.RADIUS,
+    y: canvasHeight - BUFFER_HELL_CONFIG.player.startYOffset,
+    radius: BUFFER_HELL_CONFIG.player.radius,
   });
   const enemies = useRef<BufferHellEnemy[]>([]);
   const frameCount = useRef(0);
@@ -41,8 +41,8 @@ function useBufferHellEngine({
 
       player.current = {
         x: canvasWidth / 2,
-        y: canvasHeight - BUFFER_HELL_CONFIG.PLAYER.START_Y_OFFSET,
-        radius: BUFFER_HELL_CONFIG.PLAYER.RADIUS,
+        y: canvasHeight - BUFFER_HELL_CONFIG.player.startYOffset,
+        radius: BUFFER_HELL_CONFIG.player.radius,
       };
 
       frameCount.current = 0;
@@ -69,7 +69,7 @@ function useBufferHellEngine({
       if (
         keys.current[" "] &&
         frameCount.current - lastFireFrame.current >=
-          BUFFER_HELL_CONFIG.BULLET.FIRE_RATE
+          BUFFER_HELL_CONFIG.bullet.fireRate
       ) {
         const newBullets = createBullets({
           playerX: player.current.x,
@@ -104,7 +104,7 @@ function useBufferHellEngine({
       });
 
       bullets.current.forEach((bullet) => {
-        bullet.y -= BUFFER_HELL_CONFIG.BULLET.SPEED;
+        bullet.y -= BUFFER_HELL_CONFIG.bullet.speed;
       });
 
       bullets.current.forEach((bullet) => {
@@ -119,15 +119,15 @@ function useBufferHellEngine({
 
       cleanUpEntities({
         entities: enemies,
-        height: BUFFER_HELL_CONFIG.CANVAS.HEIGHT,
-        width: BUFFER_HELL_CONFIG.CANVAS.WIDTH,
+        height: BUFFER_HELL_CONFIG.canvas.height,
+        width: BUFFER_HELL_CONFIG.canvas.width,
         margin: 50,
       });
 
       cleanUpEntities({
         entities: bullets,
-        height: BUFFER_HELL_CONFIG.CANVAS.HEIGHT,
-        width: BUFFER_HELL_CONFIG.CANVAS.WIDTH,
+        height: BUFFER_HELL_CONFIG.canvas.height,
+        width: BUFFER_HELL_CONFIG.canvas.width,
         margin: 50,
       });
     },

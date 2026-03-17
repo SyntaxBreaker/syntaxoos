@@ -23,8 +23,8 @@ function BufferHell() {
   const bulletSprite = useImageLoader({ imageUrl: bulletImageSource });
 
   const { enemies, player, tick, bullets } = useBufferHellEngine({
-    canvasHeight: BUFFER_HELL_CONFIG.CANVAS.HEIGHT,
-    canvasWidth: BUFFER_HELL_CONFIG.CANVAS.WIDTH,
+    canvasHeight: BUFFER_HELL_CONFIG.canvas.height,
+    canvasWidth: BUFFER_HELL_CONFIG.canvas.width,
   });
 
   useEffect(() => {
@@ -39,8 +39,8 @@ function BufferHell() {
       if (context) {
         clearCanvas({
           context: context,
-          width: BUFFER_HELL_CONFIG.CANVAS.WIDTH,
-          height: BUFFER_HELL_CONFIG.CANVAS.HEIGHT,
+          width: BUFFER_HELL_CONFIG.canvas.width,
+          height: BUFFER_HELL_CONFIG.canvas.height,
           color: "#0F172A",
         });
 
@@ -112,8 +112,8 @@ function BufferHell() {
       <div className="relative">
         <BufferHellCanvas
           canvasRef={canvasRef}
-          canvasHeight={BUFFER_HELL_CONFIG.CANVAS.HEIGHT}
-          canvasWidth={BUFFER_HELL_CONFIG.CANVAS.WIDTH}
+          canvasHeight={BUFFER_HELL_CONFIG.canvas.height}
+          canvasWidth={BUFFER_HELL_CONFIG.canvas.width}
         />
         {status === "MENU" && <BufferHellMenu />}
         {status == "GAME_OVER" && <BufferHellGameOver score={score} />}

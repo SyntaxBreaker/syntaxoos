@@ -15,8 +15,8 @@ export const handlePlayerMovement = ({
   canvasHeight,
 }: HandlePlayerMovementProps) => {
   const playerSpeed = keysRef.current["Shift"]
-    ? BUFFER_HELL_CONFIG.PLAYER.SLOW_SPEED
-    : BUFFER_HELL_CONFIG.PLAYER.NORMAL_SPEED;
+    ? BUFFER_HELL_CONFIG.player.slowSpeed
+    : BUFFER_HELL_CONFIG.player.normalSpeed;
 
   if (keysRef.current["a"] || keysRef.current["A"])
     playerRef.current.x -= playerSpeed;
@@ -27,7 +27,7 @@ export const handlePlayerMovement = ({
   if (keysRef.current["s"] || keysRef.current["S"])
     playerRef.current.y += playerSpeed;
 
-  const playerMargin = BUFFER_HELL_CONFIG.PLAYER.MARGIN;
+  const playerMargin = BUFFER_HELL_CONFIG.player.margin;
   playerRef.current.x = Math.max(
     playerMargin,
     Math.min(canvasWidth - playerMargin, playerRef.current.x),
