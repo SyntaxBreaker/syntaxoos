@@ -15,7 +15,7 @@ import TaskManager from "./components/TaskManager";
 import Terminal from "./components/Terminal";
 import TextReader from "./components/TextReader";
 import apiIcon from "./assets/icons/api.svg";
-import bufferIcon from "./assets/icons/buffer.svg";
+import bufferHellIcon from "./assets/icons/bufferHell.svg";
 import calculatorIcon from "./assets/icons/calculator.svg";
 import contactIcon from "./assets/icons/contact.svg";
 import dictionaryIcon from "./assets/icons/dictionary.svg";
@@ -151,7 +151,7 @@ export const APPS: App[] = [
     id: WINDOW_ID.bufferHell,
     windowName: "Buffer Hell",
     component: <BufferHell />,
-    iconSrc: bufferIcon,
+    iconSrc: bufferHellIcon,
     showOnDesktop: true,
   },
 ] as const;
