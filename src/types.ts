@@ -69,7 +69,7 @@ export type APIClientBodyContentType =
   | "application/xml"
   | "text/plain";
 
-export type BufferHellGameStatus = "MENU" | "PLAYING" | "GAME_OVER";
+export type BufferHellGameStatus = "menu" | "playing" | "gameOver";
 
 export interface BufferHellPlayer {
   x: number;

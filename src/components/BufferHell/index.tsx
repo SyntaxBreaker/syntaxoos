@@ -28,7 +28,7 @@ function BufferHell() {
   });
 
   useEffect(() => {
-    if (status !== "PLAYING") return;
+    if (status !== "playing") return;
 
     const context = canvasRef.current?.getContext("2d");
     let frameId: number;
@@ -115,8 +115,8 @@ function BufferHell() {
           canvasHeight={BUFFER_HELL_CONFIG.canvas.height}
           canvasWidth={BUFFER_HELL_CONFIG.canvas.width}
         />
-        {status === "MENU" && <BufferHellMenu />}
-        {status == "GAME_OVER" && <BufferHellGameOver score={score} />}
+        {status === "menu" && <BufferHellMenu />}
+        {status == "gameOver" && <BufferHellGameOver score={score} />}
       </div>
     </article>
   );

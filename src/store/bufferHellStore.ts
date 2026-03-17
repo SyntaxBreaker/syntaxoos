@@ -15,17 +15,17 @@ interface BufferHellStore {
 export const useBufferHellStore = create<BufferHellStore>()(
   persist(
     (set) => ({
-      status: "MENU",
+      status: "menu",
       score: 0,
       highScore: 0,
       startGame: () =>
         set({
-          status: "PLAYING",
+          status: "playing",
           score: 0,
         }),
       endGame: () =>
         set((state) => ({
-          status: "GAME_OVER",
+          status: "gameOver",
           highScore: Math.max(state.score, state.highScore),
         })),
       addScore: (points) =>
@@ -37,7 +37,7 @@ export const useBufferHellStore = create<BufferHellStore>()(
         }),
       resetGame: () =>
         set({
-          status: "PLAYING",
+          status: "playing",
           score: 0,
         }),
     }),

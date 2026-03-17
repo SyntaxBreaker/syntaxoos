@@ -35,7 +35,7 @@ function useBufferHellEngine({
   const weaponLevel = useRef(1);
 
   useEffect(() => {
-    if (status === "PLAYING") {
+    if (status === "playing") {
       enemies.current = [];
       bullets.current = [];
 
@@ -53,7 +53,7 @@ function useBufferHellEngine({
 
   const tick = useCallback(
     (keys: React.RefObject<Record<string, boolean>>) => {
-      if (status !== "PLAYING" || !keys) return;
+      if (status !== "playing" || !keys) return;
 
       frameCount.current++;
 
