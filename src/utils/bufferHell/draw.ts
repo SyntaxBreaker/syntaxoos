@@ -5,14 +5,6 @@ interface ClearCanvasProps {
   color: string;
 }
 
-interface DrawCircleProps {
-  context: CanvasRenderingContext2D;
-  x: number;
-  y: number;
-  radius: number;
-  color: string;
-}
-
 interface RenderSpriteProps {
   context: CanvasRenderingContext2D;
   x: number;
