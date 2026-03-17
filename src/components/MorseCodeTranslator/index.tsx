@@ -9,7 +9,7 @@ function MorseCodeTranslator() {
     event.preventDefault();
 
     const morseCode = input
-      .toUpperCase()
+      .toLocaleLowerCase()
       .split(/\s+/)
       .map((word) =>
         word
