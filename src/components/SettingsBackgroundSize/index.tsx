@@ -25,9 +25,9 @@ function SettingsBackgroundSize() {
         defaultValue={currentBackgroundSize}
         onChange={handleBackgroundSizeChange}
       >
-        <option value="Auto">Auto</option>
-        <option value="Cover">Cover</option>
-        <option value="Full">Full</option>
+        <option value="auto">Auto</option>
+        <option value="cover">Cover</option>
+        <option value="full">Full</option>
       </select>
     </section>
   );

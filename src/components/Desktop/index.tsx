@@ -23,7 +23,7 @@ function Desktop() {
   const desktopStyle = {
     backgroundImage: `url('${currentWallpaper}')`,
     backgroundSize: `${
-      backgroundSize === "Full" ? "100% 100%" : backgroundSize
+      backgroundSize === "full" ? "100% 100%" : backgroundSize
     }`,
   };
 

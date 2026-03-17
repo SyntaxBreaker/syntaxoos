@@ -11,8 +11,8 @@ interface SettingsStore {
 }
 
 export const useSettingsStore = create<SettingsStore>()((set) => ({
-  currentBackgroundSize: "Full",
-  currentTab: "Appearance",
+  currentBackgroundSize: "full",
+  currentTab: "appearance",
   currentWallpaper: WALLPAPERS[0].src,
   setBackgroundSize: (size) => {
     set({ currentBackgroundSize: size });
