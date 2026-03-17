@@ -40,9 +40,9 @@ function TaskManagerTaskEditor({ task, onCancel }: TaskManagerTaskEditorProps) {
           setPriority(event.target.value as Task["priority"])
         }
       >
-        <option value="Low">Low</option>
-        <option value="Medium">Medium</option>
-        <option value="High">High</option>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
       </select>
       <div className="flex flex-row gap-2 self-end">
         <button
