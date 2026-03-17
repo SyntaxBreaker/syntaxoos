@@ -26,11 +26,11 @@ function DesktopContextMenu() {
       />
       <ContextMenuItem
         label="Settings"
-        onClick={() => openWindow(WINDOW_ID.SETTINGS)}
+        onClick={() => openWindow(WINDOW_ID.settings)}
       />
       <ContextMenuItem
         label="System Monitor"
-        onClick={() => openWindow(WINDOW_ID.SYSTEM_MONITOR)}
+        onClick={() => openWindow(WINDOW_ID.systemMonitor)}
       />
     </ContextMenu>
   );

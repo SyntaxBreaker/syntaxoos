@@ -26,14 +26,14 @@ function FileManagerItem({
   const handleFileOpen = () => {
     if (fileType === "image") {
       setImage(src, fileName);
-      openWindow(WINDOW_ID.IMAGE_VIEWER, fileName);
+      openWindow(WINDOW_ID.imageViewer, fileName);
     } else if (fileType === "text" || fileType === "markdown") {
       const fileFormat = fileName.split(".")[1];
       setDocument(src, fileFormat);
-      openWindow(WINDOW_ID.TEXT_READER, fileName);
+      openWindow(WINDOW_ID.textReader, fileName);
     } else if (fileType === "audio") {
       setAudio(src, fileName);
-      openWindow(WINDOW_ID.MUSIC_PLAYER, fileName);
+      openWindow(WINDOW_ID.musicPlayer, fileName);
     }
   };
 
