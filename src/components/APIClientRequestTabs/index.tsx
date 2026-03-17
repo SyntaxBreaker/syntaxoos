@@ -6,7 +6,7 @@ interface APIClientRequestTabsProps {
   setActiveTab: React.Dispatch<React.SetStateAction<API_CLIENT_TAB>>;
 }
 
-const TABS: API_CLIENT_TAB[] = ["Parameters", "Headers", "Body", "Response"];
+const TABS: API_CLIENT_TAB[] = ["parameters", "headers", "body", "response"];
 
 function APIClientRequestTabs({
   activeTab,

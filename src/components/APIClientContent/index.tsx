@@ -9,10 +9,10 @@ interface APIClientContentProps {
 }
 
 const API_CLIENT_CONTENT: Record<API_CLIENT_TAB, React.ReactNode> = {
-  Parameters: <APIClientQueryParamManager />,
-  Headers: <APIClientHeaderManager />,
-  Body: <APIClientBodyManager />,
-  Response: <APIClientResponse />,
+  parameters: <APIClientQueryParamManager />,
+  headers: <APIClientHeaderManager />,
+  body: <APIClientBodyManager />,
+  response: <APIClientResponse />,
 };
 
 function APIClientContent({ activeTab }: APIClientContentProps) {

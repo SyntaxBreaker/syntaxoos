@@ -56,7 +56,7 @@ export interface Task {
 
 export type Morse = keyof typeof MORSE_CODE;
 
-export type API_CLIENT_TAB = "Parameters" | "Headers" | "Body" | "Response";
+export type API_CLIENT_TAB = "parameters" | "headers" | "body" | "response";
 
 export interface KeyValueItem {
   id: string;

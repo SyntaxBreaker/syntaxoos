@@ -6,7 +6,7 @@ import APIClientContent from "../APIClientContent";
 import Separator from "../Separator";
 
 function APIClient() {
-  const [activeTab, setActiveTab] = useState<API_CLIENT_TAB>("Parameters");
+  const [activeTab, setActiveTab] = useState<API_CLIENT_TAB>("parameters");
 
   return (
     <article className="flex flex-col gap-4 p-2">
