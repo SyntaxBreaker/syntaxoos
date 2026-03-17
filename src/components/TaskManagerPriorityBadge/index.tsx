@@ -5,9 +5,9 @@ interface TaskManagerPriorityBadgeProps {
 }
 
 const colors = {
-  High: "text-red-300",
-  Medium: "text-amber-300",
-  Low: "text-emerald-300",
+  high: "text-red-300",
+  medium: "text-amber-300",
+  low: "text-emerald-300",
 };
 
 function TaskManagerPriorityBadge({ priority }: TaskManagerPriorityBadgeProps) {

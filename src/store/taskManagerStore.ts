@@ -23,7 +23,7 @@ export const useTaskMangerStore = create<TaskManagerStore>()(
               id: crypto.randomUUID(),
               title: title,
               completed: false,
-              priority: "Low",
+              priority: "low",
               createdAt: Date.now(),
               updatedAt: Date.now(),
             },
