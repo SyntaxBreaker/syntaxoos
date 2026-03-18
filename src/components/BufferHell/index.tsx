@@ -116,7 +116,7 @@ function BufferHell() {
           canvasWidth={BUFFER_HELL_CONFIG.canvas.width}
         />
         {status === "menu" && <BufferHellMenu />}
-        {status == "gameOver" && <BufferHellGameOver score={score} />}
+        {status === "gameOver" && <BufferHellGameOver score={score} />}
       </div>
     </article>
   );
