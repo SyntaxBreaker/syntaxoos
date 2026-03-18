@@ -9,7 +9,7 @@ function BufferHellMenu() {
         BUFFER HELL
       </h2>
       <button
-        className="bg-gray-800 text-slate-200 w-3xs p-4 py-2 rounded border-2 border-transparent hover:cursor-pointer mt-2 hover:border-gray-400"
+        className="bg-gray-800 text-gray-200 w-3xs p-4 py-2 rounded border-2 border-transparent hover:cursor-pointer mt-2 hover:border-gray-400"
         onClick={startGame}
       >
         START

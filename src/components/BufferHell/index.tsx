@@ -107,7 +107,7 @@ function BufferHell() {
   }, []);
 
   return (
-    <article className="flex flex-col bg-slate-900 border border-slate-700 rounded-lg w-fit overflow-hidden p-2">
+    <article className="flex flex-col bg-gray-900 border border-gray-700 rounded-lg w-fit overflow-hidden p-2">
       <BufferHellHeader score={score} />
       <div className="relative">
         <BufferHellCanvas
