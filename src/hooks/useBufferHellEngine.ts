@@ -19,9 +19,9 @@ function useBufferHellEngine({
   canvasWidth,
 }: UseBufferHellEngineProps) {
   const score = useBufferHellStore((state) => state.score);
-  const status = useBufferHellStore((state) => state.status);
+  const gameStatus = useBufferHellStore((state) => state.gameStatus);
   const addScore = useBufferHellStore((state) => state.addScore);
-  const endGame = useBufferHellStore((state) => state.endGame);
+  const setGameStatus = useBufferHellStore((state) => state.setGameStatus);
 
   const player = useRef({
     x: canvasWidth / 2,
@@ -35,7 +35,7 @@ function useBufferHellEngine({
   const weaponLevel = useRef(1);
 
   useEffect(() => {
-    if (status === "playing") {
+    if (gameStatus === "playing") {
       enemies.current = [];
       bullets.current = [];
 
@@ -49,11 +49,11 @@ function useBufferHellEngine({
       lastFireFrame.current = 0;
       weaponLevel.current = 1;
     }
-  }, [status, canvasHeight, canvasWidth]);
+  }, [gameStatus, canvasHeight, canvasWidth]);
 
   const tick = useCallback(
     (keys: React.RefObject<Record<string, boolean>>) => {
-      if (status !== "playing" || !keys) return;
+      if (gameStatus !== "playing" || !keys) return;
 
       frameCount.current++;
 
@@ -99,7 +99,7 @@ function useBufferHellEngine({
         enemy.y += enemy.velocityY;
 
         if (checkCircleCollision({ circleA: enemy, circleB: player.current })) {
-          endGame();
+          setGameStatus("gameOver");
         }
       });
 
@@ -131,7 +131,7 @@ function useBufferHellEngine({
         margin: 50,
       });
     },
-    [status, addScore, endGame, canvasHeight, canvasWidth, score],
+    [gameStatus, addScore, setGameStatus, canvasHeight, canvasWidth, score],
   );
 
   return { player, enemies, tick, bullets };

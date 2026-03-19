@@ -1,7 +1,14 @@
-import type { CalculatorButton, CommandPayload, FileSystemItem } from "./types";
+import type {
+  BufferHellHero,
+  CalculatorButton,
+  CommandPayload,
+  FileSystemItem,
+} from "./types";
 import arcade from "./assets/sounds/arcade.wav";
 import moonwalk from "./assets/images/moonwalk.jpg";
 import defaultWallpaper from "./assets/wallpapers/default.jpg";
+import draconianSprite from "./assets/bufferHell/draconian.png";
+import gargoyleSprite from "./assets/bufferHell/gargoyle.png";
 
 export const SYSTEM_INFO: string[] = [
   "OS: SyntaxoOS 1.0.0 (Powered by TypeScript)",
@@ -192,3 +199,24 @@ export const BUFFER_HELL_CONFIG = {
     fireRate: 10,
   },
 };
+
+export const BUFFER_HELL_HEROES: BufferHellHero[] = [
+  {
+    id: "draconian",
+    name: "draconian",
+    sprite: draconianSprite,
+    baseSpeed: 3,
+    baseHealth: 150,
+    description: "Slow but tanky. Starts with high HP.",
+    scale: 8,
+  },
+  {
+    id: "gargoyle",
+    name: "gargoyle",
+    sprite: gargoyleSprite,
+    baseSpeed: 6,
+    baseHealth: 80,
+    description: "Fragile but incredibly fast.",
+    scale: 10,
+  },
+];

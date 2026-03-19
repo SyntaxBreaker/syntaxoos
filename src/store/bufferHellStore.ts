@@ -1,33 +1,25 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import type { BufferHellGameStatus } from "../types";
+import type { BufferHellGameStatus, BufferHellHero } from "../types";
+import { BUFFER_HELL_HEROES } from "../constants";
 
 interface BufferHellStore {
-  status: BufferHellGameStatus;
+  gameStatus: BufferHellGameStatus;
   score: number;
   highScore: number;
-  startGame: () => void;
-  endGame: () => void;
+  hero: BufferHellHero;
   addScore: (points: number) => void;
-  resetGame: () => void;
+  setHero: (hero: BufferHellHero) => void;
+  setGameStatus: (status: BufferHellGameStatus) => void;
 }
 
 export const useBufferHellStore = create<BufferHellStore>()(
   persist(
     (set) => ({
-      status: "menu",
+      gameStatus: "menu",
       score: 0,
       highScore: 0,
-      startGame: () =>
-        set({
-          status: "playing",
-          score: 0,
-        }),
-      endGame: () =>
-        set((state) => ({
-          status: "gameOver",
-          highScore: Math.max(state.score, state.highScore),
-        })),
+      hero: BUFFER_HELL_HEROES[0],
       addScore: (points) =>
         set((state) => {
           const nextScore = state.score + points;
@@ -35,10 +27,33 @@ export const useBufferHellStore = create<BufferHellStore>()(
             score: nextScore,
           };
         }),
-      resetGame: () =>
+      setGameStatus: (status) => {
+        if (status === "playing") {
+          set({
+            gameStatus: status,
+            score: 0,
+          });
+        } else if (status === "gameOver") {
+          set((state) => {
+            return {
+              gameStatus: "gameOver",
+              highScore: Math.max(state.score, state.highScore),
+            };
+          });
+        } else if (status === "heroSelection") {
+          set({
+            gameStatus: "heroSelection",
+          });
+        } else if (status === "menu") {
+          set({
+            gameStatus: "menu",
+            score: 0,
+          });
+        }
+      },
+      setHero: (hero) =>
         set({
-          status: "playing",
-          score: 0,
+          hero: hero,
         }),
     }),
     {

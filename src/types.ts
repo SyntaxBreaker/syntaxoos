@@ -69,7 +69,11 @@ export type APIClientBodyContentType =
   | "application/xml"
   | "text/plain";
 
-export type BufferHellGameStatus = "menu" | "playing" | "gameOver";
+export type BufferHellGameStatus =
+  | "menu"
+  | "heroSelection"
+  | "playing"
+  | "gameOver";
 
 export interface BufferHellPlayer {
   x: number;
@@ -89,4 +93,16 @@ export interface BufferHellBullet {
   x: number;
   y: number;
   radius: number;
+}
+
+export type BufferHellHeroName = "draconian" | "gargoyle";
+
+export interface BufferHellHero {
+  id: string;
+  name: BufferHellHeroName;
+  sprite: string;
+  baseSpeed: number;
+  baseHealth: number;
+  description: string;
+  scale: number;
 }
