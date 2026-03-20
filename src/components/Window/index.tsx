@@ -17,34 +17,34 @@ function Window({ id, x, y, windowName, children }: WindowProps) {
   const changePosition = useWindowsStore((state) => state.changePosition);
   const isWindowMinimized = useWindowsStore((state) => state.isWindowMinimized);
 
-  const handleMouseMove = (event: MouseEvent) => {
-    if (!isDragging) return;
-
-    const desktop = document.getElementById("desktop");
-    if (!desktop || !windowRef.current) return;
-
-    const desktopRect = desktop.getBoundingClientRect();
-    const windowRect = windowRef.current.getBoundingClientRect();
-
-    const rawX = event.clientX - dragOffsetRef.current.offsetX;
-    const rawY = event.clientY - dragOffsetRef.current.offsetY;
-
-    const minX = desktopRect.left;
-    const minY = desktopRect.top;
-    const maxX = desktopRect.right - windowRect.width;
-    const maxY = desktopRect.bottom - windowRect.height;
-
-    const newX = Math.max(minX, Math.min(rawX, maxX));
-    const newY = Math.max(minY, Math.min(rawY, maxY));
-
-    changePosition(id, newX, newY);
-  };
-
   const handleMouseUp = () => {
     setIsDragging(false);
   };
 
   useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      if (!isDragging) return;
+
+      const desktop = document.getElementById("desktop");
+      if (!desktop || !windowRef.current) return;
+
+      const desktopRect = desktop.getBoundingClientRect();
+      const windowRect = windowRef.current.getBoundingClientRect();
+
+      const rawX = event.clientX - dragOffsetRef.current.offsetX;
+      const rawY = event.clientY - dragOffsetRef.current.offsetY;
+
+      const minX = desktopRect.left;
+      const minY = desktopRect.top;
+      const maxX = desktopRect.right - windowRect.width;
+      const maxY = desktopRect.bottom - windowRect.height;
+
+      const newX = Math.max(minX, Math.min(rawX, maxX));
+      const newY = Math.max(minY, Math.min(rawY, maxY));
+
+      changePosition(id, newX, newY);
+    };
+
     if (isDragging) {
       document.addEventListener("mousemove", handleMouseMove);
       document.addEventListener("mouseup", handleMouseUp);
@@ -54,7 +54,7 @@ function Window({ id, x, y, windowName, children }: WindowProps) {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [handleMouseMove, isDragging]);
+  }, [isDragging, changePosition, id]);
 
   return (
     <section
