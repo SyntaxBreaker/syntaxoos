@@ -29,15 +29,30 @@ function BufferHell() {
   const enemySprite = useImageLoader({ imageUrl: enemyImageSource });
   const bulletSprite = useImageLoader({ imageUrl: bulletImageSource });
 
+  const canvas = canvasRef.current;
+  const context = canvas?.getContext("2d");
+
   const { enemies, player, tick, bullets } = useBufferHellEngine({
     canvasHeight: BUFFER_HELL_CONFIG.canvas.height,
     canvasWidth: BUFFER_HELL_CONFIG.canvas.width,
   });
 
   useEffect(() => {
+    if (gameStatus === "playing") return;
+
+    if (context && canvas) {
+      clearCanvas({
+        context: context,
+        width: BUFFER_HELL_CONFIG.canvas.width,
+        height: BUFFER_HELL_CONFIG.canvas.height,
+        color: "#0F172A",
+      });
+    }
+  }, [gameStatus]);
+
+  useEffect(() => {
     if (gameStatus !== "playing") return;
 
-    const context = canvasRef.current?.getContext("2d");
     let frameId: number;
 
     const render = () => {
@@ -117,11 +132,13 @@ function BufferHell() {
     <article className="flex flex-col bg-gray-900 border border-gray-700 rounded-lg w-fit overflow-hidden p-2">
       <BufferHellHeader score={score} />
       <div className="relative">
-        <BufferHellCanvas
-          canvasRef={canvasRef}
-          canvasHeight={BUFFER_HELL_CONFIG.canvas.height}
-          canvasWidth={BUFFER_HELL_CONFIG.canvas.width}
-        />
+        {canvasRef && (
+          <BufferHellCanvas
+            canvasRef={canvasRef}
+            canvasHeight={BUFFER_HELL_CONFIG.canvas.height}
+            canvasWidth={BUFFER_HELL_CONFIG.canvas.width}
+          />
+        )}
         {gameStatus === "menu" && <BufferHellMenu />}
         {gameStatus === "gameOver" && <BufferHellGameOver score={score} />}
         {gameStatus === "heroSelection" && <BufferHellHeroSelection />}

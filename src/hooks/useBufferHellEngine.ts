@@ -35,7 +35,7 @@ function useBufferHellEngine({
   const weaponLevel = useRef(1);
 
   useEffect(() => {
-    if (gameStatus === "playing") {
+    if (gameStatus === "gameOver") {
       enemies.current = [];
       bullets.current = [];
 
