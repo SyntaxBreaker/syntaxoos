@@ -87,6 +87,7 @@ export interface BufferHellEnemy {
   velocityX: number;
   velocityY: number;
   radius: number;
+  damage: number;
 }
 
 export interface BufferHellBullet {

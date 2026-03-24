@@ -22,6 +22,7 @@ function useBufferHellEngine({
   const gameStatus = useBufferHellStore((state) => state.gameStatus);
   const addScore = useBufferHellStore((state) => state.addScore);
   const setGameStatus = useBufferHellStore((state) => state.setGameStatus);
+  const takeDamage = useBufferHellStore((state) => state.takeDamage);
 
   const player = useRef({
     x: canvasWidth / 2,
@@ -33,6 +34,17 @@ function useBufferHellEngine({
   const bullets = useRef<BufferHellBullet[]>([]);
   const lastFireFrame = useRef(0);
   const weaponLevel = useRef(1);
+
+  const checkIfPlayerIsDead = () => {
+    const currentHP = useBufferHellStore.getState().playerHP;
+
+    if (currentHP <= 0) {
+      setGameStatus("gameOver");
+      return true;
+    }
+
+    return false;
+  };
 
   useEffect(() => {
     if (gameStatus === "gameOver") {
@@ -99,7 +111,10 @@ function useBufferHellEngine({
         enemy.y += enemy.velocityY;
 
         if (checkCircleCollision({ circleA: enemy, circleB: player.current })) {
-          setGameStatus("gameOver");
+          takeDamage(enemy.damage);
+          setTimeout(() => {
+            checkIfPlayerIsDead();
+          }, 500);
         }
       });
 

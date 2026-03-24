@@ -188,6 +188,7 @@ export const BUFFER_HELL_CONFIG = {
     spawnAcceleration: 300,
     spawnY: 150,
     speed: 3,
+    damage: 25,
   },
   bullet: {
     speed: 8,

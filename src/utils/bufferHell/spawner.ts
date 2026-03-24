@@ -25,5 +25,6 @@ export const createEnemy = ({ frameCount, canvasWidth }: CreateEnemyProps) => {
     velocityX: Math.cos(angle) * BUFFER_HELL_CONFIG.enemy.speed,
     velocityY: Math.sin(angle) * BUFFER_HELL_CONFIG.enemy.speed,
     radius: BUFFER_HELL_CONFIG.enemy.radius,
+    damage: BUFFER_HELL_CONFIG.enemy.damage,
   };
 };

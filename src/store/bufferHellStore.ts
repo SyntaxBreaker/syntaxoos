@@ -8,9 +8,11 @@ interface BufferHellStore {
   score: number;
   highScore: number;
   hero: BufferHellHero;
+  playerHP: number;
   addScore: (points: number) => void;
   setHero: (hero: BufferHellHero) => void;
   setGameStatus: (status: BufferHellGameStatus) => void;
+  takeDamage: (damage: number) => void;
 }
 
 export const useBufferHellStore = create<BufferHellStore>()(
@@ -20,6 +22,7 @@ export const useBufferHellStore = create<BufferHellStore>()(
       score: 0,
       highScore: 0,
       hero: BUFFER_HELL_HEROES[0],
+      playerHP: BUFFER_HELL_HEROES[0].baseHealth,
       addScore: (points) =>
         set((state) => {
           const nextScore = state.score + points;
@@ -29,9 +32,12 @@ export const useBufferHellStore = create<BufferHellStore>()(
         }),
       setGameStatus: (status) => {
         if (status === "playing") {
-          set({
-            gameStatus: status,
-            score: 0,
+          set((state) => {
+            return {
+              gameStatus: status,
+              score: 0,
+              playerHP: state.hero.baseHealth,
+            };
           });
         } else if (status === "gameOver") {
           set((state) => {
@@ -54,6 +60,12 @@ export const useBufferHellStore = create<BufferHellStore>()(
       setHero: (hero) =>
         set({
           hero: hero,
+          playerHP: hero.baseHealth,
+        }),
+      takeDamage: (damage) =>
+        set((state) => {
+          const newHP = Math.max(0, state.playerHP - damage);
+          return { playerHP: newHP };
         }),
     }),
     {
