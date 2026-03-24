@@ -119,15 +119,15 @@ function useBufferHellEngine({
 
       cleanUpEntities({
         entities: enemies,
-        height: BUFFER_HELL_CONFIG.canvas.height,
-        width: BUFFER_HELL_CONFIG.canvas.width,
+        height: canvasHeight,
+        width: canvasWidth,
         margin: 50,
       });
 
       cleanUpEntities({
         entities: bullets,
-        height: BUFFER_HELL_CONFIG.canvas.height,
-        width: BUFFER_HELL_CONFIG.canvas.width,
+        height: canvasHeight,
+        width: canvasWidth,
         margin: 50,
       });
     },

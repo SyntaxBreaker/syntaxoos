@@ -173,10 +173,6 @@ export const MORSE_CODE: { [key: string]: string } = {
 };
 
 export const BUFFER_HELL_CONFIG = {
-  canvas: {
-    height: 500,
-    width: 990,
-  },
   player: {
     margin: 10,
     normalSpeed: 4,
