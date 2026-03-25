@@ -64,7 +64,7 @@ export const useBufferHellStore = create<BufferHellStore>()(
         }),
       takeDamage: (damage) =>
         set((state) => {
-          const newHP = Math.max(0, state.playerHP - damage);
+          const newHP = state.playerHP - damage;
           return { playerHP: newHP };
         }),
     }),

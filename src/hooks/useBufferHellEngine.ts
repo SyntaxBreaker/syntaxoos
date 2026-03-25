@@ -112,9 +112,8 @@ function useBufferHellEngine({
 
         if (checkCircleCollision({ circleA: enemy, circleB: player.current })) {
           takeDamage(enemy.damage);
-          setTimeout(() => {
-            checkIfPlayerIsDead();
-          }, 500);
+          enemy.x = -2000;
+          checkIfPlayerIsDead();
         }
       });
 
