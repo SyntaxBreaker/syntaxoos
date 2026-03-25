@@ -94,6 +94,7 @@ function BufferHell() {
         sprite: playerSprite,
         x: player.current.x,
         y: player.current.y,
+        scale: 8,
       });
 
       enemies.current.forEach(({ radius, x, y }) => {
