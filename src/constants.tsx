@@ -174,9 +174,8 @@ export const MORSE_CODE: { [key: string]: string } = {
 
 export const BUFFER_HELL_CONFIG = {
   player: {
-    margin: 10,
     normalSpeed: 4,
-    radius: 5,
+    radius: 4,
     slowSpeed: 2,
     startYOffset: 100,
   },
@@ -205,7 +204,6 @@ export const BUFFER_HELL_HEROES: BufferHellHero[] = [
     baseSpeed: 3,
     baseHealth: 150,
     description: "Slow but tanky. Starts with high HP.",
-    scale: 8,
   },
   {
     id: "gargoyle",
@@ -214,6 +212,5 @@ export const BUFFER_HELL_HEROES: BufferHellHero[] = [
     baseSpeed: 6,
     baseHealth: 80,
     description: "Fragile but incredibly fast.",
-    scale: 10,
   },
 ];

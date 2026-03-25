@@ -91,7 +91,6 @@ function BufferHell() {
         context,
         fallbackColor: "38BDF8",
         radius: player.current.radius,
-        scale: hero?.scale || 4,
         sprite: playerSprite,
         x: player.current.x,
         y: player.current.y,
@@ -102,7 +101,6 @@ function BufferHell() {
           context,
           fallbackColor: "#FB7185",
           radius,
-          scale: 4,
           sprite: enemySprite,
           x,
           y,
@@ -117,7 +115,6 @@ function BufferHell() {
           sprite: bulletSprite,
           x,
           y,
-          scale: 4,
         });
       });
       frameId = requestAnimationFrame(render);

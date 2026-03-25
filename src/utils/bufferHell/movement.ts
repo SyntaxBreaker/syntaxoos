@@ -14,26 +14,25 @@ export const handlePlayerMovement = ({
   canvasWidth,
   canvasHeight,
 }: HandlePlayerMovementProps) => {
+  if (!keysRef.current) return;
+
+  const player = playerRef.current;
   const playerSpeed = keysRef.current["Shift"]
     ? BUFFER_HELL_CONFIG.player.slowSpeed
     : BUFFER_HELL_CONFIG.player.normalSpeed;
 
-  if (keysRef.current["a"] || keysRef.current["A"])
-    playerRef.current.x -= playerSpeed;
-  if (keysRef.current["d"] || keysRef.current["D"])
-    playerRef.current.x += playerSpeed;
-  if (keysRef.current["w"] || keysRef.current["W"])
-    playerRef.current.y -= playerSpeed;
-  if (keysRef.current["s"] || keysRef.current["S"])
-    playerRef.current.y += playerSpeed;
+  if (keysRef.current["a"] || keysRef.current["A"]) player.x -= playerSpeed;
+  if (keysRef.current["d"] || keysRef.current["D"]) player.x += playerSpeed;
+  if (keysRef.current["w"] || keysRef.current["W"]) player.y -= playerSpeed;
+  if (keysRef.current["s"] || keysRef.current["S"]) player.y += playerSpeed;
 
-  const playerMargin = BUFFER_HELL_CONFIG.player.margin;
-  playerRef.current.x = Math.max(
-    playerMargin,
-    Math.min(canvasWidth - playerMargin, playerRef.current.x),
+  const playerRadius = (player.radius * 4) / 2;
+  player.x = Math.max(
+    playerRadius,
+    Math.min(canvasWidth - playerRadius, player.x),
   );
-  playerRef.current.y = Math.max(
-    playerMargin,
-    Math.min(canvasHeight - playerMargin, playerRef.current.y),
+  player.y = Math.max(
+    playerRadius,
+    Math.min(canvasHeight - playerRadius, player.y),
   );
 };

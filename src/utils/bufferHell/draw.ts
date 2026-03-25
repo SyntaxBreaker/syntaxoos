@@ -29,7 +29,7 @@ export const renderSprite = ({
   context,
   fallbackColor,
   radius,
-  scale = 2.5,
+  scale = 4,
   sprite,
   x,
   y,

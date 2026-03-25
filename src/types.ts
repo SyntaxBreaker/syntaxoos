@@ -105,5 +105,4 @@ export interface BufferHellHero {
   baseSpeed: number;
   baseHealth: number;
   description: string;
-  scale: number;
 }
