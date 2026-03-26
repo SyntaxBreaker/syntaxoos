@@ -11,12 +11,14 @@ import useImageLoader from "../../hooks/useImageLoader";
 import enemyImageSource from "../../assets/bufferHell/enemy.png";
 import bulletImageSource from "../../assets/bufferHell/bullet.png";
 import BufferHellHeroSelection from "../BufferHellHeroSelection";
+import BufferHellPauseMenu from "../BufferHellPauseMenu";
 
 function BufferHell() {
   const [dimensions, setDimensions] = useState({ height: 500, width: 990 });
   const gameStatus = useBufferHellStore((state) => state.gameStatus);
   const score = useBufferHellStore((state) => state.score);
   const selectedHero = useBufferHellStore((state) => state.hero);
+  const setGameStatus = useBufferHellStore((state) => state.setGameStatus);
 
   const hero = BUFFER_HELL_HEROES.find(
     (hero) => hero.name === selectedHero.name,
@@ -146,6 +148,17 @@ function BufferHell() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setGameStatus("pause");
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   return (
     <article className="flex flex-col bg-gray-900 border border-gray-700 rounded-lg w-full h-full overflow-hidden p-2">
       <BufferHellHeader score={score} />
@@ -161,6 +174,7 @@ function BufferHell() {
         {gameStatus === "menu" && <BufferHellMenu />}
         {gameStatus === "gameOver" && <BufferHellGameOver score={score} />}
         {gameStatus === "heroSelection" && <BufferHellHeroSelection />}
+        {gameStatus === "pause" && <BufferHellPauseMenu />}
       </div>
     </article>
   );

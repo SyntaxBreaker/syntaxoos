@@ -31,31 +31,23 @@ export const useBufferHellStore = create<BufferHellStore>()(
           };
         }),
       setGameStatus: (status) => {
-        if (status === "playing") {
-          set((state) => {
-            return {
-              gameStatus: status,
-              score: 0,
-              playerHP: state.hero.baseHealth,
-            };
-          });
-        } else if (status === "gameOver") {
-          set((state) => {
-            return {
-              gameStatus: "gameOver",
-              highScore: Math.max(state.score, state.highScore),
-            };
-          });
-        } else if (status === "heroSelection") {
-          set({
-            gameStatus: "heroSelection",
-          });
-        } else if (status === "menu") {
-          set({
-            gameStatus: "menu",
-            score: 0,
-          });
-        }
+        set((state) => {
+          const newState: Partial<BufferHellStore> = { gameStatus: status };
+
+          switch (status) {
+            case "gameOver":
+              newState.highScore = Math.max(state.score, state.highScore);
+              newState.score = 0;
+              newState.playerHP = state.hero.baseHealth;
+              break;
+            case "menu":
+              newState.score = 0;
+              newState.playerHP = state.hero.baseHealth;
+              break;
+          }
+
+          return newState;
+        });
       },
       setHero: (hero) =>
         set({

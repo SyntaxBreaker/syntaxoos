@@ -73,7 +73,8 @@ export type BufferHellGameStatus =
   | "menu"
   | "heroSelection"
   | "playing"
-  | "gameOver";
+  | "gameOver"
+  | "pause";
 
 export interface BufferHellPlayer {
   x: number;
