@@ -34,7 +34,7 @@ function BufferHellHeroSelection() {
             />
             <div className="flex flex-col gap-1 text-sm font-mono text-gray-200">
               <span>HP: {hero.baseHealth}</span>
-              <span>Speed: {hero.baseSpeed}</span>
+              <span>SPEED: {hero.baseSpeed}</span>
             </div>
           </button>
         ))}
