@@ -26,7 +26,7 @@ export const handlePlayerMovement = ({
   if (keysRef.current["w"] || keysRef.current["W"]) player.y -= playerSpeed;
   if (keysRef.current["s"] || keysRef.current["S"]) player.y += playerSpeed;
 
-  const playerRadius = (player.radius * 4) / 2;
+  const playerRadius = (player.radius * player.scale) / 2;
   player.x = Math.max(
     playerRadius,
     Math.min(canvasWidth - playerRadius, player.x),

@@ -80,6 +80,7 @@ export interface BufferHellPlayer {
   x: number;
   y: number;
   radius: number;
+  scale: number;
 }
 
 export interface BufferHellEnemy {

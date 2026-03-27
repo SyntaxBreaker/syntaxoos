@@ -28,6 +28,7 @@ function useBufferHellEngine({
     x: canvasWidth / 2,
     y: canvasHeight - BUFFER_HELL_CONFIG.player.startYOffset,
     radius: BUFFER_HELL_CONFIG.player.radius,
+    scale: BUFFER_HELL_CONFIG.player.scale,
   });
   const enemies = useRef<BufferHellEnemy[]>([]);
   const frameCount = useRef(0);
@@ -55,6 +56,7 @@ function useBufferHellEngine({
         x: canvasWidth / 2,
         y: canvasHeight - BUFFER_HELL_CONFIG.player.startYOffset,
         radius: BUFFER_HELL_CONFIG.player.radius,
+        scale: BUFFER_HELL_CONFIG.player.scale,
       };
 
       frameCount.current = 0;
