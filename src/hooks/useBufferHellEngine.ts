@@ -14,6 +14,8 @@ interface UseBufferHellEngineProps {
   canvasWidth: number;
 }
 
+const MAX_ENEMIES = 100;
+
 function useBufferHellEngine({
   canvasHeight,
   canvasWidth,
@@ -45,6 +47,16 @@ function useBufferHellEngine({
     }
 
     return false;
+  };
+
+  const spawnEnemy = () => {
+    if (enemies.current.length >= MAX_ENEMIES) return;
+
+    const newEnemies = createEnemy({
+      canvasWidth: canvasWidth,
+      frameCount: frameCount,
+    });
+    enemies.current.push(newEnemies);
   };
 
   useEffect(() => {
@@ -100,11 +112,7 @@ function useBufferHellEngine({
       const enemySpawnRate = getEnemySpawnRate({ score: score });
 
       if (frameCount.current % enemySpawnRate === 0) {
-        const newEnemy = createEnemy({
-          canvasWidth: canvasWidth,
-          frameCount: frameCount,
-        });
-        enemies.current.push(newEnemy);
+        spawnEnemy();
         addScore(1);
       }
 
