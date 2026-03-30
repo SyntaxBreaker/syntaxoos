@@ -13,9 +13,11 @@ interface WindowProps {
 function Window({ id, x, y, windowName, children }: WindowProps) {
   const [isDragging, setIsDragging] = useState(false);
   const dragOffsetRef = useRef({ offsetX: 0, offsetY: 0 });
-  const windowRef = useRef<HTMLDivElement>(null);
+
   const changePosition = useWindowsStore((state) => state.changePosition);
   const isWindowMinimized = useWindowsStore((state) => state.isWindowMinimized);
+
+  const windowRef = useRef<HTMLDivElement>(null);
 
   const handleMouseUp = () => {
     setIsDragging(false);
