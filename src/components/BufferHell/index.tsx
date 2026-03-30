@@ -33,7 +33,7 @@ function BufferHell() {
   const enemySprite = useImageLoader({ imageUrl: enemyImageSource });
   const bulletSprite = useImageLoader({ imageUrl: bulletImageSource });
 
-  const { enemies, player, tick, bullets } = useBufferHellEngine({
+  const { enemiesRef, playerRef, tick, bulletsRef } = useBufferHellEngine({
     canvasHeight: dimensions.height,
     canvasWidth: dimensions.width,
   });
@@ -92,14 +92,14 @@ function BufferHell() {
       renderSprite({
         context,
         fallbackColor: "38BDF8",
-        radius: player.current.radius,
+        radius: playerRef.current.radius,
         sprite: playerSprite,
-        x: player.current.x,
-        y: player.current.y,
+        x: playerRef.current.x,
+        y: playerRef.current.y,
         scale: 8,
       });
 
-      enemies.current.forEach(({ radius, x, y }) => {
+      enemiesRef.current.forEach(({ radius, x, y }) => {
         renderSprite({
           context,
           fallbackColor: "#FB7185",
@@ -110,7 +110,7 @@ function BufferHell() {
         });
       });
 
-      bullets.current.forEach(({ radius, x, y }) => {
+      bulletsRef.current.forEach(({ radius, x, y }) => {
         renderSprite({
           context,
           fallbackColor: "#38BDF8",

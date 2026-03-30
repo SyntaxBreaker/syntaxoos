@@ -27,17 +27,17 @@ function useBufferHellEngine({
   const setGameStatus = useBufferHellStore((state) => state.setGameStatus);
   const takeDamage = useBufferHellStore((state) => state.takeDamage);
 
-  const player = useRef({
+  const playerRef = useRef({
     x: canvasWidth / 2,
     y: canvasHeight - BUFFER_HELL_CONFIG.player.startYOffset,
     radius: BUFFER_HELL_CONFIG.player.radius,
     scale: BUFFER_HELL_CONFIG.player.scale,
   });
-  const enemies = useRef<BufferHellEnemy[]>([]);
-  const frameCount = useRef(0);
-  const bullets = useRef<BufferHellBullet[]>([]);
-  const lastFireFrame = useRef(0);
-  const weaponLevel = useRef(1);
+  const enemiesRef = useRef<BufferHellEnemy[]>([]);
+  const frameCountRef = useRef(0);
+  const bulletsRef = useRef<BufferHellBullet[]>([]);
+  const lastFireFrameRef = useRef(0);
+  const weaponLevelRef = useRef(1);
 
   const checkIfPlayerIsDead = () => {
     const currentHP = useBufferHellStore.getState().playerHP;
@@ -51,30 +51,30 @@ function useBufferHellEngine({
   };
 
   const spawnEnemy = () => {
-    if (enemies.current.length >= MAX_ENEMIES) return;
+    if (enemiesRef.current.length >= MAX_ENEMIES) return;
 
     const newEnemies = createEnemy({
       canvasWidth: canvasWidth,
-      frameCount: frameCount,
+      frameCount: frameCountRef,
     });
-    enemies.current.push(newEnemies);
+    enemiesRef.current.push(newEnemies);
   };
 
   useEffect(() => {
     if (gameStatus === "gameOver") {
-      enemies.current = [];
-      bullets.current = [];
+      enemiesRef.current = [];
+      bulletsRef.current = [];
 
-      player.current = {
+      playerRef.current = {
         x: canvasWidth / 2,
         y: canvasHeight - BUFFER_HELL_CONFIG.player.startYOffset,
         radius: BUFFER_HELL_CONFIG.player.radius,
         scale: BUFFER_HELL_CONFIG.player.scale,
       };
 
-      frameCount.current = 0;
-      lastFireFrame.current = 0;
-      weaponLevel.current = 1;
+      frameCountRef.current = 0;
+      lastFireFrameRef.current = 0;
+      weaponLevelRef.current = 1;
     }
   }, [gameStatus, canvasHeight, canvasWidth]);
 
@@ -82,58 +82,60 @@ function useBufferHellEngine({
     (keys: React.RefObject<Record<string, boolean>>) => {
       if (gameStatus !== "playing" || !keys) return;
 
-      frameCount.current++;
+      frameCountRef.current++;
 
       handlePlayerMovement({
         keysRef: keys,
-        playerRef: player,
+        playerRef: playerRef,
         canvasWidth: canvasWidth,
         canvasHeight: canvasHeight,
       });
 
-      weaponLevel.current = getWeaponLevel({ score: score });
+      weaponLevelRef.current = getWeaponLevel({ score: score });
 
       if (
         keys.current[" "] &&
-        frameCount.current - lastFireFrame.current >=
+        frameCountRef.current - lastFireFrameRef.current >=
           BUFFER_HELL_CONFIG.bullet.fireRate
       ) {
         const newBullets = createBullets({
-          playerX: player.current.x,
-          playerY: player.current.y,
-          playerRadius: player.current.radius,
-          weaponLevel: weaponLevel,
+          playerX: playerRef.current.x,
+          playerY: playerRef.current.y,
+          playerRadius: playerRef.current.radius,
+          weaponLevel: weaponLevelRef,
         });
 
-        bullets.current.push(...newBullets);
+        bulletsRef.current.push(...newBullets);
 
-        lastFireFrame.current = frameCount.current;
+        lastFireFrameRef.current = frameCountRef.current;
       }
 
       const enemySpawnRate = getEnemySpawnRate({ score: score });
 
-      if (frameCount.current % enemySpawnRate === 0) {
+      if (frameCountRef.current % enemySpawnRate === 0) {
         spawnEnemy();
         addScore(1);
       }
 
-      enemies.current.forEach((enemy) => {
+      enemiesRef.current.forEach((enemy) => {
         enemy.x += enemy.velocityX;
         enemy.y += enemy.velocityY;
 
-        if (checkCircleCollision({ circleA: enemy, circleB: player.current })) {
+        if (
+          checkCircleCollision({ circleA: enemy, circleB: playerRef.current })
+        ) {
           takeDamage(enemy.damage);
           enemy.x = -2000;
           checkIfPlayerIsDead();
         }
       });
 
-      bullets.current.forEach((bullet) => {
+      bulletsRef.current.forEach((bullet) => {
         bullet.y -= BUFFER_HELL_CONFIG.bullet.speed;
       });
 
-      bullets.current.forEach((bullet) => {
-        enemies.current.forEach((enemy) => {
+      bulletsRef.current.forEach((bullet) => {
+        enemiesRef.current.forEach((enemy) => {
           if (checkCircleCollision({ circleA: bullet, circleB: enemy })) {
             bullet.y = -100;
             enemy.x = -1000;
@@ -144,14 +146,14 @@ function useBufferHellEngine({
       });
 
       cleanUpEntities({
-        entities: enemies,
+        entities: enemiesRef,
         height: canvasHeight,
         width: canvasWidth,
         margin: 50,
       });
 
       cleanUpEntities({
-        entities: bullets,
+        entities: bulletsRef,
         height: canvasHeight,
         width: canvasWidth,
         margin: 50,
@@ -160,7 +162,7 @@ function useBufferHellEngine({
     [gameStatus, addScore, setGameStatus, canvasHeight, canvasWidth, score],
   );
 
-  return { player, enemies, tick, bullets };
+  return { playerRef, enemiesRef, tick, bulletsRef };
 }
 
 export default useBufferHellEngine;
