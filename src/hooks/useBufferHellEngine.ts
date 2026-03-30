@@ -137,8 +137,8 @@ function useBufferHellEngine({
       bulletsRef.current.forEach((bullet) => {
         enemiesRef.current.forEach((enemy) => {
           if (checkCircleCollision({ circleA: bullet, circleB: enemy })) {
-            bullet.y = -100;
-            enemy.x = -1000;
+            bullet.y = -2000;
+            enemy.x = -2000;
             gainExperience(10);
             addScore(10);
           }
