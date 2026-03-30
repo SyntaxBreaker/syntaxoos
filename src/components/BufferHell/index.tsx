@@ -26,7 +26,8 @@ function BufferHell() {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const keys = useRef<Record<string, boolean>>({});
+  const keysRef = useRef<Record<string, boolean>>({});
+
   const playerSprite = useImageLoader({
     imageUrl: hero ? hero.sprite : BUFFER_HELL_HEROES[0].sprite,
   });
@@ -80,7 +81,7 @@ function BufferHell() {
     let frameId: number;
 
     const render = () => {
-      tick(keys);
+      tick(keysRef);
 
       clearCanvas({
         context: context,
@@ -136,7 +137,7 @@ function BufferHell() {
       if (gameKeys.includes(event.key)) {
         event.preventDefault();
       }
-      keys.current[event.key] = event.type === "keydown";
+      keysRef.current[event.key] = event.type === "keydown";
     };
 
     window.addEventListener("keydown", handleKey);
