@@ -10,7 +10,7 @@ function BufferHellHeader({ score }: BufferHellHeaderProps) {
 
   return (
     <header className="p-2 bg-gray-800 flex justify-between rounded-lg text-xs text-gray-200 font-mono">
-      <div>PLAYER HP: {playerHP}</div>
+      <span>PLAYER HP: {playerHP}</span>
       <span>
         SCORE: {score} | High Score: {highScore}
       </span>
