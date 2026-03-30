@@ -23,6 +23,7 @@ function useBufferHellEngine({
   const score = useBufferHellStore((state) => state.score);
   const gameStatus = useBufferHellStore((state) => state.gameStatus);
   const addScore = useBufferHellStore((state) => state.addScore);
+  const gainExperience = useBufferHellStore((state) => state.gainExperience);
   const setGameStatus = useBufferHellStore((state) => state.setGameStatus);
   const takeDamage = useBufferHellStore((state) => state.takeDamage);
 
@@ -136,6 +137,7 @@ function useBufferHellEngine({
           if (checkCircleCollision({ circleA: bullet, circleB: enemy })) {
             bullet.y = -100;
             enemy.x = -1000;
+            gainExperience(10);
             addScore(10);
           }
         });

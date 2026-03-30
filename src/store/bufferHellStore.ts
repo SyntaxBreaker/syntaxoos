@@ -4,12 +4,16 @@ import type { BufferHellGameStatus, BufferHellHero } from "../types";
 import { BUFFER_HELL_HEROES } from "../constants";
 
 interface BufferHellStore {
+  experienceToNextLevel: number;
   gameStatus: BufferHellGameStatus;
-  score: number;
   highScore: number;
   hero: BufferHellHero;
+  playerExperience: number;
   playerHP: number;
+  playerLevel: number;
+  score: number;
   addScore: (points: number) => void;
+  gainExperience: (experience: number) => void;
   setHero: (hero: BufferHellHero) => void;
   setGameStatus: (status: BufferHellGameStatus) => void;
   takeDamage: (damage: number) => void;
@@ -18,16 +22,36 @@ interface BufferHellStore {
 export const useBufferHellStore = create<BufferHellStore>()(
   persist(
     (set) => ({
+      experienceToNextLevel: 100,
       gameStatus: "menu",
-      score: 0,
       highScore: 0,
       hero: BUFFER_HELL_HEROES[0],
+      playerExperience: 0,
       playerHP: BUFFER_HELL_HEROES[0].baseHealth,
+      playerLevel: 1,
+      score: 0,
       addScore: (points) =>
         set((state) => {
           const nextScore = state.score + points;
           return {
             score: nextScore,
+          };
+        }),
+      gainExperience: (experience) =>
+        set((state) => {
+          const newExperience = state.playerExperience + experience;
+          if (newExperience >= state.experienceToNextLevel) {
+            return {
+              playerLevel: state.playerLevel + 1,
+              playerExperience: newExperience - state.experienceToNextLevel,
+              experienceToNextLevel: Math.floor(
+                state.experienceToNextLevel * 1.5,
+              ),
+            };
+          }
+
+          return {
+            playerExperience: newExperience,
           };
         }),
       setGameStatus: (status) => {
@@ -37,6 +61,8 @@ export const useBufferHellStore = create<BufferHellStore>()(
           switch (status) {
             case "gameOver":
               newState.highScore = Math.max(state.score, state.highScore);
+              newState.playerLevel = 1;
+              newState.playerExperience = 0;
               newState.score = 0;
               newState.playerHP = state.hero.baseHealth;
               break;
