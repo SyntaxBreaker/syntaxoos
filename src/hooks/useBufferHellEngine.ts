@@ -14,7 +14,7 @@ interface UseBufferHellEngineProps {
   canvasWidth: number;
 }
 
-const MAX_ENEMIES = 100;
+const MAX_ENEMIES = 30;
 
 function useBufferHellEngine({
   canvasHeight,
