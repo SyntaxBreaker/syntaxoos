@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useBufferHellStore } from "../../store/bufferHellStore";
 import useBufferHellEngine from "../../hooks/useBufferHellEngine";
 import BufferHellHeader from "../BufferHellHeader";
@@ -14,19 +14,19 @@ import BufferHellHeroSelection from "../BufferHellHeroSelection";
 import BufferHellPauseMenu from "../BufferHellPauseMenu";
 
 function BufferHell() {
-  const [dimensions, setDimensions] = useState({ height: 500, width: 990 });
   const gameStatus = useBufferHellStore((state) => state.gameStatus);
   const score = useBufferHellStore((state) => state.score);
   const selectedHero = useBufferHellStore((state) => state.hero);
   const setGameStatus = useBufferHellStore((state) => state.setGameStatus);
 
-  const hero = BUFFER_HELL_HEROES.find(
-    (hero) => hero.name === selectedHero.name,
-  );
-
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const keysRef = useRef<Record<string, boolean>>({});
+  const dimensionsRef = useRef({ width: 900, height: 500 });
+
+  const hero = BUFFER_HELL_HEROES.find(
+    (hero) => hero.name === selectedHero.name,
+  );
 
   const playerSprite = useImageLoader({
     imageUrl: hero ? hero.sprite : BUFFER_HELL_HEROES[0].sprite,
@@ -35,8 +35,7 @@ function BufferHell() {
   const bulletSprite = useImageLoader({ imageUrl: bulletImageSource });
 
   const { enemiesRef, playerRef, tick, bulletsRef } = useBufferHellEngine({
-    canvasHeight: dimensions.height,
-    canvasWidth: dimensions.width,
+    dimensionsRef: dimensionsRef,
   });
 
   useEffect(() => {
@@ -44,7 +43,7 @@ function BufferHell() {
 
     const observer = new ResizeObserver((entries) => {
       const { height, width } = entries[0].contentRect;
-      setDimensions({ height, width });
+      dimensionsRef.current = { height, width };
     });
 
     observer.observe(containerRef.current);
@@ -53,10 +52,10 @@ function BufferHell() {
 
   useEffect(() => {
     if (canvasRef.current) {
-      canvasRef.current.width = dimensions.width;
-      canvasRef.current.height = dimensions.height;
+      canvasRef.current.width = dimensionsRef.current.width;
+      canvasRef.current.height = dimensionsRef.current.height;
     }
-  }, [dimensions]);
+  }, []);
 
   useEffect(() => {
     if (gameStatus === "playing") return;
@@ -65,12 +64,12 @@ function BufferHell() {
     if (context && canvasRef.current) {
       clearCanvas({
         context,
-        width: dimensions.width,
-        height: dimensions.height,
+        width: dimensionsRef.current.width,
+        height: dimensionsRef.current.height,
         color: "#0F172A",
       });
     }
-  }, [gameStatus, dimensions]);
+  }, [gameStatus]);
 
   useEffect(() => {
     if (gameStatus !== "playing") return;
@@ -85,8 +84,8 @@ function BufferHell() {
 
       clearCanvas({
         context: context,
-        width: dimensions.width,
-        height: dimensions.height,
+        width: dimensionsRef.current.width,
+        height: dimensionsRef.current.height,
         color: "#0F172A",
       });
 
@@ -169,8 +168,8 @@ function BufferHell() {
       >
         <BufferHellCanvas
           canvasRef={canvasRef}
-          canvasHeight={dimensions.height}
-          canvasWidth={dimensions.width}
+          canvasHeight={dimensionsRef.current.height}
+          canvasWidth={dimensionsRef.current.width}
         />
         {gameStatus === "menu" && <BufferHellMenu />}
         {gameStatus === "gameOver" && <BufferHellGameOver score={score} />}

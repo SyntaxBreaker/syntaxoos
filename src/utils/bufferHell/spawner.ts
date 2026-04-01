@@ -5,7 +5,7 @@ interface GetEnemySpawnRateProps {
 }
 
 interface CreateEnemyProps {
-  frameCount: React.RefObject<number>;
+  canvasHeight: number;
   canvasWidth: number;
 }
 
@@ -17,13 +17,30 @@ export const getEnemySpawnRate = ({ score }: GetEnemySpawnRateProps) => {
   );
 };
 
-export const createEnemy = ({ frameCount, canvasWidth }: CreateEnemyProps) => {
-  const angle = frameCount.current * BUFFER_HELL_CONFIG.enemy.angleIncrement;
+export const createEnemy = ({
+  canvasHeight,
+  canvasWidth,
+}: CreateEnemyProps) => {
+  const margin = 60;
+  const spawnSide = Math.floor(Math.random() * 4);
+
+  const height = canvasHeight > 0 ? canvasHeight : 500;
+  const width = canvasWidth > 0 ? canvasWidth : 900;
+
+  const positions = [
+    { x: Math.random() * width, y: -margin },
+    { x: width + margin, y: Math.random() * height },
+    { x: Math.random() * width, y: height + margin },
+    { x: -margin, y: Math.random() * height },
+  ];
+
+  const { x, y } = positions[spawnSide];
+
   return {
-    x: canvasWidth / 2,
-    y: BUFFER_HELL_CONFIG.enemy.spawnY,
-    velocityX: Math.cos(angle) * BUFFER_HELL_CONFIG.enemy.speed,
-    velocityY: Math.sin(angle) * BUFFER_HELL_CONFIG.enemy.speed,
+    x: x,
+    y: y,
+    velocityX: 0,
+    velocityY: 0,
     radius: BUFFER_HELL_CONFIG.enemy.radius,
     damage: BUFFER_HELL_CONFIG.enemy.damage,
   };

@@ -18,7 +18,9 @@ export const cleanUpEntities = <T extends Entity>({
 }: CleanUpEntitiesProps<T>): void => {
   entities.current = entities.current.filter(
     (entity) =>
-      (entity.x > -margin && entity.x < width + margin) ||
-      (entity.y > -margin && entity.y < height + margin),
+      entity.x > -margin &&
+      entity.x < width + margin &&
+      entity.y > -margin &&
+      entity.y < height + margin,
   );
 };

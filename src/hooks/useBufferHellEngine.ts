@@ -10,16 +10,13 @@ import { getWeaponLevel } from "../utils/bufferHell/weapon";
 import { cleanUpEntities } from "../utils/bufferHell/physics";
 
 interface UseBufferHellEngineProps {
-  canvasHeight: number;
-  canvasWidth: number;
+  dimensionsRef: React.RefObject<{ height: number; width: number }>;
 }
 
-const MAX_ENEMIES = 30;
+const MAX_ENEMIES = 10;
+const ENEMY_SPEED = BUFFER_HELL_CONFIG.enemy.speed;
 
-function useBufferHellEngine({
-  canvasHeight,
-  canvasWidth,
-}: UseBufferHellEngineProps) {
+function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
   const score = useBufferHellStore((state) => state.score);
   const gameStatus = useBufferHellStore((state) => state.gameStatus);
   const addScore = useBufferHellStore((state) => state.addScore);
@@ -27,9 +24,11 @@ function useBufferHellEngine({
   const setGameStatus = useBufferHellStore((state) => state.setGameStatus);
   const takeDamage = useBufferHellStore((state) => state.takeDamage);
 
+  const { width, height } = dimensionsRef.current;
+
   const playerRef = useRef({
-    x: canvasWidth / 2,
-    y: canvasHeight - BUFFER_HELL_CONFIG.player.startYOffset,
+    x: width / 2,
+    y: height - BUFFER_HELL_CONFIG.player.startYOffset,
     radius: BUFFER_HELL_CONFIG.player.radius,
     scale: BUFFER_HELL_CONFIG.player.scale,
   });
@@ -53,11 +52,12 @@ function useBufferHellEngine({
   const spawnEnemy = () => {
     if (enemiesRef.current.length >= MAX_ENEMIES) return;
 
-    const newEnemies = createEnemy({
-      canvasWidth: canvasWidth,
-      frameCount: frameCountRef,
+    const newEnemy = createEnemy({
+      canvasHeight: height,
+      canvasWidth: width,
     });
-    enemiesRef.current.push(newEnemies);
+
+    enemiesRef.current.push(newEnemy);
   };
 
   useEffect(() => {
@@ -66,8 +66,8 @@ function useBufferHellEngine({
       bulletsRef.current = [];
 
       playerRef.current = {
-        x: canvasWidth / 2,
-        y: canvasHeight - BUFFER_HELL_CONFIG.player.startYOffset,
+        x: width / 2,
+        y: height - BUFFER_HELL_CONFIG.player.startYOffset,
         radius: BUFFER_HELL_CONFIG.player.radius,
         scale: BUFFER_HELL_CONFIG.player.scale,
       };
@@ -76,7 +76,7 @@ function useBufferHellEngine({
       lastFireFrameRef.current = 0;
       weaponLevelRef.current = 1;
     }
-  }, [gameStatus, canvasHeight, canvasWidth]);
+  }, [gameStatus, height, width]);
 
   const tick = useCallback(
     (keys: React.RefObject<Record<string, boolean>>) => {
@@ -87,8 +87,8 @@ function useBufferHellEngine({
       handlePlayerMovement({
         keysRef: keys,
         playerRef: playerRef,
-        canvasWidth: canvasWidth,
-        canvasHeight: canvasHeight,
+        canvasWidth: width,
+        canvasHeight: height,
       });
 
       weaponLevelRef.current = getWeaponLevel({ score: score });
@@ -113,20 +113,25 @@ function useBufferHellEngine({
       const enemySpawnRate = getEnemySpawnRate({ score: score });
 
       if (frameCountRef.current % enemySpawnRate === 0) {
-        spawnEnemy();
-        addScore(1);
+        if (enemiesRef.current.length < MAX_ENEMIES) {
+          spawnEnemy();
+        }
       }
 
       enemiesRef.current.forEach((enemy) => {
+        const deltaX = playerRef.current.x - enemy.x;
+        const deltaY = playerRef.current.y - enemy.y;
+        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY) || 1;
+
+        enemy.velocityX = (deltaX / distance) * ENEMY_SPEED;
+        enemy.velocityY = (deltaY / distance) * ENEMY_SPEED;
         enemy.x += enemy.velocityX;
         enemy.y += enemy.velocityY;
 
-        if (
-          checkCircleCollision({ circleA: enemy, circleB: playerRef.current })
-        ) {
-          takeDamage(enemy.damage);
-          enemy.x = -2000;
+        if (distance < playerRef.current.radius + enemy.radius) {
+          takeDamage(10);
           checkIfPlayerIsDead();
+          enemy.x = -5000;
         }
       });
 
@@ -147,19 +152,19 @@ function useBufferHellEngine({
 
       cleanUpEntities({
         entities: enemiesRef,
-        height: canvasHeight,
-        width: canvasWidth,
-        margin: 50,
+        height: dimensionsRef.current.height,
+        width: dimensionsRef.current.width,
+        margin: 100,
       });
 
       cleanUpEntities({
         entities: bulletsRef,
-        height: canvasHeight,
-        width: canvasWidth,
+        height: height,
+        width: width,
         margin: 50,
       });
     },
-    [gameStatus, addScore, setGameStatus, canvasHeight, canvasWidth, score],
+    [gameStatus, takeDamage, dimensionsRef],
   );
 
   return { playerRef, enemiesRef, tick, bulletsRef };
