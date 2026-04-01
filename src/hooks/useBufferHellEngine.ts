@@ -2,7 +2,10 @@ import { useCallback, useEffect, useRef } from "react";
 import { useBufferHellStore } from "../store/bufferHellStore";
 import { BUFFER_HELL_CONFIG } from "../constants";
 import type { BufferHellBullet, BufferHellEnemy } from "../types";
-import { handlePlayerMovement } from "../utils/bufferHell/movement";
+import {
+  handlePlayerMovement,
+  moveEnemiesTowardPlayer,
+} from "../utils/bufferHell/movement";
 import { createBullets } from "../utils/bufferHell/combat";
 import { createEnemy, getEnemySpawnRate } from "../utils/bufferHell/spawner";
 import { checkCircleCollision } from "../utils/bufferHell/collision";
@@ -120,21 +123,14 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
 
       separateEntities(enemiesRef.current);
 
-      enemiesRef.current.forEach((enemy) => {
-        const deltaX = playerRef.current.x - enemy.x;
-        const deltaY = playerRef.current.y - enemy.y;
-        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY) || 1;
-
-        enemy.velocityX = (deltaX / distance) * ENEMY_SPEED;
-        enemy.velocityY = (deltaY / distance) * ENEMY_SPEED;
-        enemy.x += enemy.velocityX;
-        enemy.y += enemy.velocityY;
-
-        if (distance < playerRef.current.radius + enemy.radius) {
+      moveEnemiesTowardPlayer({
+        enemies: enemiesRef.current,
+        player: playerRef.current,
+        speed: ENEMY_SPEED,
+        onPlayerHit: () => {
           takeDamage(10);
           checkIfPlayerIsDead();
-          enemy.x = -5000;
-        }
+        },
       });
 
       bulletsRef.current.forEach((bullet) => {

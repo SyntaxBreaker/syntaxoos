@@ -8,6 +8,27 @@ interface HandlePlayerMovementProps {
   canvasHeight: number;
 }
 
+interface Enemy {
+  x: number;
+  y: number;
+  radius: number;
+  velocityX: number;
+  velocityY: number;
+}
+
+interface Player {
+  x: number;
+  y: number;
+  radius: number;
+}
+
+interface MoveEnemiesTowardPlayerProps {
+  enemies: Enemy[];
+  player: Player;
+  speed: number;
+  onPlayerHit: () => void;
+}
+
 export const handlePlayerMovement = ({
   keysRef,
   playerRef,
@@ -35,4 +56,27 @@ export const handlePlayerMovement = ({
     playerRadius,
     Math.min(canvasHeight - playerRadius, player.y),
   );
+};
+
+export const moveEnemiesTowardPlayer = ({
+  enemies,
+  player,
+  speed,
+  onPlayerHit,
+}: MoveEnemiesTowardPlayerProps): void => {
+  enemies.forEach((enemy) => {
+    const deltaX = player.x - enemy.x;
+    const deltaY = player.y - enemy.y;
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY) || 1;
+
+    enemy.velocityX = (deltaX / distance) * speed;
+    enemy.velocityY = (deltaY / distance) * speed;
+    enemy.x += enemy.velocityX;
+    enemy.y += enemy.velocityY;
+
+    if (distance < player.radius + enemy.radius) {
+      onPlayerHit();
+      enemy.x = -5000;
+    }
+  });
 };
