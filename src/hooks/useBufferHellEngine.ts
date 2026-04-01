@@ -7,7 +7,7 @@ import { createBullets } from "../utils/bufferHell/combat";
 import { createEnemy, getEnemySpawnRate } from "../utils/bufferHell/spawner";
 import { checkCircleCollision } from "../utils/bufferHell/collision";
 import { getWeaponLevel } from "../utils/bufferHell/weapon";
-import { cleanUpEntities } from "../utils/bufferHell/physics";
+import { cleanUpEntities, separateEntities } from "../utils/bufferHell/physics";
 
 interface UseBufferHellEngineProps {
   dimensionsRef: React.RefObject<{ height: number; width: number }>;
@@ -117,6 +117,8 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
           spawnEnemy();
         }
       }
+
+      separateEntities(enemiesRef.current);
 
       enemiesRef.current.forEach((enemy) => {
         const deltaX = playerRef.current.x - enemy.x;
