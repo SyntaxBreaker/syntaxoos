@@ -63,32 +63,34 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
     enemiesRef.current.push(newEnemy);
   };
 
+  const resetEntities = useCallback(() => {
+    if (!dimensionsRef.current) return;
+    const { height, width } = dimensionsRef.current;
+
+    enemiesRef.current = [];
+    bulletsRef.current = [];
+    frameCountRef.current = 0;
+    lastFireFrameRef.current = 0;
+    weaponLevelRef.current = 1;
+
+    playerRef.current.x = width / 2;
+    playerRef.current.y = height - BUFFER_HELL_CONFIG.player.startYOffset;
+  }, [dimensionsRef]);
+
   useEffect(() => {
-    if (gameStatus === "gameOver") {
-      enemiesRef.current = [];
-      bulletsRef.current = [];
-
-      playerRef.current = {
-        x: width / 2,
-        y: height - BUFFER_HELL_CONFIG.player.startYOffset,
-        radius: BUFFER_HELL_CONFIG.player.radius,
-        scale: BUFFER_HELL_CONFIG.player.scale,
-      };
-
-      frameCountRef.current = 0;
-      lastFireFrameRef.current = 0;
-      weaponLevelRef.current = 1;
+    if (gameStatus === "gameOver" || frameCountRef.current === 0) {
+      resetEntities();
     }
-  }, [gameStatus, height, width]);
+  }, [gameStatus, resetEntities]);
 
   const tick = useCallback(
-    (keys: React.RefObject<Record<string, boolean>>) => {
-      if (gameStatus !== "playing" || !keys) return;
+    (keysRef: React.RefObject<Record<string, boolean>>) => {
+      if (gameStatus !== "playing" || !keysRef) return;
 
       frameCountRef.current++;
 
       handlePlayerMovement({
-        keysRef: keys,
+        keysRef: keysRef,
         playerRef: playerRef,
         canvasWidth: width,
         canvasHeight: height,
@@ -97,7 +99,7 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
       weaponLevelRef.current = getWeaponLevel({ score: score });
 
       if (
-        keys.current[" "] &&
+        keysRef.current[" "] &&
         frameCountRef.current - lastFireFrameRef.current >=
           BUFFER_HELL_CONFIG.bullet.fireRate
       ) {
