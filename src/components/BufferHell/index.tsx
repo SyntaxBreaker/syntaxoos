@@ -132,11 +132,17 @@ function BufferHell() {
 
   useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {
-      const gameKeys = [" ", "w", "W", "a", "A", "s", "S", "d", "D", "Shift"];
-      if (gameKeys.includes(event.key)) {
+      const key = event.key.toLowerCase();
+      const isPressed = event.type === "keydown";
+
+      keysRef.current[key] = isPressed;
+
+      const gameKeys = ["w", "a", "s", "d", "shift", " "];
+      if (gameKeys.includes(key)) {
         event.preventDefault();
       }
-      keysRef.current[event.key] = event.type === "keydown";
+
+      if (isPressed && key === "escape") setGameStatus("pause");
     };
 
     window.addEventListener("keydown", handleKey);
@@ -145,18 +151,8 @@ function BufferHell() {
     return () => {
       window.removeEventListener("keydown", handleKey);
       window.removeEventListener("keyup", handleKey);
+      keysRef.current = {};
     };
-  }, []);
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setGameStatus("pause");
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   return (
