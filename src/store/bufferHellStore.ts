@@ -1,6 +1,10 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import type { BufferHellGameStatus, BufferHellHero } from "../types";
+import type {
+  BufferHellGameStatus,
+  BufferHellHero,
+  BufferHellPromotion,
+} from "../types";
 import { BUFFER_HELL_HEROES } from "../constants";
 
 interface BufferHellStore {
@@ -11,8 +15,11 @@ interface BufferHellStore {
   playerExperience: number;
   playerHP: number;
   playerLevel: number;
+  playerSpeed: number;
+  playerFireRate: number;
   score: number;
   addScore: (points: number) => void;
+  promotePlayer: (promotionType: BufferHellPromotion) => void;
   gainExperience: (experience: number) => void;
   setHero: (hero: BufferHellHero) => void;
   setGameStatus: (status: BufferHellGameStatus) => void;
@@ -27,8 +34,10 @@ export const useBufferHellStore = create<BufferHellStore>()(
       highScore: 0,
       hero: BUFFER_HELL_HEROES[0],
       playerExperience: 0,
+      playerFireRate: 0,
       playerHP: BUFFER_HELL_HEROES[0].baseHealth,
       playerLevel: 1,
+      playerSpeed: 0,
       score: 0,
       addScore: (points) =>
         set((state) => {
@@ -42,6 +51,7 @@ export const useBufferHellStore = create<BufferHellStore>()(
           const newExperience = state.playerExperience + experience;
           if (newExperience >= state.experienceToNextLevel) {
             return {
+              gameStatus: "levelUp",
               playerLevel: state.playerLevel + 1,
               playerExperience: newExperience - state.experienceToNextLevel,
               experienceToNextLevel: Math.floor(
@@ -54,6 +64,28 @@ export const useBufferHellStore = create<BufferHellStore>()(
             playerExperience: newExperience,
           };
         }),
+      promotePlayer: (promotionType) => {
+        set((state) => {
+          const gameStatus = { gameStatus: "playing" as BufferHellGameStatus };
+
+          switch (promotionType) {
+            case "agility":
+              return { ...gameStatus, playerSpeed: state.playerSpeed + 0.5 };
+            case "fireRate":
+              return {
+                ...gameStatus,
+                playerFireRate: Math.max(5, state.playerFireRate - 2),
+              };
+            case "vitality":
+              return {
+                ...gameStatus,
+                playerHP: state.playerHP + 20,
+              };
+            default:
+              return gameStatus;
+          }
+        });
+      },
       setGameStatus: (status) => {
         set((state) => {
           const newState: Partial<BufferHellStore> = { gameStatus: status };
@@ -63,8 +95,10 @@ export const useBufferHellStore = create<BufferHellStore>()(
               newState.highScore = Math.max(state.score, state.highScore);
               newState.playerLevel = 1;
               newState.playerExperience = 0;
-              newState.score = 0;
               newState.playerHP = state.hero.baseHealth;
+              newState.playerSpeed = state.hero.baseSpeed;
+              newState.playerFireRate = state.hero.baseFireRate;
+              newState.score = 0;
               break;
             case "menu":
               newState.score = 0;
@@ -79,6 +113,8 @@ export const useBufferHellStore = create<BufferHellStore>()(
         set({
           hero: hero,
           playerHP: hero.baseHealth,
+          playerFireRate: hero.baseFireRate,
+          playerSpeed: hero.baseSpeed,
         }),
       takeDamage: (damage) =>
         set((state) => {

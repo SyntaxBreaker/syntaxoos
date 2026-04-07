@@ -12,6 +12,7 @@ import enemyImageSource from "../../assets/bufferHell/enemy.png";
 import bulletImageSource from "../../assets/bufferHell/bullet.png";
 import BufferHellHeroSelection from "../BufferHellHeroSelection";
 import BufferHellPauseMenu from "../BufferHellPauseMenu";
+import BufferHellLevelUp from "../BufferHellLevelUp";
 
 function BufferHell() {
   const gameStatus = useBufferHellStore((state) => state.gameStatus);
@@ -171,6 +172,7 @@ function BufferHell() {
         {gameStatus === "gameOver" && <BufferHellGameOver score={score} />}
         {gameStatus === "heroSelection" && <BufferHellHeroSelection />}
         {gameStatus === "pause" && <BufferHellPauseMenu />}
+        {gameStatus === "levelUp" && <BufferHellLevelUp />}
       </div>
     </article>
   );

@@ -74,7 +74,8 @@ export type BufferHellGameStatus =
   | "heroSelection"
   | "playing"
   | "gameOver"
-  | "pause";
+  | "pause"
+  | "levelUp";
 
 export interface BufferHellPlayer {
   x: number;
@@ -100,11 +101,14 @@ export interface BufferHellBullet {
 
 export type BufferHellHeroName = "draconian" | "gargoyle";
 
+export type BufferHellPromotion = "agility" | "fireRate" | "vitality";
+
 export interface BufferHellHero {
   id: string;
   name: BufferHellHeroName;
   sprite: string;
-  baseSpeed: number;
+  baseFireRate: number;
   baseHealth: number;
+  baseSpeed: number;
   description: string;
 }
