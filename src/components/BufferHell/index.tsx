@@ -17,7 +17,7 @@ import BufferHellLevelUp from "../BufferHellLevelUp";
 function BufferHell() {
   const gameStatus = useBufferHellStore((state) => state.gameStatus);
   const score = useBufferHellStore((state) => state.score);
-  const selectedHero = useBufferHellStore((state) => state.hero);
+  const selectedHeroId = useBufferHellStore((state) => state.selectedHeroId);
   const setGameStatus = useBufferHellStore((state) => state.setGameStatus);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -25,9 +25,7 @@ function BufferHell() {
   const keysRef = useRef<Record<string, boolean>>({});
   const dimensionsRef = useRef({ width: 900, height: 500 });
 
-  const hero = BUFFER_HELL_HEROES.find(
-    (hero) => hero.name === selectedHero.name,
-  );
+  const hero = BUFFER_HELL_HEROES.find((hero) => hero.id === selectedHeroId);
 
   const playerSprite = useImageLoader({
     imageUrl: hero ? hero.sprite : BUFFER_HELL_HEROES[0].sprite,

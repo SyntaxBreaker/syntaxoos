@@ -199,7 +199,7 @@ export const BUFFER_HELL_CONFIG = {
 
 export const BUFFER_HELL_HEROES: BufferHellHero[] = [
   {
-    id: "draconian",
+    id: 0,
     name: "draconian",
     sprite: draconianSprite,
     baseFireRate: 1,
@@ -208,7 +208,7 @@ export const BUFFER_HELL_HEROES: BufferHellHero[] = [
     description: "Slow but tanky. Starts with high HP.",
   },
   {
-    id: "gargoyle",
+    id: 1,
     name: "gargoyle",
     sprite: gargoyleSprite,
     baseFireRate: 1,

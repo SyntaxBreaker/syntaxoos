@@ -104,7 +104,7 @@ export type BufferHellHeroName = "draconian" | "gargoyle";
 export type BufferHellPromotion = "agility" | "fireRate" | "vitality";
 
 export interface BufferHellHero {
-  id: string;
+  id: number;
   name: BufferHellHeroName;
   sprite: string;
   baseFireRate: number;

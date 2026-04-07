@@ -1,13 +1,12 @@
 import { BUFFER_HELL_HEROES } from "../../constants";
 import { useBufferHellStore } from "../../store/bufferHellStore";
-import type { BufferHellHero } from "../../types";
 
 function BufferHellHeroSelection() {
   const setGameStatus = useBufferHellStore((state) => state.setGameStatus);
   const setHero = useBufferHellStore((state) => state.setHero);
 
-  const handleSelect = ({ hero }: { hero: BufferHellHero }) => {
-    setHero(hero);
+  const handleSelect = ({ heroId }: { heroId: number }) => {
+    setHero(heroId);
     setGameStatus("menu");
   };
 
@@ -21,7 +20,7 @@ function BufferHellHeroSelection() {
           <button
             key={hero.id}
             className="flex flex-col items-center gap-4 p-4 bg-gray-800 border-2 border-transparent hover:border-gray-400 rounded-md w-2xs"
-            onClick={() => handleSelect({ hero: hero })}
+            onClick={() => handleSelect({ heroId: hero.id })}
           >
             <div className="flex flex-col gap-1">
               <h3 className="text-2xl font-bold text-gray-200">{hero.name}</h3>
