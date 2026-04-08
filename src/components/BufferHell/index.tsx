@@ -6,13 +6,18 @@ import BufferHellCanvas from "../BufferHellCanvas";
 import BufferHellMenu from "../BufferHellMenu";
 import BufferHellGameOver from "../BufferHellGameOver";
 import { BUFFER_HELL_HEROES } from "../../constants";
-import { clearCanvas, renderSprite } from "../../utils/bufferHell/draw";
+import {
+  clearCanvas,
+  drawExperienceGem,
+  renderSprite,
+} from "../../utils/bufferHell/draw";
 import useImageLoader from "../../hooks/useImageLoader";
 import enemyImageSource from "../../assets/bufferHell/enemy.png";
 import bulletImageSource from "../../assets/bufferHell/bullet.png";
 import BufferHellHeroSelection from "../BufferHellHeroSelection";
 import BufferHellPauseMenu from "../BufferHellPauseMenu";
 import BufferHellLevelUp from "../BufferHellLevelUp";
+import type { BufferHellExperienceGem } from "../../types";
 
 function BufferHell() {
   const gameStatus = useBufferHellStore((state) => state.gameStatus);
@@ -33,9 +38,10 @@ function BufferHell() {
   const enemySprite = useImageLoader({ imageUrl: enemyImageSource });
   const bulletSprite = useImageLoader({ imageUrl: bulletImageSource });
 
-  const { enemiesRef, playerRef, tick, bulletsRef } = useBufferHellEngine({
-    dimensionsRef: dimensionsRef,
-  });
+  const { enemiesRef, playerRef, tick, bulletsRef, gemsRef } =
+    useBufferHellEngine({
+      dimensionsRef: dimensionsRef,
+    });
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -119,6 +125,11 @@ function BufferHell() {
           y,
         });
       });
+
+      gemsRef.current.forEach((gem: BufferHellExperienceGem) => {
+        drawExperienceGem({ context, gem });
+      });
+
       frameId = requestAnimationFrame(render);
     };
 

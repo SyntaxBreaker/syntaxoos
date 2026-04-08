@@ -1,7 +1,11 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useBufferHellStore } from "../store/bufferHellStore";
 import { BUFFER_HELL_CONFIG } from "../constants";
-import type { BufferHellBullet, BufferHellEnemy } from "../types";
+import type {
+  BufferHellBullet,
+  BufferHellEnemy,
+  BufferHellExperienceGem,
+} from "../types";
 import {
   handlePlayerMovement,
   moveEnemiesTowardPlayer,
@@ -26,6 +30,9 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
   const gainExperience = useBufferHellStore((state) => state.gainExperience);
   const setGameStatus = useBufferHellStore((state) => state.setGameStatus);
   const takeDamage = useBufferHellStore((state) => state.takeDamage);
+  const playerPickupRadius = useBufferHellStore(
+    (state) => state.playerPickupRadius,
+  );
 
   const { width, height } = dimensionsRef.current;
 
@@ -40,6 +47,7 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
   const bulletsRef = useRef<BufferHellBullet[]>([]);
   const lastFireFrameRef = useRef(0);
   const weaponLevelRef = useRef(1);
+  const gemsRef = useRef<BufferHellExperienceGem[]>([]);
 
   const checkIfPlayerIsDead = () => {
     const currentHP = useBufferHellStore.getState().playerHP;
@@ -69,6 +77,7 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
 
     enemiesRef.current = [];
     bulletsRef.current = [];
+    gemsRef.current = [];
     frameCountRef.current = 0;
     lastFireFrameRef.current = 0;
     weaponLevelRef.current = 1;
@@ -76,6 +85,35 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
     playerRef.current.x = width / 2;
     playerRef.current.y = height - BUFFER_HELL_CONFIG.player.startYOffset;
   }, [dimensionsRef]);
+
+  const pickUpExperienceGem = useCallback(
+    (playerX: number, playerY: number) => {
+      gemsRef.current = gemsRef.current.filter((gem) => {
+        const deltaX = playerX - gem.x;
+        const deltaY = playerY - gem.y;
+        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+        if (distance < playerPickupRadius) {
+          gem.isMovingToPlayer = true;
+        }
+
+        if (gem.isMovingToPlayer) {
+          const speed = 10;
+          gem.x += (deltaX / distance) * speed;
+          gem.y += (deltaY / distance) * speed;
+        }
+
+        if (distance < 15) {
+          addScore(10);
+          gainExperience(gem.value);
+          return false;
+        }
+
+        return true;
+      });
+    },
+    [gainExperience, addScore, playerPickupRadius],
+  );
 
   useEffect(() => {
     if (gameStatus === "gameOver" || frameCountRef.current === 0) {
@@ -142,13 +180,23 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
       bulletsRef.current.forEach((bullet) => {
         enemiesRef.current.forEach((enemy) => {
           if (checkCircleCollision({ circleA: bullet, circleB: enemy })) {
-            bullet.y = -2000;
+            const newGem: BufferHellExperienceGem = {
+              id: crypto.randomUUID(),
+              x: enemy.x,
+              y: enemy.y,
+              value: Math.floor(Math.random() * (50 - 10 + 1)) + 10,
+              isMovingToPlayer: false,
+            };
+
             enemy.x = -2000;
-            gainExperience(10);
-            addScore(10);
+            bullet.y = -2000;
+
+            gemsRef.current.push(newGem);
           }
         });
       });
+
+      pickUpExperienceGem(playerRef.current.x, playerRef.current.y);
 
       cleanUpEntities({
         entities: enemiesRef,
@@ -167,7 +215,7 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
     [gameStatus, takeDamage, dimensionsRef],
   );
 
-  return { playerRef, enemiesRef, tick, bulletsRef };
+  return { playerRef, enemiesRef, tick, bulletsRef, gemsRef };
 }
 
 export default useBufferHellEngine;

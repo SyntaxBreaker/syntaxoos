@@ -179,6 +179,7 @@ export const BUFFER_HELL_CONFIG = {
     slowSpeed: 2,
     startYOffset: 100,
     scale: 8,
+    pickupRadius: 50,
   },
   enemy: {
     angleIncrement: 0.15,

@@ -1,3 +1,5 @@
+import type { BufferHellExperienceGem } from "../../types";
+
 interface ClearCanvasProps {
   context: CanvasRenderingContext2D;
   width: number;
@@ -13,6 +15,11 @@ interface RenderSpriteProps {
   sprite: HTMLImageElement | null;
   scale?: number;
   fallbackColor: string;
+}
+
+interface DrawExperienceGemProps {
+  context: CanvasRenderingContext2D;
+  gem: BufferHellExperienceGem;
 }
 
 export const clearCanvas = ({
@@ -45,4 +52,26 @@ export const renderSprite = ({
 
   const size = radius * scale;
   context.drawImage(sprite, x - size / 2, y - size / 2, size, size);
+};
+
+export const drawExperienceGem = ({ context, gem }: DrawExperienceGemProps) => {
+  context.save();
+
+  const pulse = Math.sin(Date.now() / 150) * 2;
+  const size = 6 + pulse / 2;
+
+  context.beginPath();
+  context.fillStyle = "#10B981";
+  context.shadowBlur = 12 + pulse;
+  context.shadowColor = "#10B981";
+
+  context.moveTo(gem.x, gem.y - size);
+  context.lineTo(gem.x + size - 2, gem.y);
+  context.lineTo(gem.x, gem.y + size);
+  context.lineTo(gem.x - size + 2, gem.y);
+
+  context.closePath();
+  context.fill();
+
+  context.restore();
 };

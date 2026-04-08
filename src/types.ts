@@ -101,7 +101,11 @@ export interface BufferHellBullet {
 
 export type BufferHellHeroName = "draconian" | "gargoyle";
 
-export type BufferHellPromotion = "agility" | "fireRate" | "vitality";
+export type BufferHellPromotion =
+  | "agility"
+  | "fireRate"
+  | "vitality"
+  | "pickUpRadius";
 
 export interface BufferHellHero {
   id: number;
@@ -111,4 +115,12 @@ export interface BufferHellHero {
   baseHealth: number;
   baseSpeed: number;
   description: string;
+}
+
+export interface BufferHellExperienceGem {
+  id: string;
+  x: number;
+  y: number;
+  value: number;
+  isMovingToPlayer: boolean;
 }

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import type { BufferHellGameStatus, BufferHellPromotion } from "../types";
-import { BUFFER_HELL_HEROES } from "../constants";
+import { BUFFER_HELL_CONFIG, BUFFER_HELL_HEROES } from "../constants";
 
 interface BufferHellStore {
   experienceToNextLevel: number;
@@ -11,6 +11,7 @@ interface BufferHellStore {
   playerExperience: number;
   playerHP: number;
   playerLevel: number;
+  playerPickupRadius: number;
   playerSpeed: number;
   playerFireRate: number;
   score: number;
@@ -33,6 +34,7 @@ export const useBufferHellStore = create<BufferHellStore>()(
       playerFireRate: 0,
       playerHP: BUFFER_HELL_HEROES[0].baseHealth,
       playerLevel: 1,
+      playerPickupRadius: BUFFER_HELL_CONFIG.player.pickupRadius,
       playerSpeed: 0,
       score: 0,
       addScore: (points) =>
@@ -115,6 +117,7 @@ export const useBufferHellStore = create<BufferHellStore>()(
           selectedHeroId: heroId,
           playerHP: BUFFER_HELL_HEROES[heroId].baseHealth,
           playerFireRate: BUFFER_HELL_HEROES[heroId].baseFireRate,
+          playerPickupRadius: BUFFER_HELL_CONFIG.player.pickupRadius,
           playerSpeed: BUFFER_HELL_HEROES[heroId].baseSpeed,
         }),
       takeDamage: (damage) =>

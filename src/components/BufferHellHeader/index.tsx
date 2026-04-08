@@ -6,16 +6,19 @@ interface BufferHellHeaderProps {
 
 function BufferHellHeader({ score }: BufferHellHeaderProps) {
   const highScore = useBufferHellStore((state) => state.highScore);
+  const playerExperience = useBufferHellStore(
+    (state) => state.playerExperience,
+  );
   const playerHP = useBufferHellStore((state) => state.playerHP);
   const playerLevel = useBufferHellStore((state) => state.playerLevel);
 
   return (
     <header className="p-2 bg-gray-800 flex justify-between rounded-lg text-xs text-gray-200 font-mono">
       <span>
-        HP: {playerHP} | Level: {playerLevel}
+        HP: {playerHP} | Experience: {playerExperience} | Level: {playerLevel}
       </span>
       <span>
-        SCORE: {score} | High Score: {highScore}
+        Score: {score} | High Score: {highScore}
       </span>
     </header>
   );
