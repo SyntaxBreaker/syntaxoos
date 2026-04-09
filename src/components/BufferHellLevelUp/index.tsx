@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useBufferHellStore } from "../../store/bufferHellStore";
 import type { BufferHellPromotion } from "../../types";
 
@@ -6,14 +7,22 @@ const PLAYER_UPGRADES = [
   {
     id: "fireRate",
     label: "🔥 Rapid Fire",
-    description: "-2 Frame Delay",
+    description: "-1 Frame Delay",
   },
   { id: "vitality", label: "🛡️ Vitality", description: "+20 HP" },
+  {
+    id: "pickupRadius",
+    label: "🧲 Magnetism",
+    description: "+10 Pickup Radius",
+  },
 ] as const;
 
 function BufferHellLevelUp() {
   const promotePlayer = useBufferHellStore((state) => state.promotePlayer);
 
+  const getRandomUpgrades = useMemo(() => {
+    return [...PLAYER_UPGRADES].sort(() => Math.random() - 0.5).slice(0, 2);
+  }, []);
   const handlePlayerPromotion = (promotionType: BufferHellPromotion) => {
     promotePlayer(promotionType);
   };
@@ -22,7 +31,7 @@ function BufferHellLevelUp() {
     <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
       <h2 className="text-gray-200 text-3xl font-bold font-mono">LEVEL UP!</h2>
       <div className="flex flex-row gap-4">
-        {PLAYER_UPGRADES.map((upgrade) => (
+        {getRandomUpgrades.map((upgrade) => (
           <button
             key={upgrade.id}
             className="flex flex-col items-center gap-4 p-4 bg-gray-800 border-2 border-transparent hover:border-gray-400 rounded-md w-2xs"

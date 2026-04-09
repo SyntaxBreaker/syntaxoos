@@ -75,13 +75,18 @@ export const useBufferHellStore = create<BufferHellStore>()(
             case "fireRate":
               return {
                 ...gameStatus,
-                playerFireRate: Math.max(5, state.playerFireRate - 2),
+                playerFireRate: Math.max(5, state.playerFireRate - 1),
               };
             case "vitality":
               return {
                 ...gameStatus,
                 playerHP:
                   BUFFER_HELL_HEROES[state.selectedHeroId].baseHealth + 20,
+              };
+            case "pickupRadius":
+              return {
+                ...gameStatus,
+                playerPickupRadius: state.playerPickupRadius + 10,
               };
             default:
               return gameStatus;

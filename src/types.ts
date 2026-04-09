@@ -105,7 +105,7 @@ export type BufferHellPromotion =
   | "agility"
   | "fireRate"
   | "vitality"
-  | "pickUpRadius";
+  | "pickupRadius";
 
 export interface BufferHellHero {
   id: number;
