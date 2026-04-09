@@ -1,4 +1,3 @@
-import { BUFFER_HELL_CONFIG } from "../../constants";
 import type { BufferHellPlayer } from "../../types";
 
 interface HandlePlayerMovementProps {
@@ -6,6 +5,7 @@ interface HandlePlayerMovementProps {
   playerRef: React.RefObject<BufferHellPlayer>;
   canvasWidth: number;
   canvasHeight: number;
+  playerMovementSpeed: number;
 }
 
 interface Enemy {
@@ -34,13 +34,14 @@ export const handlePlayerMovement = ({
   playerRef,
   canvasWidth,
   canvasHeight,
+  playerMovementSpeed,
 }: HandlePlayerMovementProps) => {
   if (!keysRef.current) return;
 
   const player = playerRef.current;
   const playerSpeed = keysRef.current["Shift"]
-    ? BUFFER_HELL_CONFIG.player.slowSpeed
-    : BUFFER_HELL_CONFIG.player.normalSpeed;
+    ? playerMovementSpeed / 2
+    : playerMovementSpeed;
 
   if (keysRef.current["a"] || keysRef.current["A"]) player.x -= playerSpeed;
   if (keysRef.current["d"] || keysRef.current["D"]) player.x += playerSpeed;

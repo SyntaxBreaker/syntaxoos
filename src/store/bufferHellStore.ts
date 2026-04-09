@@ -12,7 +12,7 @@ interface BufferHellStore {
   playerHP: number;
   playerLevel: number;
   playerPickupRadius: number;
-  playerSpeed: number;
+  playerMovementSpeed: number;
   playerFireRate: number;
   score: number;
   addScore: (points: number) => void;
@@ -34,8 +34,8 @@ export const useBufferHellStore = create<BufferHellStore>()(
       playerFireRate: 0,
       playerHP: BUFFER_HELL_HEROES[0].baseHealth,
       playerLevel: 1,
+      playerMovementSpeed: BUFFER_HELL_HEROES[0].baseSpeed,
       playerPickupRadius: BUFFER_HELL_CONFIG.player.pickupRadius,
-      playerSpeed: 0,
       score: 0,
       addScore: (points) =>
         set((state) => {
@@ -68,7 +68,10 @@ export const useBufferHellStore = create<BufferHellStore>()(
 
           switch (promotionType) {
             case "agility":
-              return { ...gameStatus, playerSpeed: state.playerSpeed + 0.5 };
+              return {
+                ...gameStatus,
+                playerMovementSpeed: state.playerMovementSpeed + 0.5,
+              };
             case "fireRate":
               return {
                 ...gameStatus,
@@ -96,7 +99,7 @@ export const useBufferHellStore = create<BufferHellStore>()(
               newState.playerExperience = 0;
               newState.playerHP =
                 BUFFER_HELL_HEROES[state.selectedHeroId].baseHealth;
-              newState.playerSpeed =
+              newState.playerMovementSpeed =
                 BUFFER_HELL_HEROES[state.selectedHeroId].baseSpeed;
               newState.playerFireRate =
                 BUFFER_HELL_HEROES[state.selectedHeroId].baseFireRate;
@@ -118,7 +121,7 @@ export const useBufferHellStore = create<BufferHellStore>()(
           playerHP: BUFFER_HELL_HEROES[heroId].baseHealth,
           playerFireRate: BUFFER_HELL_HEROES[heroId].baseFireRate,
           playerPickupRadius: BUFFER_HELL_CONFIG.player.pickupRadius,
-          playerSpeed: BUFFER_HELL_HEROES[heroId].baseSpeed,
+          playerMovementSpeed: BUFFER_HELL_HEROES[heroId].baseSpeed,
         }),
       takeDamage: (damage) =>
         set((state) => {

@@ -33,6 +33,9 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
   const playerPickupRadius = useBufferHellStore(
     (state) => state.playerPickupRadius,
   );
+  const playerMovementSpeed = useBufferHellStore(
+    (state) => state.playerMovementSpeed,
+  );
 
   const { width, height } = dimensionsRef.current;
 
@@ -132,6 +135,7 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
         playerRef: playerRef,
         canvasWidth: width,
         canvasHeight: height,
+        playerMovementSpeed: playerMovementSpeed,
       });
 
       weaponLevelRef.current = getWeaponLevel({ score: score });

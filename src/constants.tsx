@@ -174,9 +174,7 @@ export const MORSE_CODE: { [key: string]: string } = {
 
 export const BUFFER_HELL_CONFIG = {
   player: {
-    normalSpeed: 4,
     radius: 4,
-    slowSpeed: 2,
     startYOffset: 100,
     scale: 8,
     pickupRadius: 50,
