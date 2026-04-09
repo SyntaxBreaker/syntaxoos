@@ -31,7 +31,7 @@ export const useBufferHellStore = create<BufferHellStore>()(
       highScore: 0,
       selectedHeroId: BUFFER_HELL_HEROES[0].id,
       playerExperience: 0,
-      playerFireRate: 0,
+      playerFireRate: BUFFER_HELL_HEROES[0].baseFireRate,
       playerHP: BUFFER_HELL_HEROES[0].baseHealth,
       playerLevel: 1,
       playerMovementSpeed: BUFFER_HELL_HEROES[0].baseSpeed,

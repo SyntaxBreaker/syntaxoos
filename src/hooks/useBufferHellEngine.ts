@@ -36,6 +36,7 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
   const playerMovementSpeed = useBufferHellStore(
     (state) => state.playerMovementSpeed,
   );
+  const playerFireRate = useBufferHellStore((state) => state.playerFireRate);
 
   const { width, height } = dimensionsRef.current;
 
@@ -142,8 +143,7 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
 
       if (
         keysRef.current[" "] &&
-        frameCountRef.current - lastFireFrameRef.current >=
-          BUFFER_HELL_CONFIG.bullet.fireRate
+        frameCountRef.current - lastFireFrameRef.current >= playerFireRate
       ) {
         const newBullets = createBullets({
           playerX: playerRef.current.x,
