@@ -37,6 +37,7 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
     (state) => state.playerMovementSpeed,
   );
   const playerFireRate = useBufferHellStore((state) => state.playerFireRate);
+  const healPlayer = useBufferHellStore((state) => state.healPlayer);
 
   const { width, height } = dimensionsRef.current;
 
@@ -201,6 +202,10 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
       });
 
       pickUpExperienceGem(playerRef.current.x, playerRef.current.y);
+
+      if (frameCountRef.current % 300 === 0) {
+        healPlayer();
+      }
 
       cleanUpEntities({
         entities: enemiesRef,

@@ -10,12 +10,14 @@ interface BufferHellStore {
   selectedHeroId: number;
   playerExperience: number;
   playerHP: number;
+  playerMaxHP: number;
   playerLevel: number;
   playerPickupRadius: number;
   playerMovementSpeed: number;
   playerFireRate: number;
   score: number;
   addScore: (points: number) => void;
+  healPlayer: () => void;
   promotePlayer: (promotionType: BufferHellPromotion) => void;
   gainExperience: (experience: number) => void;
   setHero: (heroId: number) => void;
@@ -33,6 +35,7 @@ export const useBufferHellStore = create<BufferHellStore>()(
       playerExperience: 0,
       playerFireRate: BUFFER_HELL_HEROES[0].baseFireRate,
       playerHP: BUFFER_HELL_HEROES[0].baseHealth,
+      playerMaxHP: BUFFER_HELL_HEROES[0].baseHealth,
       playerLevel: 1,
       playerMovementSpeed: BUFFER_HELL_HEROES[0].baseSpeed,
       playerPickupRadius: BUFFER_HELL_CONFIG.player.pickupRadius,
@@ -44,6 +47,11 @@ export const useBufferHellStore = create<BufferHellStore>()(
             score: nextScore,
           };
         }),
+      healPlayer: () => {
+        set((state) => ({
+          playerHP: Math.min(state.playerMaxHP, state.playerHP + 2),
+        }));
+      },
       gainExperience: (experience) =>
         set((state) => {
           const newExperience = state.playerExperience + experience;
@@ -80,8 +88,8 @@ export const useBufferHellStore = create<BufferHellStore>()(
             case "vitality":
               return {
                 ...gameStatus,
-                playerHP:
-                  BUFFER_HELL_HEROES[state.selectedHeroId].baseHealth + 20,
+                playerMaxHP: state.playerMaxHP + 20,
+                playerHP: state.playerMaxHP + 20,
               };
             case "pickupRadius":
               return {
