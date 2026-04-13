@@ -167,7 +167,7 @@ function BufferHell() {
 
   return (
     <article className="flex flex-col bg-gray-900 border border-gray-700 rounded-lg w-full h-full overflow-hidden p-2">
-      <BufferHellHeader score={score} />
+      {gameStatus === "playing" && <BufferHellHeader score={score} />}
       <div
         className="relative flex-grow min-h-0 w-full h-full"
         ref={containerRef}
