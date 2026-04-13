@@ -1,6 +1,7 @@
 import { useBufferHellStore } from "../../store/bufferHellStore";
 
 function BufferHellMenu() {
+  const highScore = useBufferHellStore((state) => state.highScore);
   const setGameStatus = useBufferHellStore((state) => state.setGameStatus);
 
   return (
@@ -8,6 +9,11 @@ function BufferHellMenu() {
       <h2 className="text-gray-200 text-3xl font-bold font-mono">
         BUFFER HELL
       </h2>
+      {highScore > 0 && (
+        <p className="text-gray-400 font-mono text-sm">
+          HIGH SCORE: {highScore}
+        </p>
+      )}
       <button
         className="bg-gray-800 text-gray-200 w-3xs p-4 py-2 rounded border-2 border-transparent hover:cursor-pointer mt-2 hover:border-gray-400"
         onClick={() => setGameStatus("heroSelection")}
