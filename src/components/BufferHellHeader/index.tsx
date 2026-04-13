@@ -21,7 +21,7 @@ function BufferHellHeader({ score }: BufferHellHeaderProps) {
   );
 
   return (
-    <header className="p-2 bg-gray-800 flex justify-between items-center rounded-lg text-xs text-gray-200 font-mono">
+    <header className="p-2 bg-gray-800 flex justify-between items-center rounded-lg text-xs text-gray-200 font-mono absolute top-0 w-full">
       <span>
         HP: {playerHP} | Experience: {playerExperience} | Level: {playerLevel}
       </span>
