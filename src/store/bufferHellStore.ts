@@ -77,27 +77,45 @@ export const useBufferHellStore = create<BufferHellStore>()(
           const gameStatus = { gameStatus: "playing" as BufferHellGameStatus };
 
           switch (promotionType) {
-            case "agility":
+            case "agility": {
+              const increasedPlayerMovementSpeed =
+                state.playerMovementSpeed +
+                BUFFER_HELL_CONFIG.promotion.agility;
+
               return {
                 ...gameStatus,
-                playerMovementSpeed: state.playerMovementSpeed + 0.5,
+                playerMovementSpeed: increasedPlayerMovementSpeed,
               };
-            case "fireRate":
+            }
+            case "fireRate": {
+              const updatedPlayerFireRate = Math.max(
+                5,
+                state.playerFireRate - BUFFER_HELL_CONFIG.promotion.fireRate,
+              );
+
               return {
                 ...gameStatus,
-                playerFireRate: Math.max(5, state.playerFireRate - 1),
+                playerFireRate: updatedPlayerFireRate,
               };
-            case "vitality":
+            }
+            case "vitality": {
+              const increasedPlayerMaxHP =
+                state.playerMaxHP + BUFFER_HELL_CONFIG.promotion.vitality;
               return {
                 ...gameStatus,
-                playerMaxHP: state.playerMaxHP + 20,
-                playerHP: state.playerMaxHP + 20,
+                playerMaxHP: increasedPlayerMaxHP,
+                playerHP: increasedPlayerMaxHP,
               };
-            case "pickupRadius":
+            }
+            case "pickupRadius": {
+              const increasedPlayerPickupRadius =
+                state.playerPickupRadius +
+                BUFFER_HELL_CONFIG.promotion.pickupRadius;
               return {
                 ...gameStatus,
-                playerPickupRadius: state.playerPickupRadius + 10,
+                playerPickupRadius: increasedPlayerPickupRadius,
               };
+            }
             default:
               return gameStatus;
           }

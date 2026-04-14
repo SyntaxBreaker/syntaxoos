@@ -194,6 +194,12 @@ export const BUFFER_HELL_CONFIG = {
     radius: 2,
     fireRate: 10,
   },
+  promotion: {
+    vitality: 20,
+    agility: 0.5,
+    fireRate: 1,
+    pickupRadius: 10,
+  },
 };
 
 export const BUFFER_HELL_HEROES: BufferHellHero[] = [
