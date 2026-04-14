@@ -37,6 +37,7 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
     (state) => state.playerMovementSpeed,
   );
   const playerFireRate = useBufferHellStore((state) => state.playerFireRate);
+  const playerDamage = useBufferHellStore((state) => state.playerDamage);
   const healPlayer = useBufferHellStore((state) => state.healPlayer);
 
   const { width, height } = dimensionsRef.current;
@@ -185,18 +186,21 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
       bulletsRef.current.forEach((bullet) => {
         enemiesRef.current.forEach((enemy) => {
           if (checkCircleCollision({ circleA: bullet, circleB: enemy })) {
-            const newGem: BufferHellExperienceGem = {
-              id: crypto.randomUUID(),
-              x: enemy.x,
-              y: enemy.y,
-              value: Math.floor(Math.random() * (50 - 10 + 1)) + 10,
-              isMovingToPlayer: false,
-            };
-
-            enemy.x = -2000;
+            enemy.health -= playerDamage;
             bullet.y = -2000;
 
-            gemsRef.current.push(newGem);
+            if (enemy.health <= 0) {
+              const newGem: BufferHellExperienceGem = {
+                id: crypto.randomUUID(),
+                x: enemy.x,
+                y: enemy.y,
+                value: Math.floor(Math.random() * (50 - 10 + 1)) + 10,
+                isMovingToPlayer: false,
+              };
+
+              gemsRef.current.push(newGem);
+              enemy.x = -2000;
+            }
           }
         });
       });

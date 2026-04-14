@@ -15,6 +15,7 @@ interface BufferHellStore {
   playerPickupRadius: number;
   playerMovementSpeed: number;
   playerFireRate: number;
+  playerDamage: number;
   score: number;
   addScore: (points: number) => void;
   healPlayer: () => void;
@@ -32,6 +33,7 @@ export const useBufferHellStore = create<BufferHellStore>()(
       gameStatus: "menu",
       highScore: 0,
       selectedHeroId: BUFFER_HELL_HEROES[0].id,
+      playerDamage: BUFFER_HELL_HEROES[0].baseDamage,
       playerExperience: 0,
       playerFireRate: BUFFER_HELL_HEROES[0].baseFireRate,
       playerHP: BUFFER_HELL_HEROES[0].baseHealth,
@@ -117,11 +119,15 @@ export const useBufferHellStore = create<BufferHellStore>()(
               newState.playerFireRate =
                 BUFFER_HELL_HEROES[state.selectedHeroId].baseFireRate;
               newState.score = 0;
+              newState.playerDamage =
+                BUFFER_HELL_HEROES[state.selectedHeroId].baseDamage;
               break;
             case "menu":
               newState.score = 0;
               newState.playerHP =
                 BUFFER_HELL_HEROES[state.selectedHeroId].baseHealth;
+              newState.playerDamage =
+                BUFFER_HELL_HEROES[state.selectedHeroId].baseDamage;
               break;
           }
 
@@ -135,6 +141,7 @@ export const useBufferHellStore = create<BufferHellStore>()(
           playerFireRate: BUFFER_HELL_HEROES[heroId].baseFireRate,
           playerPickupRadius: BUFFER_HELL_CONFIG.player.pickupRadius,
           playerMovementSpeed: BUFFER_HELL_HEROES[heroId].baseSpeed,
+          playerDamage: BUFFER_HELL_HEROES[heroId].baseDamage,
         }),
       takeDamage: (damage) =>
         set((state) => {

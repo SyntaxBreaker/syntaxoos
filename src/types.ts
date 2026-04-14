@@ -91,6 +91,7 @@ export interface BufferHellEnemy {
   velocityY: number;
   radius: number;
   damage: number;
+  health: number;
 }
 
 export interface BufferHellBullet {
@@ -111,6 +112,7 @@ export interface BufferHellHero {
   id: number;
   name: BufferHellHeroName;
   sprite: string;
+  baseDamage: number;
   baseFireRate: number;
   baseHealth: number;
   baseSpeed: number;

@@ -36,6 +36,8 @@ export const createEnemy = ({
 
   const { x, y } = positions[spawnSide];
 
+  const enemyHealth = Math.floor(Math.random() * (20 - 1 + 1) + 1);
+
   return {
     x: x,
     y: y,
@@ -43,5 +45,6 @@ export const createEnemy = ({
     velocityY: 0,
     radius: BUFFER_HELL_CONFIG.enemy.radius,
     damage: BUFFER_HELL_CONFIG.enemy.damage,
+    health: enemyHealth,
   };
 };
