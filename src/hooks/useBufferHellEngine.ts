@@ -7,6 +7,7 @@ import type {
   BufferHellExperienceGem,
 } from "../types";
 import {
+  getAngleFromKeys,
   handlePlayerMovement,
   moveEnemiesTowardPlayer,
 } from "../utils/bufferHell/movement";
@@ -54,6 +55,7 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
   const lastFireFrameRef = useRef(0);
   const weaponLevelRef = useRef(1);
   const gemsRef = useRef<BufferHellExperienceGem[]>([]);
+  const lastFireAngleRef = useRef(-Math.PI / 2);
 
   const checkIfPlayerIsDead = () => {
     const currentHP = useBufferHellStore.getState().playerHP;
@@ -147,15 +149,20 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
         keysRef.current[" "] &&
         frameCountRef.current - lastFireFrameRef.current >= playerFireRate
       ) {
+        const currentAngle = getAngleFromKeys(keysRef);
+        if (currentAngle !== null) {
+          lastFireAngleRef.current = currentAngle;
+        }
+
         const newBullets = createBullets({
           playerX: playerRef.current.x,
           playerY: playerRef.current.y,
           playerRadius: playerRef.current.radius,
           weaponLevel: weaponLevelRef,
+          angle: lastFireAngleRef.current,
         });
 
         bulletsRef.current.push(...newBullets);
-
         lastFireFrameRef.current = frameCountRef.current;
       }
 
@@ -180,7 +187,8 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
       });
 
       bulletsRef.current.forEach((bullet) => {
-        bullet.y -= BUFFER_HELL_CONFIG.bullet.speed;
+        bullet.x += bullet.velocityX;
+        bullet.y += bullet.velocityY;
       });
 
       bulletsRef.current.forEach((bullet) => {

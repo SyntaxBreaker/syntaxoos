@@ -81,3 +81,19 @@ export const moveEnemiesTowardPlayer = ({
     }
   });
 };
+
+export const getAngleFromKeys = (
+  keys: React.RefObject<Record<string, boolean>>,
+): number | null => {
+  let x = 0;
+  let y = 0;
+
+  if (keys.current["w"]) y -= 1;
+  if (keys.current["s"]) y += 1;
+  if (keys.current["a"]) x -= 1;
+  if (keys.current["d"]) x += 1;
+
+  if (x === 0 && y === 0) return null;
+
+  return Math.atan2(y, x);
+};

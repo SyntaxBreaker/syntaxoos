@@ -99,6 +99,8 @@ export interface BufferHellBullet {
   x: number;
   y: number;
   radius: number;
+  velocityX: number;
+  velocityY: number;
 }
 
 export type BufferHellHeroName = "draconian" | "gargoyle";
