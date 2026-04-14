@@ -46,5 +46,6 @@ export const createEnemy = ({
     radius: BUFFER_HELL_CONFIG.enemy.radius,
     damage: BUFFER_HELL_CONFIG.enemy.damage,
     health: enemyHealth,
+    maxHealth: enemyHealth,
   };
 };

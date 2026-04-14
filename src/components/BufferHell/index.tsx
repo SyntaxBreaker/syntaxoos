@@ -8,6 +8,7 @@ import BufferHellGameOver from "../BufferHellGameOver";
 import { BUFFER_HELL_HEROES } from "../../constants";
 import {
   clearCanvas,
+  renderEnemyHealthBar,
   drawExperienceGem,
   renderSprite,
 } from "../../utils/bufferHell/draw";
@@ -96,7 +97,7 @@ function BufferHell() {
 
       renderSprite({
         context,
-        fallbackColor: "38BDF8",
+        fallbackColor: "#38BDF8",
         radius: playerRef.current.radius,
         sprite: playerSprite,
         x: playerRef.current.x,
@@ -104,7 +105,7 @@ function BufferHell() {
         scale: 8,
       });
 
-      enemiesRef.current.forEach(({ radius, x, y }) => {
+      enemiesRef.current.forEach(({ radius, x, y, health, maxHealth }) => {
         renderSprite({
           context,
           fallbackColor: "#FB7185",
@@ -112,6 +113,15 @@ function BufferHell() {
           sprite: enemySprite,
           x,
           y,
+        });
+
+        renderEnemyHealthBar({
+          context,
+          x,
+          y,
+          radius,
+          currentHP: health,
+          maxHP: maxHealth,
         });
       });
 

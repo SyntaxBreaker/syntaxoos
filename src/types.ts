@@ -92,6 +92,7 @@ export interface BufferHellEnemy {
   radius: number;
   damage: number;
   health: number;
+  maxHealth: number;
 }
 
 export interface BufferHellBullet {

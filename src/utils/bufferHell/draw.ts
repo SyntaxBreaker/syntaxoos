@@ -22,6 +22,15 @@ interface DrawExperienceGemProps {
   gem: BufferHellExperienceGem;
 }
 
+interface DrawEnemyHealthBarProps {
+  context: CanvasRenderingContext2D;
+  x: number;
+  y: number;
+  radius: number;
+  currentHP: number;
+  maxHP: number;
+}
+
 export const clearCanvas = ({
   context,
   width,
@@ -74,4 +83,38 @@ export const drawExperienceGem = ({ context, gem }: DrawExperienceGemProps) => {
   context.fill();
 
   context.restore();
+};
+
+export const renderEnemyHealthBar = ({
+  context,
+  x,
+  y,
+  radius,
+  currentHP,
+  maxHP,
+}: DrawEnemyHealthBarProps) => {
+  if (currentHP >= maxHP) return;
+
+  const enemyHealthBarWidth = radius * 5;
+  const enemyHealthBarHeight = 4;
+  const enemyHealthPercentage = Math.max(0, currentHP / maxHP);
+
+  const enemyHealthBarX = x - enemyHealthBarWidth / 2;
+  const enemyHealthBarY = y - radius - 10;
+
+  context.fillStyle = "rgba(0, 0, 0, 0.7)";
+  context.fillRect(
+    enemyHealthBarX,
+    enemyHealthBarY,
+    enemyHealthBarWidth,
+    enemyHealthBarHeight,
+  );
+
+  context.fillStyle = enemyHealthPercentage > 0.4 ? "#10B981" : "#EF4444";
+  context.fillRect(
+    enemyHealthBarX,
+    enemyHealthBarY,
+    enemyHealthBarWidth * enemyHealthPercentage,
+    enemyHealthBarHeight,
+  );
 };
