@@ -145,15 +145,15 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
 
       weaponLevelRef.current = getWeaponLevel({ score: score });
 
+      const currentAngle = getAngleFromKeys(keysRef);
+      if (currentAngle !== null) {
+        lastFireAngleRef.current = currentAngle;
+      }
+
       if (
         keysRef.current[" "] &&
         frameCountRef.current - lastFireFrameRef.current >= playerFireRate
       ) {
-        const currentAngle = getAngleFromKeys(keysRef);
-        if (currentAngle !== null) {
-          lastFireAngleRef.current = currentAngle;
-        }
-
         const newBullets = createBullets({
           playerX: playerRef.current.x,
           playerY: playerRef.current.y,
