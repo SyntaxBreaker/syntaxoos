@@ -6,19 +6,13 @@ import BufferHellCanvas from "../BufferHellCanvas";
 import BufferHellMenu from "../BufferHellMenu";
 import BufferHellGameOver from "../BufferHellGameOver";
 import { BUFFER_HELL_HEROES } from "../../constants";
-import {
-  clearCanvas,
-  renderEnemyHealthBar,
-  drawExperienceGem,
-  renderSprite,
-} from "../../utils/bufferHell/draw";
+import { clearCanvas, renderScene } from "../../utils/bufferHell/draw";
 import useImageLoader from "../../hooks/useImageLoader";
 import enemyImageSource from "../../assets/bufferHell/enemy.png";
 import bulletImageSource from "../../assets/bufferHell/bullet.png";
 import BufferHellHeroSelection from "../BufferHellHeroSelection";
 import BufferHellPauseMenu from "../BufferHellPauseMenu";
 import BufferHellLevelUp from "../BufferHellLevelUp";
-import type { BufferHellExperienceGem } from "../../types";
 
 function BufferHell() {
   const gameStatus = useBufferHellStore((state) => state.gameStatus);
@@ -88,56 +82,16 @@ function BufferHell() {
     const render = () => {
       tick(keysRef);
 
-      clearCanvas({
-        context: context,
-        width: dimensionsRef.current.width,
-        height: dimensionsRef.current.height,
-        color: "#0F172A",
-      });
-
-      renderSprite({
+      renderScene({
         context,
-        fallbackColor: "#38BDF8",
-        radius: playerRef.current.radius,
-        sprite: playerSprite,
-        x: playerRef.current.x,
-        y: playerRef.current.y,
-        scale: 8,
-      });
-
-      enemiesRef.current.forEach(({ radius, x, y, health, maxHealth }) => {
-        renderSprite({
-          context,
-          fallbackColor: "#FB7185",
-          radius,
-          sprite: enemySprite,
-          x,
-          y,
-        });
-
-        renderEnemyHealthBar({
-          context,
-          x,
-          y,
-          radius,
-          currentHP: health,
-          maxHP: maxHealth,
-        });
-      });
-
-      bulletsRef.current.forEach(({ radius, x, y }) => {
-        renderSprite({
-          context,
-          fallbackColor: "#38BDF8",
-          radius,
-          sprite: bulletSprite,
-          x,
-          y,
-        });
-      });
-
-      gemsRef.current.forEach((gem: BufferHellExperienceGem) => {
-        drawExperienceGem({ context, gem });
+        dimensions: dimensionsRef.current,
+        player: playerRef.current,
+        playerSprite,
+        enemies: enemiesRef.current,
+        enemySprite,
+        bullets: bulletsRef.current,
+        bulletSprite,
+        gems: gemsRef.current,
       });
 
       frameId = requestAnimationFrame(render);

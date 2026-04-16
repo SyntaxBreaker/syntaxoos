@@ -1,4 +1,9 @@
-import type { BufferHellExperienceGem } from "../../types";
+import type {
+  BufferHellBullet,
+  BufferHellEnemy,
+  BufferHellExperienceGem,
+  BufferHellPlayer,
+} from "../../types";
 
 interface ClearCanvasProps {
   context: CanvasRenderingContext2D;
@@ -29,6 +34,21 @@ interface DrawEnemyHealthBarProps {
   radius: number;
   currentHP: number;
   maxHP: number;
+}
+
+interface RenderSceneProps {
+  context: CanvasRenderingContext2D;
+  dimensions: {
+    width: number;
+    height: number;
+  };
+  player: BufferHellPlayer;
+  playerSprite: HTMLImageElement | null;
+  enemies: BufferHellEnemy[];
+  enemySprite: HTMLImageElement | null;
+  bullets: BufferHellBullet[];
+  bulletSprite: HTMLImageElement | null;
+  gems: BufferHellExperienceGem[];
 }
 
 export const clearCanvas = ({
@@ -117,4 +137,71 @@ export const renderEnemyHealthBar = ({
     enemyHealthBarWidth * enemyHealthPercentage,
     enemyHealthBarHeight,
   );
+};
+
+export const renderScene = ({
+  context,
+  dimensions,
+  player,
+  playerSprite,
+  enemies,
+  enemySprite,
+  bullets,
+  bulletSprite,
+  gems,
+}: RenderSceneProps) => {
+  clearCanvas({
+    context,
+    width: dimensions.width,
+    height: dimensions.height,
+    color: "#0F172A",
+  });
+
+  gems.forEach((gem) =>
+    drawExperienceGem({
+      context,
+      gem,
+    }),
+  );
+
+  bullets.forEach((bullet) =>
+    renderSprite({
+      context,
+      fallbackColor: "#38BDF8",
+      radius: bullet.radius,
+      sprite: bulletSprite,
+      x: bullet.x,
+      y: bullet.y,
+    }),
+  );
+
+  enemies.forEach((enemy) => {
+    renderSprite({
+      context,
+      fallbackColor: "#FB7185",
+      radius: enemy.radius,
+      sprite: enemySprite,
+      x: enemy.x,
+      y: enemy.y,
+    });
+
+    renderEnemyHealthBar({
+      context,
+      radius: enemy.radius,
+      currentHP: enemy.health,
+      maxHP: enemy.maxHealth,
+      x: enemy.x,
+      y: enemy.y,
+    });
+  });
+
+  renderSprite({
+    context,
+    fallbackColor: "#38BDF8",
+    radius: player.radius,
+    sprite: playerSprite,
+    x: player.x,
+    y: player.y,
+    scale: 8,
+  });
 };
