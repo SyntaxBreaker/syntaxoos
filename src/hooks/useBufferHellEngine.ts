@@ -158,7 +158,7 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
           playerX: playerRef.current.x,
           playerY: playerRef.current.y,
           playerRadius: playerRef.current.radius,
-          weaponLevel: weaponLevelRef,
+          weaponLevel: weaponLevelRef.current,
           angle: lastFireAngleRef.current,
         });
 

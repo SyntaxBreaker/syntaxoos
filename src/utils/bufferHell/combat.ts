@@ -12,7 +12,7 @@ interface CreateBulletsProps {
   playerX: number;
   playerY: number;
   playerRadius: number;
-  weaponLevel: React.RefObject<number>;
+  weaponLevel: number;
   angle: number;
 }
 
@@ -39,13 +39,13 @@ export const createBullets = ({
 
   bullets.push(addBullet({ x: playerX, y: playerY, angle }));
 
-  if (weaponLevel.current >= 2) {
+  if (weaponLevel >= 2) {
     bullets.push(
       addBullet({ x: playerX, y: playerY, angle, spreadAngle: 0.2 }),
     );
   }
 
-  if (weaponLevel.current >= 3) {
+  if (weaponLevel >= 3) {
     bullets.push(
       addBullet({ x: playerX, y: playerY, angle, spreadAngle: -0.2 }),
     );
