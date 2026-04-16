@@ -136,8 +136,8 @@ function useBufferHellEngine({ dimensionsRef }: UseBufferHellEngineProps) {
       frameCountRef.current++;
 
       handlePlayerMovement({
-        keysRef: keysRef,
-        playerRef: playerRef,
+        keys: keysRef.current,
+        player: playerRef.current,
         canvasWidth: width,
         canvasHeight: height,
         playerMovementSpeed: playerMovementSpeed,

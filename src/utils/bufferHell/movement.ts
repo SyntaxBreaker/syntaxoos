@@ -1,8 +1,8 @@
 import type { BufferHellPlayer } from "../../types";
 
 interface HandlePlayerMovementProps {
-  keysRef: React.RefObject<Record<string, boolean>>;
-  playerRef: React.RefObject<BufferHellPlayer>;
+  keys: Record<string, boolean>;
+  player: BufferHellPlayer;
   canvasWidth: number;
   canvasHeight: number;
   playerMovementSpeed: number;
@@ -30,23 +30,22 @@ interface MoveEnemiesTowardPlayerProps {
 }
 
 export const handlePlayerMovement = ({
-  keysRef,
-  playerRef,
+  keys,
+  player,
   canvasWidth,
   canvasHeight,
   playerMovementSpeed,
 }: HandlePlayerMovementProps) => {
-  if (!keysRef.current) return;
+  if (!keys) return;
 
-  const player = playerRef.current;
-  const playerSpeed = keysRef.current["Shift"]
+  const playerSpeed = keys["Shift"]
     ? playerMovementSpeed / 2
     : playerMovementSpeed;
 
-  if (keysRef.current["a"] || keysRef.current["A"]) player.x -= playerSpeed;
-  if (keysRef.current["d"] || keysRef.current["D"]) player.x += playerSpeed;
-  if (keysRef.current["w"] || keysRef.current["W"]) player.y -= playerSpeed;
-  if (keysRef.current["s"] || keysRef.current["S"]) player.y += playerSpeed;
+  if (keys["a"] || keys["A"]) player.x -= playerSpeed;
+  if (keys["d"] || keys["D"]) player.x += playerSpeed;
+  if (keys["w"] || keys["W"]) player.y -= playerSpeed;
+  if (keys["s"] || keys["S"]) player.y += playerSpeed;
 
   const playerRadius = (player.radius * player.scale) / 2;
   player.x = Math.max(
